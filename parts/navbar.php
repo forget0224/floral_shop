@@ -1,0 +1,157 @@
+<?php
+if (empty($pageName)) {
+    $pageName = "";
+}
+?>
+<style>
+    .navbar-nav .nav-link.active {
+        background-color: rgb(13, 110, 253);
+        border-radius: 10px;
+        font-weight: 800;
+        color: white;
+    }
+</style>
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">FLORAL SHOP<sup>2</sup></div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Addons
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="true"
+            aria-controls="collapsePages1">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>代客送花</span>
+        </a>
+        <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">小標題/分類</h6>
+                <a class="collapse-item" href="login.php">Login</a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">訂單管理</h6>
+                <a class="collapse-item" href="custom/list.php">訂單列表</a>
+
+                <a class="collapse-item" href="blank.html">Blank Page</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true"
+            aria-controls="collapsePages2">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>線上商城</span>
+        </a>
+        <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">小標題/分類</h6>
+                <a class="collapse-item" href="login.php">Login</a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">小標題/分類</h6>
+                <a class="collapse-item" href="table.html">表格</a>
+                <a class="collapse-item" href="blank.html">Blank Page</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3" aria-expanded="true"
+            aria-controls="collapsePages3">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>課程</span>
+        </a>
+        <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">小標題/分類</h6>
+                <a class="collapse-item" href="login.php">Login</a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">小標題/分類</h6>
+                <a class="collapse-item" href="table.html">表格</a>
+                <a class="collapse-item" href="blank.html">Blank Page</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages4" aria-expanded="true"
+            aria-controls="collapsePages4">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>遊戲</span>
+        </a>
+        <div id="collapsePages4" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">小標題/分類</h6>
+                <a class="collapse-item" href="login.php">Login</a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">小標題/分類</h6>
+                <a class="collapse-item" href="table.html">表格</a>
+                <a class="collapse-item" href="blank.html">Blank Page</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages5" aria-expanded="true"
+            aria-controls="collapsePages5">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>會員專區</span>
+        </a>
+        <div id="collapsePages5" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Login Screens:</h6>
+                <a class="collapse-item" href="login.php">Login</a>
+                <a class="collapse-item" href="register.html">Register</a>
+                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">Other Pages:</h6>
+                <a class="collapse-item" href="404.html">404 Page</a>
+                <a class="collapse-item" href="blank.html">Blank Page</a>
+            </div>
+        </div>
+    </li>
+
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Tables</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+    <!-- Sidebar Message -->
+    <div class="sidebar-card d-none d-lg-flex">
+        <img class="sidebar-card-illustration mb-2" src="/tem/img/undraw_rocket.svg" alt="...">
+        <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components,
+            and more!</p>
+        <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to
+            Pro!</a>
+    </div>
+
+</ul>
