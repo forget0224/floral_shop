@@ -3,7 +3,7 @@
 $db_host = 'localhost';
 $db_user = 'root';
 $db_pass = '';
-$db_name = 'florist';
+$db_name = 'floral_shop';
 
 # data source name
 
