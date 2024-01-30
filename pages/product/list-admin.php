@@ -1,36 +1,28 @@
 <?php require '../parts/db_connect.php';
-$pageName = '頁面名';
-$title = '頁面標題';
-// 你該頁面前面的那些東東
 
-// 確認是否已刪除成功
-// Check if the deleteSuccess session variable is set
+// 刪除
 $deleteSuccess = isset($_SESSION['deleteSuccess']) && $_SESSION['deleteSuccess'] === true;
-// Clear the session variable
 unset($_SESSION['deleteSuccess']);
 
-// 搜尋功能
+// 搜尋
 $searchKeyword = isset($_GET['search']) ? $_GET['search'] : '';
 
-//
 $pageName = 'list';
-$title = '列表';
+$title = '商品列表';
 $perPage = 20;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 if ($page < 1) {
-  // redirect
   header('Location: ?page=1');
   exit;
 }
 $t_sql = "SELECT COUNT(1) FROM product";
 $row = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM);
-$totalRows = $row[0]; # 取得總筆數
-$totalPages = 0; # 預設值
-$rows = []; # 預設值
+$totalRows = $row[0]; 
+$totalPages = 0; 
+$rows = []; 
 if ($totalRows > 0) {
-  $totalPages = ceil($totalRows / $perPage); # 計算總頁數
+  $totalPages = ceil($totalRows / $perPage);
   if ($page > $totalPages) {
-    // redirect
     header('Location: ?page=' . $totalPages);
     exit;
   }
@@ -51,6 +43,7 @@ if ($totalRows > 0) {
   $rows = $stmt->fetchAll();
 }
 ?>
+
 <?php include '../parts/html-head.php' ?>
 
 <body id="page-top">
