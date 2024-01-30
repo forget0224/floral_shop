@@ -20,6 +20,8 @@
         rel="stylesheet">
     <link href="/floral_shop/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="/floral_shop/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- 0347 -->
+    <!-- 0348 -->
 </head>
 
 <body>
