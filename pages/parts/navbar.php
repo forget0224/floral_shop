@@ -88,8 +88,8 @@ if (empty($pageName)) {
                 <a class="collapse-item" href="login.php">Login</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">小標題/分類</h6>
-                <a class="collapse-item" href="table.html">表格</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
+                <a class="collapse-item" href="table.php">表格</a>
+                <a class="collapse-item" href="blank.php">Blank Page</a>
             </div>
         </div>
     </li>
@@ -125,6 +125,25 @@ if (empty($pageName)) {
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Other Pages:</h6>
                 <a class="collapse-item" href="404.html">404 Page</a>
+                <a class="collapse-item" href="blank.html">Blank Page</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages6" aria-expanded="true"
+            aria-controls="collapsePages6">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>店家專區</span>
+        </a>
+        <div id="collapsePages6" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">小標題/分類</h6>
+                <a class="collapse-item" href="login.php">Login</a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">店家管理</h6>
+                <a class="collapse-item" href="/floral_shop/pages/store/list.php">店家列表</a>
+                <a class="collapse-item" href="/floral_shop/pages/store/add.php">店家新增</a>
+
                 <a class="collapse-item" href="blank.html">Blank Page</a>
             </div>
         </div>
