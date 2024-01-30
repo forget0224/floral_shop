@@ -66,15 +66,47 @@ if ($totalRows > 0) {
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
+                    <h1 class="h3 mb-2 text-gray-800">課程列表</h1>
+                    <p class="mb-4">課程列表<a target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                <!-- 分頁 start -->
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination mb-0">
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=<?= 1 ?>">
+                                        <i class="fa-solid fa-angles-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=<?= $page-1 ?>">
+                                        <i class="fa-solid fa-angle-left"></i>
+                                        </a>
+                                    </li>
+                                    <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
+                                        if ($i >= 1 and $i <= $totalPages) : ?>
+                                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                                        </li>
+                                    <?php endif;
+                                    endfor; ?>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=<?= $page+1 ?>">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=<?= $totalPages ?>">
+                                        <i class="fa-solid fa-angles-right"></i>
+                                        </a>
+                                    </li>
+                                    </ul>
+                                </nav>
+                            </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
