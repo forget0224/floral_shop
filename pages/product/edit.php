@@ -1,10 +1,8 @@
 <?php
 require '../parts/db_connect.php';
 require '../parts/admin-required.php';
-$pageName = '頁面名';
-$title = '頁面標題';
-
-// 你該頁面前面的那些東東
+$pageName = 'edit';
+$title = '編輯商品';
 
 $product_id = isset($_GET["product_id"]) ? intval($_GET["product_id"]) : 0;
 // $sql = "SELECT * FROM product WHERE product_id=$product_id";
@@ -17,8 +15,8 @@ if (empty($row)) {
   header('Location: list.php');
   exit; # 結束 php 程式
 }
-
 ?>
+
 <?php include '../parts/html-head.php' ?>
 
 <style>
@@ -73,19 +71,11 @@ if (empty($row)) {
                         <div class="form-text"></div>
                       </div>
 
-                      <!-- <div class="mb-3">
-              <label for="categories_id" class="form-label">種類列表</label>
-              <input type="text" class="form-control" id="categories_id" name="categories_id" value="<?= htmlentities($row['categories_id']) ?>">
-              <div class="form-text"></div>
-            </div> -->
-
                       <div class="mb-3">
                         <label for="categories_id" class="form-label">種類列表</label>
-                        <!-- <input type="text" class="form-control" id="categories_id" name="categories_id" value="<?= htmlentities($row['category_name']) ?>"> -->
-
 
                         <select class="form-control" id="categories_id" name="categories_id">
-                          <!-- <option value="" disabled selected>--請選擇類別--</option> -->
+                          <option value="" disabled selected>--請選擇類別--</option>
                           <?php
                           // Fetch categories from the database
                           $categoriesSql = "SELECT * FROM categories";
@@ -101,8 +91,6 @@ if (empty($row)) {
                             // You can adjust the indentation based on your preference
                             echo "<option value=\"$categoryId\" $selected>$categoryName</option>";
                           }
-                          // categories_id ==資料庫id   要給他selected
-
                           ?>
                         </select>
 
@@ -229,8 +217,6 @@ if (empty($row)) {
 
 
     function check() {
-      // 使用 let 聲明 originalData，以便它在整個腳本中可見
-
       originalData = {
         name: '<?= htmlentities($row['name']) ?>',
         categories_id: '<?= $row['categories_id'] ?>',
@@ -250,15 +236,10 @@ if (empty($row)) {
       const successAlert = new bootstrap.Modal(document.getElementById('successModal'));
 
       if (!hasFormChanged()) {
-        // console.log(hasFormChanged())
         errorAlert.show();
-
-        // 再設一個條件：如果點選修改的按鈕，selected跟原先欄位內的value值相等，就要跳出errorAlert.show();
       } else {
-        // console.log(hasFormChanged())
         successAlert.show();
       }
-
 
       const fd = new FormData(document.form1);
       fetch('edit-api.php', {
@@ -272,10 +253,8 @@ if (empty($row)) {
           });
           if (result.success) {
             if (hasFormChanged()) {
-              // Content has changed, show "編輯成功" modal
               successAlert.show();
             } else {
-              // No change, show "沒有更新" modal
               errorAlert.show();
             }
           }

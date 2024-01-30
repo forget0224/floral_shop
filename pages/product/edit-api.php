@@ -1,10 +1,7 @@
 <?php
 date_default_timezone_set('Asia/Taipei');
-
 require '../parts/admin-required.php';
 require '../parts/db_connect.php';
-// require __DIR__ . '../admin-required.php';
-// require __DIR__ . '../parts/db_connect.php';
 header('Content-Type: application/json');
 
 $output = [
@@ -14,9 +11,6 @@ $output = [
   "postData" => $_POST,
   "errors" => [],
 ];
-
-// TODO: 資料輸入之前, 要做檢查
-# filter_var('bob@example.com', FILTER_VALIDATE_EMAIL)
 
 $product_id = isset($_POST['product_id']) ? intval($_POST['product_id']) : 0;
 if (empty($product_id)) {

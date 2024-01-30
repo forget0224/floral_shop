@@ -6,7 +6,7 @@ $sql = "DELETE FROM product WHERE product_id=$product_id";
 
 $pdo->query($sql);
 
-// 這條是新增的Set the session variable indicating successful deletion
+// Set the session variable indicating successful deletion
 $_SESSION['deleteSuccess'] = true;
 
 $goto = empty($_SERVER["HTTP_REFERER"]) ? "list.php" : $_SERVER["HTTP_REFERER"];

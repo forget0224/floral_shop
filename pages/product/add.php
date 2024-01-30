@@ -1,11 +1,10 @@
 <?php
 require '../parts/db_connect.php';
 require '../parts/admin-required.php';
-$pageName = '頁面名';
-$title = '頁面標題';
-// 你該頁面前面的那些東東
-
+$pageName = 'add';
+$title = '增加商品';
 ?>
+
 <?php include '../parts/html-head.php' ?>
 
 <style>
