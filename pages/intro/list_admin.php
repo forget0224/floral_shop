@@ -77,14 +77,13 @@ if ($totalRows > 0) {
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+                    <h1 class="h3 mb-2 text-gray-800">花圖鑑 FLOWER BOOK</h1>
+                    <p class="mb-4">我可以為自己獻上花束，比你愛我還更愛我自己<a target="_blank" href="https://datatables.net"></a></p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">I can love me better, baby</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -96,13 +95,13 @@ if ($totalRows > 0) {
                                                 <ul class="pagination">
 
                                                     <li class="page-item">
-                                                        <a class="page-link" href="#">
+                                                        <a class="page-link" href="?page=<?= 1 ?>">
                                                             <i class="fa-solid fa-angles-left"></i>
                                                         </a>
                                                     </li>
 
                                                     <li class="page-item">
-                                                        <a class="page-link" href="#">
+                                                        <a class="page-link" href="?page=<?= $page-1 ?>">
                                                             <i class="fa-solid fa-angle-left"></i>
                                                         </a>
                                                     </li>
@@ -117,12 +116,12 @@ if ($totalRows > 0) {
                                                     endfor; ?>
 
                                                     <li class="page-item">
-                                                        <a class="page-link" href="#">
+                                                        <a class="page-link" href="?page=<?= $page+1 ?>">
                                                             <i class="fa-solid fa-angle-right"></i>
                                                         </a>
                                                     </li>
                                                     <li class="page-item">
-                                                        <a class="page-link" href="#">
+                                                        <a class="page-link" href="?page=<?= $totalPages ?>">
                                                             <i class="fa-solid fa-angles-right"></i>
                                                         </a>
                                                     </li>
@@ -175,13 +174,7 @@ if ($totalRows > 0) {
 
             </div>
             <!-- End of Main Content -->
-            <script>
-                function delete_one(flower_id) {
-                    if (confirm(`是否要刪除編號為 ${flower_id} 的資料?`)) {
-                        location.href = `delete.php?flower_id=${flower_id}`;
-                    }
-                }
-            </script>
+
             <!-- Footer -->
             <?php include '../parts/footer.php' ?>
             <!-- End of Footer -->
@@ -198,5 +191,11 @@ if ($totalRows > 0) {
     </a>
 
     <?php include '../parts/scripts.php' ?>
-
+    <script>
+        function delete_one(flower_id) {
+            if (confirm(`是否要刪除編號為 ${flower_id} 的資料?`)) {
+                location.href = `delete.php?flower_id=${flower_id}`;
+            }
+        }
+    </script>
     <?php include '../parts/html-foot.php' ?>
