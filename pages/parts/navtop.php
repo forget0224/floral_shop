@@ -111,7 +111,7 @@
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="/tem/img/undraw_profile_1.svg" alt="...">
+                        <img class="rounded-circle" src="/floral_shop/img/undraw_profile_1.svg" alt="...">
                         <div class="status-indicator bg-success"></div>
                     </div>
                     <div class="font-weight-bold">
@@ -122,7 +122,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="/tem/img/undraw_profile_2.svg" alt="...">
+                        <img class="rounded-circle" src="/floral_shop/img/undraw_profile_2.svg" alt="...">
                         <div class="status-indicator"></div>
                     </div>
                     <div>
@@ -133,7 +133,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="/tem/img/undraw_profile_3.svg" alt="...">
+                        <img class="rounded-circle" src="/floral_shop/img/undraw_profile_3.svg" alt="...">
                         <div class="status-indicator bg-warning"></div>
                     </div>
                     <div>
@@ -164,7 +164,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                <img class="img-profile rounded-circle" src="/tem/img/undraw_profile.svg">
+                <img class="img-profile rounded-circle" src="/floral_shop/img/undraw_profile.svg">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -181,7 +181,7 @@
                     Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="../logout.php" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout
                 </a>
@@ -207,7 +207,7 @@
             <div class="modal-body">確定登出嗎~~~</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <a class="btn btn-primary" href="../login.php">Logout</a>
             </div>
         </div>
     </div>

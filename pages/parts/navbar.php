@@ -14,7 +14,7 @@ if (empty($pageName)) {
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/floral_shop/manager_index.php">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -26,7 +26,7 @@ if (empty($pageName)) {
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/floral_shop/manager_index.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -52,7 +52,8 @@ if (empty($pageName)) {
                 <a class="collapse-item" href="login.php">Login</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">訂單管理</h6>
-                <a class="collapse-item" href="/tem/pages/custom/list.php">訂單列表</a>
+                <a class="collapse-item" href="/floral_shop/pages/custom/list.php">訂單列表</a>
+                <a class="collapse-item" href="/floral_shop/pages/custom/add.php">快速新增</a>
 
                 <a class="collapse-item" href="blank.html">Blank Page</a>
             </div>
@@ -147,7 +148,7 @@ if (empty($pageName)) {
 
     <!-- Sidebar Message -->
     <div class="sidebar-card d-none d-lg-flex">
-        <img class="sidebar-card-illustration mb-2" src="/tem/img/undraw_rocket.svg" alt="...">
+        <img class="sidebar-card-illustration mb-2" src="/floral_shop/img/undraw_rocket.svg" alt="...">
         <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components,
             and more!</p>
         <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to
