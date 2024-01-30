@@ -1,8 +1,10 @@
 <?php
 date_default_timezone_set('Asia/Taipei');
 
-require __DIR__ . '../admin-required.php';
-require __DIR__ . '../parts/db_connect.php';
+require '../parts/admin-required.php';
+require '../parts/db_connect.php';
+// require __DIR__ . '../admin-required.php';
+// require __DIR__ . '../parts/db_connect.php';
 header('Content-Type: application/json');
 
 $output = [
