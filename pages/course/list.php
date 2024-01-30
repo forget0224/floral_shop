@@ -67,8 +67,7 @@ if ($totalRows > 0) {
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">課程列表</h1>
-                    <p class="mb-4">課程列表<a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
+                    <p class="mb-4">課程列表</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -179,4 +178,57 @@ if ($totalRows > 0) {
 
     <?php include '../parts/scripts.php' ?>
 
+    <!-- Modal -->
+    <div class="modal fade" id="deleteSuccess" tabindex="-1" aria-labelledby="deleteSuccessModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">刪除結果</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-success" role="alert">
+            刪除成功
+            </div>
+        </div>
+        <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">繼續刪除</button>
+            <a type="button" class="btn btn-primary" href="list.php">到列表頁</a>
+        </div> -->
+        </div>
+    </div>
+    </div>
+
+    <script>
+    function delete_one(course_id) {
+        if (confirm(`是否要刪除編號為 ${course_id} 的資料?`)) {
+        // 使用 jQuery 的 AJAX 進行非同步請求
+        $.ajax({
+            url: `delete.php?course_id=${course_id}`,
+            type: 'GET',
+            dataType: 'json',
+            success: function(result) {
+            console.log(result);
+            if (result.success) {
+                // 刪除成功後顯示 Modal
+                $('#deleteSuccess').modal('show');
+
+                // 刪除成功後，等待一段時間再重新導向
+                setTimeout(function() {
+                location.href = 'list.php';
+                }, 2000); // 這裡的 2000 是等待 2 秒，你可以調整成你需要的時間
+            } else {
+                // 刪除失敗的處理
+                console.error('刪除失敗');
+            }
+            },
+            error: function(xhr, status, error) {
+            // 錯誤處理
+            console.error('AJAX 錯誤:', status, error);
+            }
+        });
+        }
+    }
+    </script>
+    
     <?php include '../parts/html-foot.php' ?>
