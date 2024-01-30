@@ -1,60 +1,67 @@
-<?php require '../parts/db_connect.php';
+<?php 
+require '../parts/db_connect.php';
 
 $pageName = 'list';
 $title = '列表';
 
 $perPage = 20;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-
 if ($page < 1) {
     header('Location: ?page=1');
     exit;
 }
 
-$searchCity = isset($_GET['search-city']) ? $_GET['search-city'] : '';
+$searchField = isset($_GET['search-field']) ? $_GET['search-field'] : '';
+$searchQuery = isset($_GET['search-query']) ? $_GET['search-query'] : '';
 
-if ($searchCity) {
-    $t_sql = "SELECT COUNT(1) FROM member WHERE city LIKE ?";
-    $pdo_stmt = $pdo->prepare($t_sql);
-    $pdo_stmt->execute(["%$searchCity%"]);
-    $totalRows = $pdo_stmt->fetch(PDO::FETCH_NUM)[0];
-
-    if ($totalRows > 0) {
-        $totalPages = ceil($totalRows / $perPage);
-
-        if ($page > $totalPages) {
-            header('Location: ?page=' . $totalPages);
-            exit;
-        }
-
-        $sql = sprintf("SELECT * FROM member WHERE city LIKE ? ORDER BY member_id ASC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(["%$searchCity%"]);
-        $rows = $stmt->fetchAll();
-    }
-} else {
-    $t_sql = "SELECT COUNT(1) FROM member";
-    $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
-
-    if ($totalRows > 0) {
-        $totalPages = ceil($totalRows / $perPage);
-
-        if ($page > $totalPages) {
-            header('Location: ?page=' . $totalPages);
-            exit;
-        }
-
-        $sql = sprintf("SELECT * FROM member ORDER BY member_id ASC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
-        $stmt = $pdo->query($sql);
-        $rows = $stmt->fetchAll();
-    }
+$allowedFields = ['name', 'email', 'phone', 'city', 'district', 'address'];
+if (!in_array($searchField, $allowedFields)) {
+    $searchField = 'name'; // 默认搜索字段
 }
 
+// 构建基于搜索条件的 SQL 查询
+$t_sql = "SELECT COUNT(1) FROM member";
+$sql = "SELECT * FROM member";
+$where = "";
+$params = [];
 
+if ($searchQuery && $searchField) {
+    $where = " WHERE $searchField LIKE ?";
+    $params[] = "%$searchQuery%";
+    $t_sql .= $where;
+    $sql .= $where;
+}
 
+$sql .= " ORDER BY member_id ASC"; // 添加排序
+$sql .= " LIMIT ?, ?"; // 添加分页
 
+// 为计算总行数准备和执行查询
+$stmt = $pdo->prepare($t_sql);
+foreach ($params as $key => $value) {
+    $stmt->bindValue($key + 1, $value);
+}
+$stmt->execute();
+$totalRows = $stmt->fetch(PDO::FETCH_NUM)[0];
 
+// 计算总页数
+$totalPages = ceil($totalRows / $perPage);
+if ($page > $totalPages) {
+    header('Location: ?page=' . $totalPages);
+    exit;
+}
+
+// 为获取数据准备和执行查询
+$stmt = $pdo->prepare($sql);
+$paramIndex = 1;
+foreach ($params as $value) {
+    $stmt->bindValue($paramIndex++, $value);
+}
+$stmt->bindValue($paramIndex++, ($page - 1) * $perPage, PDO::PARAM_INT);
+$stmt->bindValue($paramIndex, $perPage, PDO::PARAM_INT);
+$stmt->execute();
+$rows = $stmt->fetchAll();
 ?>
+
 <?php include __DIR__ . '/parts/html-head.php'  ?>
 <?php include __DIR__ . '/parts/navbar.php'  ?>
 <style>
@@ -80,9 +87,9 @@ if ($searchCity) {
                     <ul class="pagination">
                         <!-- 更新鏈接以包含搜索城市 -->
                         <li class="page-item">
-                            <a class="page-link" href="?page=1&search-city=<?= htmlentities($searchCity) ?>">
-                            <i class="fa-solid fa-backward"></i></i>
-                            </a>
+                        <a class="page-link" href="?page=1&search-field=<?= htmlentities($searchField) ?>&search-query=<?= htmlentities($searchQuery) ?>">
+                            <i class="fa-solid fa-backward"></i>
+                        </a>
                         </li>
 
                         <!-- 注意：這裡需要加入對前一頁和後一頁鏈接的處理 -->
@@ -90,32 +97,43 @@ if ($searchCity) {
                         <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
                             if ($i >= 1 and $i <= $totalPages) : ?>
                                 <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                                    <a class="page-link" href="?page=<?= $i ?>&search-city=<?= htmlentities($searchCity) ?>"><?= $i ?></a>
+                                    <a class="page-link" href="?page=<?= $i ?>&search-field=<?= htmlentities($searchField) ?>&search-query=<?= htmlentities($searchQuery) ?>"><?= $i ?></a>
                                 </li>
                         <?php endif;
                         endfor; ?>
 
+
                         <li class="page-item">
-                            <a class="page-link" href="?page=<?= $totalPages ?>&search-city=<?= htmlentities($searchCity) ?>">
-                            <i class="fa-solid fa-forward"></i></i>
-                            </a>
+                        <a class="page-link" href="?page=<?= $totalPages ?>&search-field=<?= htmlentities($searchField) ?>&search-query=<?= htmlentities($searchQuery) ?>">
+                            <i class="fa-solid fa-forward"></i>
+                        </a>
                         </li>
                     </ul>
                 </nav>
             </div>
         </div>
 
-    <div class="row">
-        <div class="col">
-            <form action="?" method="get" class="d-flex justify-content-center">
-                <div class="form-group">
-                    <label for="search-city"></label>
-                    <input type="text" class="form-control form-control-lg" id="search-city" name="search-city" placeholder="請輸入城市名稱">
-                </div>
-                <button type="submit" class="btn btn-primary ml-2"><i class="fa-solid fa-magnifying-glass"></i>搜尋</button>
-            </form>
+        <div class="row">
+            <div class="col-5 mx-auto">
+                <form action="?" method="get">
+                    <div class="form-group">
+                        <select name="search-field" class="form-control form-control-lg">
+                            <option value="name">姓名</option>
+                            <option value="email">電郵</option>
+                            <option value="phone">手機</option>
+                            <option value="city">城市</option>
+                            <option value="district">區域</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="search-query"></label>
+                        <input type="text" class="form-control form-control-lg" id="search-query" name="search-query" placeholder="請輸入搜索內容">
+                    </div>
+                    <button type="submit" class="btn btn-primary ml-2">搜尋</button>
+                </form>
+            </div>
         </div>
-    </div>
+
 
 
 
@@ -126,7 +144,7 @@ if ($searchCity) {
                     <tr>
                         
                         <th><i class="fa-solid fa-user-pen"></i></i></th>
-                        <th>#</th>
+                        <th>編號</th>
                         <th>姓名</th>
                         <th>電郵</th>
                         <th>手機</th>
