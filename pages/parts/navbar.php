@@ -88,7 +88,7 @@ if (empty($pageName)) {
                 <a class="collapse-item" href="login.php">Login</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">小標題/分類</h6>
-                <a class="collapse-item" href="../course/table.php">課程列表</a>
+                <a class="collapse-item" href="../course/list.php">課程列表</a>
                 <a class="collapse-item" href="blank.php">Blank Page</a>
             </div>
         </div>
@@ -105,8 +105,8 @@ if (empty($pageName)) {
                 <a class="collapse-item" href="login.php">Login</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">小標題/分類</h6>
-                <a class="collapse-item" href="table.html">表格</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
+                <a class="collapse-item" href="../intro/list_admin.php">花圖鑑</a>
+                <a class="collapse-item" href="blank.html">I WANT TO PLAY A GAME</a>
             </div>
         </div>
     </li>
