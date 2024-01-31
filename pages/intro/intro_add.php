@@ -120,7 +120,7 @@ $title = '新增';
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">繼續新增</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="continueAddingBtn">繼續新增</button>
                     <a type="button" class="btn btn-primary" href="/floral_shop/pages/intro/intro_flower.php">到列表頁</a>
                 </div>
             </div>
@@ -213,5 +213,11 @@ $title = '新增';
 
         // 初始化模態框
         const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+
+        // Continue Adding button redirects to a new form page
+        document.getElementById('continueAddingBtn').addEventListener('click', () => {
+            // Redirect to the add.php page
+            window.location.href = '';
+        });
     </script>
     <?php include '../parts/html-foot.php' ?>
