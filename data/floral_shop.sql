@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2024-01-30 10:06:44
+-- 產生時間： 2024-01-31 04:26:17
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -404,20 +404,20 @@ INSERT INTO `course_rating` (`review_id`, `course_id`, `member_id`, `rating`, `c
 CREATE TABLE `custom_orders` (
   `sid` int(11) NOT NULL,
   `order_id` varchar(255) DEFAULT NULL,
-  `order_date` datetime NOT NULL,
-  `delivery_date` date NOT NULL,
-  `member_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `shipping_id` int(11) NOT NULL,
-  `sender_name` varchar(255) NOT NULL,
-  `sender_tel` varchar(255) NOT NULL,
-  `recipient_name` varchar(255) NOT NULL,
-  `recipient_tel` varchar(255) NOT NULL,
-  `recipient_address` varchar(255) NOT NULL,
-  `payment_method` int(11) NOT NULL,
-  `shipping_method` int(11) NOT NULL,
-  `shipping_status` int(11) NOT NULL,
-  `order_status` int(11) NOT NULL
+  `order_date` datetime DEFAULT NULL,
+  `delivery_date` date DEFAULT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `shipping_id` int(11) DEFAULT NULL,
+  `sender_name` varchar(255) DEFAULT NULL,
+  `sender_tel` varchar(255) DEFAULT NULL,
+  `recipient_name` varchar(255) DEFAULT NULL,
+  `recipient_tel` varchar(255) DEFAULT NULL,
+  `recipient_address` varchar(255) DEFAULT NULL,
+  `payment_method` int(11) DEFAULT NULL,
+  `shipping_method` int(11) DEFAULT NULL,
+  `shipping_status` int(11) DEFAULT NULL,
+  `order_status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -425,11 +425,27 @@ CREATE TABLE `custom_orders` (
 --
 
 INSERT INTO `custom_orders` (`sid`, `order_id`, `order_date`, `delivery_date`, `member_id`, `store_id`, `shipping_id`, `sender_name`, `sender_tel`, `recipient_name`, `recipient_tel`, `recipient_address`, `payment_method`, `shipping_method`, `shipping_status`, `order_status`) VALUES
-(35, 'F2024012679001456', '2024-01-26 18:24:00', '2024-01-20', 5, 22, NULL, NULL, NULL, NULL, NULL, 'je8 je8 ', 1, NULL, NULL, NULL),
-(37, 'F2024012656254968', '2024-01-26 18:24:00', '2024-01-20', 5, 22, NULL, NULL, NULL, NULL, NULL, '西西', 1, NULL, NULL, NULL),
-(40, 'F2024012659309172', '2024-01-26 06:39:00', '2024-01-31', 4, 3, NULL, NULL, NULL, NULL, NULL, '', 2, NULL, NULL, NULL),
-(42, 'F2024012689775776', '2024-01-26 06:39:00', '2024-01-31', 4, 3, NULL, NULL, NULL, NULL, NULL, 'grrg', 2, NULL, NULL, NULL),
-(47, 'F2024012868889191', '2024-01-28 18:19:00', '2024-01-20', 8, 4, NULL, NULL, NULL, NULL, NULL, '哈哈', 3, NULL, NULL, NULL);
+(35, 'F2024012679001456', '2024-01-26 18:24:00', '2024-01-20', 5, 1, 2, '', '', '', '', 'je8 je8 ', 1, 1, 0, 1),
+(37, 'F2024012656254968', '2024-01-26 18:24:00', '2024-01-20', 2, 2, 1, '', '', '', '', '西西', 1, 2, 0, 2),
+(40, 'F2024012659309172', '2024-01-26 06:39:00', '2024-01-31', 4, 3, 1, '', '', '', '', '', 2, 2, 0, 3),
+(42, 'F2024012689775776', '2024-01-26 06:39:00', '2024-01-31', 4, 3, 2, '', '', '', '', 'grrg', 2, 1, 0, 4),
+(47, 'F2024012868889191', '2024-01-28 18:19:00', '2024-01-20', 1, 4, 1, '', '', '', '', '哈哈', 3, 1, 0, 5),
+(48, 'F2024013187029306', '2024-01-31 10:52:00', '2024-02-01', 2, 3, NULL, NULL, NULL, NULL, NULL, '大安區', 1, NULL, NULL, NULL),
+(49, 'F2024013122505516', '2024-01-02 08:15:45', '2024-01-05', 5, 1, 2, '李小美', '0921123456', '張大雄', '0922333444', '台北市中正區xx路1號', 1, 1, 0, 1),
+(50, 'F2024013152108261', '2024-01-08 14:30:22', '2024-01-12', 12, 3, 1, '王大力', '0939876543', '陳小花', '0987654321', '新北市板橋區yy街2號', 2, 1, 0, 2),
+(51, 'F2024013193024763', '2024-01-14 09:45:17', '2024-01-20', 8, 5, 2, '林阿杰', '0912345678', '鄭小娟', '0957123456', '高雄市三民區zz路3號', 3, 2, 1, 1),
+(52, 'F2024013128799033', '2024-01-20 18:22:55', '2024-01-25', 20, 10, 1, '張小鈴', '0928765432', '劉阿強', '0918234567', '桃園市中壢區xx街4號', 2, 1, 0, 1),
+(53, 'F2024013134920882', '2024-01-26 12:48:30', '2024-01-30', 15, 7, 2, '陳大明', '0954321890', '曾小芳', '0923123456', '台中市西屯區yy路5號', 1, 2, 1, 2),
+(54, 'F2024013178207313', '2024-02-01 07:05:11', '2024-02-05', 3, 22, 1, '許小青', '0987654321', '張小英', '0932123456', '新竹市東區zz街6號', 3, 1, 0, 1),
+(55, 'F2024013196273924', '2024-02-07 15:18:44', '2024-02-12', 18, 15, 2, '黃小明', '0923456789', '吳小美', '0976543210', '嘉義市西區yy路8號', 1, 2, 1, 2),
+(56, 'F2024013156747682', '2024-02-13 11:35:29', '2024-02-18', 10, 8, 1, '劉大勇', '0956789012', '林小翠', '0945612345', '南投市南區xx街10號', 2, 1, 0, 1),
+(57, 'F2024013174916641', '2024-02-19 14:52:56', '2024-02-23', 23, 13, 2, '吳小華', '0923456123', '張大春', '0909786543', '屏東市東區zz路12號', 3, 2, 1, 1),
+(58, 'F2024013114340161', '2024-02-25 10:10:10', '2024-02-28', 6, 18, 1, '陳大志', '0976123456', '林小琪', '0912456789', '基隆市仁愛區xx街15號', 1, 1, 0, 2),
+(59, 'F2024013116950888', '2024-03-02 18:24:00', '2024-03-07', 14, 11, 2, '李小芳', '0932567890', '許大德', '0921234876', '苗栗市西區yy路14號', 2, 1, 0, 1),
+(60, 'F2024013131733957', '2024-03-08 12:30:45', '2024-03-12', 17, 4, 1, '張大發', '0987654321', '黃小玲', '0945678901', '彰化市北區zz街18號', 3, 2, 1, 2),
+(61, 'F2024013197817127', '2024-03-14 09:45:22', '2024-03-19', 9, 21, 2, '許小青', '0912345678', '林大明', '0976123456', '新竹市東區xx街20號', 1, 1, 0, 1),
+(62, 'F2024013123883765', '2024-03-20 18:22:30', '2024-03-25', 21, 9, 1, '黃小美', '0923456123', '吳大勇', '0909786543', '嘉義市西區yy路22號', 2, 1, 0, 1),
+(63, 'F2024013185967449', '2024-03-26 12:48:17', '2024-03-30', 11, 16, 2, '林小華', '0954321890', '陳大春', '0923123456', '台中市西屯區yy路24號', 3, 2, 1, 2);
 
 --
 -- 觸發器 `custom_orders`
@@ -453,7 +469,7 @@ CREATE TABLE `custom_products` (
   `product_name` varchar(255) NOT NULL,
   `products_url` int(11) NOT NULL,
   `product_color` int(11) NOT NULL,
-  `product_stock` tinyint(1) NOT NULL,
+  `product_stock` int(1) NOT NULL,
   `product_price` int(11) NOT NULL,
   `store_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -465,9 +481,28 @@ CREATE TABLE `custom_products` (
 INSERT INTO `custom_products` (`product_id`, `product_name`, `products_url`, `product_color`, `product_stock`, `product_price`, `store_id`) VALUES
 (1, '玫瑰', 0, 2, 1, 50, 2),
 (2, '向日葵', 0, 5, 1, 70, 4),
-(3, '百合', 0, 1, 0, 80, 1),
+(3, '百合', 0, 1, 2, 80, 1),
 (4, '鬱金香', 0, 2, 1, 60, 5),
-(5, '康乃馨', 0, 4, 0, 90, 4);
+(5, '康乃馨', 0, 4, 1, 90, 4);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `custom_stock_status`
+--
+
+CREATE TABLE `custom_stock_status` (
+  `stock_id` int(1) NOT NULL,
+  `stock_name` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `custom_stock_status`
+--
+
+INSERT INTO `custom_stock_status` (`stock_id`, `stock_name`) VALUES
+(1, 0),
+(2, 0);
 
 -- --------------------------------------------------------
 
@@ -2441,7 +2476,7 @@ CREATE TABLE `payment` (
 INSERT INTO `payment` (`payment_id`, `payment_method`) VALUES
 (1, '信用卡'),
 (2, 'Line Pay'),
-(3, '付現');
+(3, '現金');
 
 -- --------------------------------------------------------
 
@@ -3386,7 +3421,14 @@ ALTER TABLE `custom_orders`
 --
 ALTER TABLE `custom_products`
   ADD PRIMARY KEY (`product_id`),
-  ADD KEY `idx_cu_store_id` (`store_id`);
+  ADD KEY `idx_cu_store_id` (`store_id`),
+  ADD KEY `fk_cp_stock_id` (`product_stock`);
+
+--
+-- 資料表索引 `custom_stock_status`
+--
+ALTER TABLE `custom_stock_status`
+  ADD PRIMARY KEY (`stock_id`);
 
 --
 -- 資料表索引 `intro_flower`
@@ -3658,7 +3700,7 @@ ALTER TABLE `course_rating`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `custom_orders`
 --
 ALTER TABLE `custom_orders`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `custom_products`
@@ -3909,55 +3951,8 @@ ALTER TABLE `custom_orders`
 -- 資料表的限制式 `custom_products`
 --
 ALTER TABLE `custom_products`
+  ADD CONSTRAINT `fk_cp_stock_id` FOREIGN KEY (`product_stock`) REFERENCES `custom_stock_status` (`stock_id`),
   ADD CONSTRAINT `fk_cp_store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`);
-
---
--- 資料表的限制式 `intro_flower_color`
---
-ALTER TABLE `intro_flower_color`
-  ADD CONSTRAINT `intro_flower_color_ibfk_1` FOREIGN KEY (`flower_id`) REFERENCES `intro_flower` (`flower_id`),
-  ADD CONSTRAINT `intro_flower_color_ibfk_2` FOREIGN KEY (`color_list_id`) REFERENCES `color_list` (`color_list_id`);
-
---
--- 資料表的限制式 `intro_flower_image`
---
-ALTER TABLE `intro_flower_image`
-  ADD CONSTRAINT `intro_flower_image_ibfk_1` FOREIGN KEY (`image_id`) REFERENCES `intro_image` (`image_id`),
-  ADD CONSTRAINT `intro_flower_image_ibfk_2` FOREIGN KEY (`flower_id`) REFERENCES `intro_flower` (`flower_id`);
-
---
--- 資料表的限制式 `intro_flower_occ`
---
-ALTER TABLE `intro_flower_occ`
-  ADD CONSTRAINT `intro_flower_occ_ibfk_1` FOREIGN KEY (`flower_id`) REFERENCES `intro_flower` (`flower_id`),
-  ADD CONSTRAINT `intro_flower_occ_ibfk_2` FOREIGN KEY (`occ_id`) REFERENCES `intro_occ` (`occ_id`);
-
---
--- 資料表的限制式 `intro_flower_role`
---
-ALTER TABLE `intro_flower_role`
-  ADD CONSTRAINT `intro_flower_role_ibfk_1` FOREIGN KEY (`flower_id`) REFERENCES `intro_flower` (`flower_id`),
-  ADD CONSTRAINT `intro_flower_role_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `intro_role` (`role_id`);
-
---
--- 資料表的限制式 `intro_flower_season`
---
-ALTER TABLE `intro_flower_season`
-  ADD CONSTRAINT `intro_flower_season_ibfk_1` FOREIGN KEY (`flower_id`) REFERENCES `intro_flower` (`flower_id`),
-  ADD CONSTRAINT `intro_flower_season_ibfk_2` FOREIGN KEY (`season_id`) REFERENCES `intro_season` (`season_id`);
-
---
--- 資料表的限制式 `store`
---
-ALTER TABLE `store`
-  ADD CONSTRAINT `store_ibfk_1` FOREIGN KEY (`permission_id`) REFERENCES `store_permission` (`permission_id`),
-  ADD CONSTRAINT `store_ibfk_2` FOREIGN KEY (`sub_id`) REFERENCES `store_sub` (`sub_id`);
-
---
--- 資料表的限制式 `store_stock_quantity`
---
-ALTER TABLE `store_stock_quantity`
-  ADD CONSTRAINT `store_stock_quantity_ibfk_1` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
