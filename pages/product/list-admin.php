@@ -4,7 +4,7 @@
 $deleteSuccess = isset($_SESSION['deleteSuccess']) && $_SESSION['deleteSuccess'] === true;
 unset($_SESSION['deleteSuccess']);
 
-// 搜尋
+// 搜尋-商品關鍵字
 $searchKeyword = isset($_GET['search']) ? $_GET['search'] : '';
 $isSearch = !empty($searchKeyword);
 
@@ -35,11 +35,12 @@ if ($totalRows > 0) {
     %s
     ORDER BY p.product_id DESC
     LIMIT %s, %s",
-    $isSearch ? "WHERE p.name LIKE :searchKeyword" : "",
+    $isSearch ? "WHERE p.name LIKE :searchKeyword" : "", //搜尋-商品關鍵字
     ($page - 1) * $perPage,
     $perPage
   );
 
+  // 搜尋-商品關鍵字
   $stmt = $pdo->prepare($sql);
   if ($isSearch) {
     $searchKeyword = '%' . $searchKeyword . '%';
@@ -122,32 +123,38 @@ if ($totalRows > 0) {
                   </ul>
                 </nav>
                 <!-- 分頁結束 -->
-                <!-- 篩選 -->
+                <!-- 搜尋-商品關鍵字 -->
                 <div class="ml-3">
                   <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalToggleLabel">篩選商品</h5>
+                          <h5 class="modal-title" id="exampleModalToggleLabel">搜尋商品</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <!-- 篩選搜尋欄位 -->
                         <div class="modal-body">
                           <form class="form-inline my-2 my-lg-0" id="searchForm" action="">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchInput" value="">
+                            <input class="form-control mr-sm-2" type="search" placeholder="請輸入商品關鍵字" aria-label="Search" id="searchInput" value="">
                             <p class="form-text text-danger" id="searchInputError"></p>
                           </form>
-
                         </div>
                         <div class="modal-footer">
-                          <button class="btn btn-outline-success" type="button" onclick="searchProducts()">Search</button>
+                          <button class="btn btn-outline-success" type="button" onclick="searchProducts()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">篩選商品</a>
+                  <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">商品
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                  </a>
                 </div>
-                <!-- 篩選結束 -->
+                <!-- 搜尋-商品關鍵字結束 -->
               </h6>
             </div>
             <div class="card-body">
@@ -238,7 +245,7 @@ if ($totalRows > 0) {
   </div>
 
   <script>
-    //搜尋
+    //搜尋-商品關鍵字
     function searchProducts() {
       let searchInput = document.getElementById('searchInput');
       let searchKeyword = searchInput.value.trim();
@@ -248,6 +255,8 @@ if ($totalRows > 0) {
         searchInputError.textContent = '請輸入關鍵字';
       }
     }
+
+    // 搜尋-類別
 
     //刪除
     function delete_one(product_id) {
