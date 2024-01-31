@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2024-01-30 14:28:34
+-- 產生時間： 2024-01-30 10:06:44
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -425,11 +425,11 @@ CREATE TABLE `custom_orders` (
 --
 
 INSERT INTO `custom_orders` (`sid`, `order_id`, `order_date`, `delivery_date`, `member_id`, `store_id`, `shipping_id`, `sender_name`, `sender_tel`, `recipient_name`, `recipient_tel`, `recipient_address`, `payment_method`, `shipping_method`, `shipping_status`, `order_status`) VALUES
-(35, 'F2024012679001456', '2024-01-26 18:24:00', '2024-01-20', 5, 2, 0, '', '', '', '', 'je8 je8 ', 1, 1, 1, 2),
-(37, 'F2024012656254968', '2024-01-26 18:24:00', '2024-01-20', 5, 2, 0, '', '', '', '', '西西', 1, 2, 2, 3),
-(40, 'F2024012659309172', '2024-01-26 06:39:00', '2024-01-31', 4, 3, 0, '', '', '', '', '', 2, 1, 3, 2),
-(42, 'F2024012689775776', '2024-01-26 06:39:00', '2024-01-31', 4, 3, 0, '', '', '', '', 'grrg', 2, 2, 2, 1),
-(47, 'F2024012868889191', '2024-01-28 18:19:00', '2024-01-20', 8, 4, 0, '', '', '', '', '哈哈', 3, 1, 1, 1);
+(35, 'F2024012679001456', '2024-01-26 18:24:00', '2024-01-20', 5, 22, NULL, NULL, NULL, NULL, NULL, 'je8 je8 ', 1, NULL, NULL, NULL),
+(37, 'F2024012656254968', '2024-01-26 18:24:00', '2024-01-20', 5, 22, NULL, NULL, NULL, NULL, NULL, '西西', 1, NULL, NULL, NULL),
+(40, 'F2024012659309172', '2024-01-26 06:39:00', '2024-01-31', 4, 3, NULL, NULL, NULL, NULL, NULL, '', 2, NULL, NULL, NULL),
+(42, 'F2024012689775776', '2024-01-26 06:39:00', '2024-01-31', 4, 3, NULL, NULL, NULL, NULL, NULL, 'grrg', 2, NULL, NULL, NULL),
+(47, 'F2024012868889191', '2024-01-28 18:19:00', '2024-01-20', 8, 4, NULL, NULL, NULL, NULL, NULL, '哈哈', 3, NULL, NULL, NULL);
 
 --
 -- 觸發器 `custom_orders`
@@ -3147,11 +3147,67 @@ CREATE TABLE `store` (
 --
 
 INSERT INTO `store` (`store_id`, `store_name`, `store_account`, `store_password`, `store_intro`, `store_address`, `store_path`, `store_email`, `store_tel`, `sub_date`, `sub_id`, `permission_id`) VALUES
-(1, 'admin', 'admin', '$2y$10$4XFIdw2B91YcnDWe8gJDMeeEJY9CI2ItSki1SwXJCoxpT3OKkuiBS', 'emeraldfloral', '桃園市中壢區中華路二段150號', 'https://www.emeraldfloral.com', 'admin@gmail.com', '02-2345-7890', '2024-01-01', 4, 2),
-(2, '綠之家', 'store02', '$2y$10$XBxNRIfEwmdLNP5.X48BMO1BgXFuHlql3bDE20fqM95HOylfwDOw6', 'greenhouse', '台北市中正區忠孝東路一段100號', 'https://www.greenhouse.com', 'test01@gmail.com', '02-2345-3456', '2024-01-01', 1, 2),
-(3, '春之風', 'store03', '$2y$10$VkBLLq6WMLP1YUzkVNL9y.JGxSUuv4pUgBJn2aGsC5ZRK29j38Zia', 'springbreeze', '新北市板橋區文化路二段50號', 'https://www.springbreeze.com', 'test02@gmail.com', '02-2345-4567', '2024-01-01', 2, 2),
-(4, '花漾閣', 'store04', '$2y$10$mzCzbaBs1wj3rEtjpL1guOlDjY7s1sXkuJ39WrDPreJQt4gQ2KwHm', 'flowercastle', '台中市西區民權路一段30號', 'https://www.flowercastle.com', 'test03@gmail.com', '02-2345-5678', '2024-01-01', 1, 2),
-(5, '雲端花舍', 'store05', '$2y$10$yfBsDnFokbduP6steh9tTOlKZH/CZe0QtJzYVmzl9y5zh736mI/tS', 'cloudflorist', '高雄市苓雅區成功一路80號', 'https://www.cloudflorist.com', 'test04@gmail.com', '02-2345-6789', '2024-01-01', 3, 2);
+(1, 'admin', 'admin', '$2y$10$4XFIdw2B91YcnDWe8gJDMeeEJY9CI2ItSki1SwXJCoxpT3OKkuiBS', 'manager', '桃園市中壢區中華路二段150號', 'https://www.emeraldfloral.com', 'admin@gmail.com', '0911-111-1111', '2024-01-01', 4, 1),
+(2, '花姿妍', 'store02', '$2y$10$XBxNRIfEwmdLNP5.X48BMO1BgXFuHlql3bDE20fqM95HOylfwDOw6', 'springbreeze', '台北市大安區忠孝東路一段123號', 'https://www.springbreeze.com', 'testemail1@example.com', '0921-234-567', '2024-01-06', 2, 2),
+(3, '春之調', 'store03', '$2y$10$VkBLLq6WMLP1YUzkVNL9y.JGxSUuv4pUgBJn2aGsC5ZRK29j38Zia', 'flowercastle', '新北市板橋區文化路456巷78號', 'https://www.flowercastle.com', 'samplemail2@gmail.com', '0934-567-890', '2024-01-07', 1, 2),
+(4, '花語藝', 'store04', '$2y$10$mzCzbaBs1wj3rEtjpL1guOlDjY7s1sXkuJ39WrDPreJQt4gQ2KwHm', 'cloudflorist', '台中市西屯區惠來路234號', 'https://www.cloudflorist.com', 'demo.email3@yahoo.com', '0987-123-456', '2024-01-07', 3, 2),
+(5, '綻放花藝', 'store05', '$2y$10$yfBsDnFokbduP6steh9tTOlKZH/CZe0QtJzYVmzl9y5zh736mI/tS', 'emeraldfloral', '高雄市前鎮區中山東路56巷78號', 'https://www.emeraldfloral.com', 'usermail4@hotmail.com', '0912-345-678', '2024-01-07', 2, 2),
+(6, '翠綠花苑', 'sample2024', '8AlphaBeta$', 'flowercottage', '桃園市中壢區中正路890號', 'https://www.flowercottage.com', 'example.email5@outlook.com', '0978-654-321', '2024-01-08', 1, 2),
+(7, '花漾坊', 'account12', 'Test2022!', 'flowermoment', '台南市東區崇善路12巷34號', 'https://www.flowermoment.com', 'mockmail6@mail.com', '0943-210-987', '2024-01-08', 3, 2),
+(8, '花意濃', 'securePass8', '@ccount567', 'flowerlanguage', '彰化縣彰化市光復路56號', 'https://www.flowerlanguage.com', 'testuser7@protonmail.com', '0965-432-109', '2024-01-08', 2, 2),
+(9, '花卉匯', 'login2023', 'P@ssword45', 'floristmatchmaker', '基隆市信義區中正路789號', 'https://www.matchmaker.com', 'dummyemail8@icloud.com', '0901-876-543', '2024-01-09', 1, 2),
+(10, '花間藝術', 'access22', '16DemoUser#', 'fragrantblossoms', '新竹市東區光復路34巷56號', 'https://www.blossoms.com', 'maildemo9@live.com', '0956-789-012', '2024-01-09', 2, 2),
+(11, '星夢花苑', '3UserDemo', '3AccessPass', 'flowerlovestory', '嘉義市西區公園路789號', 'https://www.lovestory.com', 'userexample10@gmail.com', '0990-123-456', '2024-01-09', 3, 2),
+(12, '花影時光', 'alphaBeta45', 'User789!abc', 'stellarnursery', '新北市三重區重新路234號', 'https://www.stellarnursery.com', 'testmail11@yahoo.com.tw', '0911-234-567', '2024-01-10', 1, 2),
+(13, '花千谷', '789testUser', 'PassWord22$', 'flowerfullday', '高雄市左營區博愛路56號', 'https://www.fullbloom.com', 'sample.email12@hotmail.com', '0976-543-210', '2024-01-10', 2, 2),
+(14, '花翩翩', 'pass123word', 'Secure2024@', 'gardenofflowers', '台中市北屯區北平路78號', 'https://www.gardenofflowers.com', 'demo.mail13@outlook.com', '0923-456-789', '2024-01-10', 3, 2),
+(15, '花韻閣', '2024DemoUser', 'Demo#User2023', 'dreamyflowers', '台南市中西區民權路12巷34號', 'https://www.dreamyflowers.com', 'user.test14@mail.com', '0945-678-901', '2024-01-11', 2, 2),
+(16, '花之舞', 'myAcc0unt', '789MyAcc!', 'colorfulbloom', '桃園市龜山區文青路890號', 'https://www.colorfulbloom.com', 'example15@protonmail.com', '0980-123-456', '2024-01-11', 1, 2),
+(17, '花藝空間', 'userPass456', 'P@ss456Word', 'flowerwander', '台東縣台東市中華路56號', 'https://www.wanderlustflowers.com', 'mock.email16@icloud.com', '0932-345-678', '2024-01-11', 3, 2),
+(18, '繽紛花屋', '2023example', 'Example2023$', 'melodyofpetals', '宜蘭縣宜蘭市和平路78號', 'https://www.melodyofpetals.com', 'testuser17@live.com', '0998-765-432', '2024-01-12', 2, 2),
+(19, '花開時節', 'demoUser321', 'User@Demo321', 'gardenretreat', '花蓮縣花蓮市博愛街234號', 'https://www.gardenretreat.com', 'dummy.mail18@gmail.com', '0910-987-654', '2024-01-12', 1, 2),
+(20, '美好花房', 'accessPass88', '123Acc!Word', 'cityofflowers', '苗栗縣苗栗市民生路56號', 'https://www.cityofflowers.com', 'mailtest19@yahoo.com', '0954-321-098', '2024-01-12', 3, 2),
+(21, '花馨藝庭', 'secureAcc45', 'Secur3Pass', 'bloomingspectacle', '金門縣金城鎮民生路78號', 'https://www.bloomingfireworks.com', 'user.sample20@hotmail.com', '0967-890-123', '2024-01-13', 2, 2),
+(22, '花意蕾', 'alphaDemo22', 'Alpha22Demo$', 'treasureofblossoms', '屏東縣屏東市大同路12號', 'https://www.treasureofblossoms.com', 'examplemail21@outlook.com', '0939-012-345', '2024-01-13', 1, 2),
+(23, '花翠園', 'test2023User', 'TestUser2023!', 'enchantedfloraljourney', '澎湖縣馬公市民生路34號', 'https://www.floraljourney.com', 'demomail22@mail.com', '0906-543-210', '2024-01-13', 3, 2),
+(24, '花羽韻', '123PassDemo', '1234#PassDemo', 'whispersofpetals', '基隆市中正區和平路890號', 'https://www.whispersofpetals.com', 'test.email23@protonmail.com', '0981-234-567', '2024-01-14', 2, 2),
+(25, '花綻放', 'mySecure1', 'MySecur1ty', 'joyfulbouquet', '新竹市北區光華路56號', 'https://www.joyfulbouquet.com', 'userdummy24@icloud.com', '0924-567-890', '2024-01-15', 3, 2),
+(26, '花謠詩', 'userAccount7', 'UserAcc7ount', 'bloomsofaffection', '嘉義市東區中山路78號', 'https://www.bloomsofaffection.com', 'mailuser25@live.com', '0977-890-123', '2024-01-15', 1, 2),
+(27, '花之境', 'sampleDemo88', 'SampleDemo88@', 'harmonyofflowers', '南投縣南投市民權路234號', 'https://www.harmonyofflowers.com', 'sampletest26@gmail.com', '0942-345-678', '2024-01-15', 2, 2),
+(28, '花樂府', '2024PassWord', '2024Pass!Word', 'fragrantavenue', '台北市中正區仁愛路12巷34號', 'https://www.fragrantavenue.com', 'demomail27@yahoo.com.tw', '0955-678-901', '2024-01-16', 1, 2),
+(29, '花漫遊', 'secureTest1', 'S3cureT3st1', 'melodiousblossoms', '台東縣成功鎮中山路56號', 'https://www.melodiousblossoms.com', 'email.test28@hotmail.com', '0919-012-345', '2024-01-16', 3, 2),
+(30, '花意婉', 'user12345678', 'User1234!5678', 'dreamgateflowers', '宜蘭縣羅東鎮公園路78號', 'https://www.dreamgateflowers.com', 'user.example29@outlook.com', '0966-543-210', '2024-01-16', 2, 2),
+(31, '花境雅庭', 'passWordTest', '789P@ssWord', 'pureblossomgarden', '花蓮縣壽豐鄉中正路890號', 'https://www.pureblossomgarden.com', 'maildemo30@mail.com', '0992-345-678', '2024-01-17', 3, 2),
+(32, '花韻坊', 'alpha789Beta', 'Alpha789Bet@#', 'starseedflorals', '苗栗縣頭份市文明路56號', 'https://www.starseedflorals.com', 'sample.user31@protonmail.com', '0913-456-789', '2024-01-17', 1, 2),
+(33, '花意盎然', 'test2022Acc', 'Test2022Acc!', 'blossomgala', '金門縣金湖鎮中正路78號', 'https://www.blossomgala.com', 'emailmock32@icloud.com', '0986-789-012', '2024-01-17', 2, 2),
+(34, '花夢蕾', '45DemoUser', 'Demo45!User', 'elegantfloralharmony', '屏東縣恆春鎮民生路234號', 'https://www.elegantfloralharmony.com', 'testmail33@live.com', '0941-234-567', '2024-01-18', 3, 2),
+(35, '花姿悅', 'secure123Pass', 'Secur3P@ss', 'poeticpetalverse', '澎湖縣白沙鄉和平路56號', 'https://www.poeticpetalverse.com', 'userdummy34@gmail.com', '0974-567-890', '2024-01-18', 2, 2),
+(36, '花樹時光', 'login2024Acc', 'L0gin2024A@', 'danceofpetals', '基隆市仁愛區中華路78號', 'https://www.danceofpetals.com', 'example.mail35@yahoo.com', '0938-901-234', '2024-01-18', 1, 2),
+(37, '花夢境', 'myPass789', 'Myp@ss789', 'colorfultunefulblooms', '新竹市香山區民權路12號', 'https://www.colorfultunefulblooms.com', 'demomail36@hotmail.com', '0951-234-567', '2024-01-19', 3, 2),
+(38, '花蔚藝術', 'userDemo2022', 'UserDemo2022!', 'symphonyofflowerlanguage', '嘉義市西區文化路34號', 'https://www.symphonyofflowerlanguage.com', 'testuser37@outlook.com', '0926-567-890', '2024-01-19', 2, 2),
+(39, '花心曲', '2023Secure', '2023S3cure', 'fantasyofflowers', '南投縣埔里鎮博愛街890號', 'https://www.fantasyofflowers.com', 'mailsample38@mail.com', '0909-012-345', '2024-01-19', 1, 2),
+(40, '花瑩藝庭', 'alpha456beta', 'Alpha!456Beta', 'nightblooms', '台北市萬華區中山路56號', 'https://www.nightblooms.com', 'user.demo39@protonmail.com', '0964-567-890', '2024-01-20', 3, 2),
+(41, '花影樓', 'demo789user', 'Demo789User@', 'secretgardenofflowers', '台東縣池上鄉民生路78號', 'https://www.secretgardenofflowers.com', 'exampledummy40@icloud.com', '0997-890-123', '2024-01-20', 2, 2),
+(42, '花音響', 'access123Pass', 'Access1!23Pass', 'allureofblossoms', '宜蘭縣冬山鄉仁愛路234號', 'https://www.allureofblossoms.com', 'test.email41@live.com', '0915-678-901', '2024-01-20', 1, 2),
+(43, '花幻夢', 'mySecureDemo', 'MyS3cureD3mo', 'journeythroughpetals', '花蓮縣光復鄉公園路56號', 'https://www.journeythroughpetals.com', 'samplemail42@gmail.com', '0940-123-456', '2024-01-21', 3, 2),
+(44, '花心曲', '2022testUser', '2022T3stUser', 'taleofflowerlanguage', '苗栗縣苑裡鎮民權路78號', 'https://www.taleofflowerlanguage.com', 'demo.email43@yahoo.com.tw', '0983-456-789', '2024-01-21', 2, 2),
+(45, '花樂章', 'passWord789', 'Pass789!Word', 'enchantingdreamsofblossoms', '金門縣烈嶼鄉中正路890號', 'https://www.enchantingdreamsofblossoms.com', 'usermail44@hotmail.com', '0936-789-012', '2024-01-22', 1, 2),
+(46, '花意梵', 'secure456acc', 'Secur456eAcc', 'gardenofblessings', '屏東縣車城鄉和平路56號', 'https://www.gardenofblessings.com', 'example.email45@outlook.com', '0959-012-345', '2024-01-22', 3, 2),
+(47, '花語薈', 'alphaPass789', 'AlphaP@ss789', 'miraculousfloralmessages', '澎湖縣西嶼鄉民生路78號', 'https://www.miraculousfloralmessages.com', 'mockmail46@mail.com', '0902-345-678', '2024-01-22', 2, 2),
+(48, '花舞姿', 'user12345acc', 'User123!45A', 'emotionallivingflowers', '基隆市安樂區中華路234號', 'https://www.emotionallivingflowers.com', 'testuser47@protonmail.com', '0968-901-234', '2024-01-23', 1, 2),
+(49, '花夢語', 'myDemo789', 'MyDemo789!', 'melodiclanguageofflowers', '新竹市東區光華路56號', 'https://www.melodiclanguageofflowers.com', 'dummyemail48@icloud.com', '0993-456-789', '2024-01-23', 2, 2),
+(50, '花綺夢', 'accPass2022', 'Acc!Pass2022', 'encounterwithfragrance', '嘉義市東區博愛街78號', 'https://www.encounterwithfragrance.com', 'maildemo49@live.com', '0925-678-901', '2024-01-23', 3, 2),
+(51, '花繽紛', 'testUser1234', 'T3stUser1234', 'Blossom Harmony', '南投縣魚池鄉文化路890號', 'https://www.blossomharmony.com', 'userexample50@gmail.com', '0972-345-678', '2024-01-06', 2, 2),
+(52, '花香坊', '2023SecurePass', '2023S3cur3P@ss', 'Petal Dreams', '台北市松山區民權路56號', 'https://www.petaldreams.com', 'testmail51@yahoo.com', '0917-890-123', '2024-01-07', 2, 2),
+(53, '花影誼', 'alphaDemo456', 'Alpha!D3mo456', 'Fragrance Encounter', '台東縣太麻里鄉公園路78號', 'https://www.fragranceencounter.com', 'sample.email52@hotmail.com', '0949-012-345', '2024-01-07', 3, 2),
+(54, '花香滿座', 'passWordDemo1', 'PassWordD3mo1', 'Affectionate Blooms', '宜蘭縣頭城鎮仁愛路234號', 'https://www.affectionateblooms.com', 'demo.mail53@outlook.com', '0982-345-678', '2024-01-07', 3, 2),
+(55, '花藝家', 'user789Demo', 'User789D3mo', 'Floral Whispers', '花蓮縣秀林鄉博愛街56號', 'https://www.floralwhispers.com', 'user.test54@mail.com', '0935-678-901', '2024-01-08', 1, 2),
+(56, '花間曲', 'secureTest123', 'Secur3T3st123', 'Blooming Fantasy', '苗栗縣三義鄉民生路78號', 'https://www.bloomingfantasy.com', 'example55@protonmail.com', '0996-789-012', '2024-01-08', 1, 2),
+(57, '花夢實', 'alpha1234beta', 'Alpha!123Beta', 'Melodic Gardens', '金門縣金寧鄉中正路890號', 'https://www.melodickgardens.com', 'mock.email56@icloud.com', '0918-901-234', '2024-01-08', 2, 2),
+(58, '花蕊舞', '2022userPass', '2022U$erPass', 'Garden Spectacle', '屏東縣枋寮鄉和平路56號', 'https://www.gardenspectacle.com', 'testuser57@live.com', '0963-456-789', '2024-01-09', 1, 2),
+(59, '花之樂', 'pass789word', 'Pass789!Word', 'Secret Blossom Retreat', '澎湖縣湖西鄉民生路78號', 'https://www.secretblossomretreat.com', 'dummy.mail58@gmail.com', '0948-901-234', '2024-01-09', 2, 2),
+(60, '花枝俏', 'demo456Acc', 'Demo456!Acc', 'Enchanted Floral Avenue', '基隆市中山區中華路234號', 'https://www.enchantedfloralavenue.com', 'mailtest59@yahoo.com', '0971-234-567', '2024-01-09', 1, 2),
+(61, '花幻影', 'accessDemo123', 'AccessD3mo123@', 'Joyful Floral Gala', '新竹市南區光復路56號', 'https://www.joyfulfloralgala.com.com', 'user.sample60@hotmail.com', '0904-567-890', '2024-01-10', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -3758,7 +3814,7 @@ ALTER TABLE `shipping`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `store`
 --
 ALTER TABLE `store`
-  MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `store_permission`
@@ -3859,7 +3915,8 @@ ALTER TABLE `custom_products`
 -- 資料表的限制式 `intro_flower_color`
 --
 ALTER TABLE `intro_flower_color`
-  ADD CONSTRAINT `intro_flower_color_ibfk_1` FOREIGN KEY (`flower_id`) REFERENCES `intro_flower` (`flower_id`);
+  ADD CONSTRAINT `intro_flower_color_ibfk_1` FOREIGN KEY (`flower_id`) REFERENCES `intro_flower` (`flower_id`),
+  ADD CONSTRAINT `intro_flower_color_ibfk_2` FOREIGN KEY (`color_list_id`) REFERENCES `color_list` (`color_list_id`);
 
 --
 -- 資料表的限制式 `intro_flower_image`
