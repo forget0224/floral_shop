@@ -3,7 +3,6 @@
 require '../parts/db_connect.php';
 $pageName = 'add';
 $title = '新增';
-
 ?>
 <?php include __DIR__ . '/parts/html-head.php'  ?>
 <?php include __DIR__ . '/parts/navbar.php'  ?>
