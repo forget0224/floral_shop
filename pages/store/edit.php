@@ -149,7 +149,7 @@ if (empty($row)) {
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">繼續編輯</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="continueEditingBtn">繼續編輯</button>
                                                     <a type="button" class="btn btn-primary" href="list.php">到列表頁</a>
                                                 </div>
                                             </div>
@@ -186,156 +186,160 @@ if (empty($row)) {
 
 
     <script>
-       // 訂閱日期
-    // 取得當前日期的字串表示
-    function getCurrentDate() {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 月份從0開始，因此需要+1
-        const day = now.getDate().toString().padStart(2, '0');
-        return `${year}-${month}-${day}`;
-    }
-    // 將當前日期設定為預設值
-    document.getElementById('sub_date').value = getCurrentDate();
+        // 訂閱日期
+        // 取得當前日期的字串表示
+        function getCurrentDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 月份從0開始，因此需要+1
+            const day = now.getDate().toString().padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+        // 將當前日期設定為預設值
+        document.getElementById('sub_date').value = getCurrentDate();
 
 
 
-    // 驗證
-    // 重新命名input欄位，解構賦子
-    const {
-        store_name: store_name_f, // <input type="text" class="form-control" id="name" name="name">   
-        store_account: store_account_f, // 新增帳號的解構賦值   
-        store_password: store_password_f, // 新增密碼的解構賦值
-        store_email: store_email_f,
-        store_tel: store_tel_f,
-    } = document.form1;
+        // 驗證
+        // 重新命名input欄位，解構賦子
+        const {
+            store_name: store_name_f, // <input type="text" class="form-control" id="name" name="name">   
+            store_account: store_account_f, // 新增帳號的解構賦值   
+            store_password: store_password_f, // 新增密碼的解構賦值
+            store_email: store_email_f,
+            store_tel: store_tel_f,
+        } = document.form1;
 
 
-    // 帳號驗證函式
-    function validatestore_account(store_account) {
-        // 長度在8到20位之間，包含英文、數字
-        var re = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,20}$/;
-        return re.test(store_account);
-    }
-
-    // 密碼
-    function validatePassword(store_password) {
-        // 長度在8到16位之間，包含英文、數字，至少1位特殊字元
-        var re = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
-        return re.test(store_password);
-    }
-
-    // 信箱
-    function validatestore_email(store_email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(store_email);
-    }
-    // 電話
-    function validatestore_tel(store_tel) {
-        var re = /^09\d{2}-?\d{3}-?\d{3}$/;
-        return re.test(store_tel);
-    }
-
-
-    // 表單送出流程
-    const sendForm = e => {
-        e.preventDefault();
-        // 表單送出，重置輸入框內容
-        store_name_f.style.border = '1px solid #CCC';
-        store_name_f.nextElementSibling.innerHTML = "";
-        store_account_f.style.border = '1px solid #CCC';
-        store_account_f.nextElementSibling.innerHTML = "";
-        store_email_f.style.border = '1px solid #CCC';
-        store_email_f.nextElementSibling.innerHTML = "";
-        store_tel_f.style.border = '1px solid #CCC';
-        store_tel_f.nextElementSibling.innerHTML = "";
-
-        // alert() 是同步函式，盡量別用
-        // TODO: 資料送出之前, 要做檢查 (有沒有填寫, 格式對不對)
-        let isPass = true; // 表單有沒有通過檢查
-
-        
-        // 判斷name輸入欄位長度
-        // 姓名
-        if (store_name_f.value.trim().length === 0) {
-            // alert("請填寫正確的姓名");
-            isPass = false;
-            store_name_f.style.border = '1px solid red';
-            store_name_f.nextElementSibling.innerHTML = "請填寫姓名";
-        } else if (store_name_f.value.trim().length < 2){
-            // alert("請填寫正確的姓名");
-            isPass = false;
-            store_name_f.style.border = '1px solid red';
-            store_name_f.nextElementSibling.innerHTML = "請填寫正確的姓名";
+        // 帳號驗證函式
+        function validatestore_account(store_account) {
+            // 長度在8到20位之間，包含英文、數字
+            var re = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,20}$/;
+            return re.test(store_account);
         }
 
-        // 帳號
-        if (store_account_f.value.trim().length === 0) {
-            isPass = false;
-            store_account_f.style.border = '1px solid red';
-            store_account_f.nextElementSibling.innerHTML = "請填寫帳號";
-        } else if (!validatestore_account(store_account_f.value)) {
-            isPass = false;
-            store_account_f.style.border = '1px solid red';
-            store_account_f.nextElementSibling.innerHTML = "請填寫6~20位數，包含英文及數字的帳號";
+        // 密碼
+        function validatePassword(store_password) {
+            // 長度在8到16位之間，包含英文、數字，至少1位特殊字元
+            var re = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+            return re.test(store_password);
         }
 
-        // 密碼驗證
-        if (store_password_f.value.trim().length === 0) {
-            isPass = false;
-            store_password_f.style.border = '1px solid red';
-            store_password_f.nextElementSibling.innerHTML = "請填寫密碼";
-        } else if (!validatePassword(store_password_f.value)) {
-            isPass = false;
-            store_password_f.style.border = '1px solid red';
-            store_password_f.nextElementSibling.innerHTML = "密碼要求長度在8到16位之間，並包含英文、數字，至少1位特殊字元";
+        // 信箱
+        function validatestore_email(store_email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(store_email);
+        }
+        // 電話
+        function validatestore_tel(store_tel) {
+            var re = /^09\d{2}-?\d{3}-?\d{3}$/;
+            return re.test(store_tel);
         }
 
-        // 信箱驗證
-        if (store_email_f.value && !validatestore_email(store_email_f.value)) {
-            isPass = false;
-            store_email_f.style.border = '1px solid red';
-            store_email_f.nextElementSibling.innerHTML = "請填寫正確的信箱";
+
+        // 表單送出流程
+        const sendForm = e => {
+            e.preventDefault();
+            // 表單送出，重置輸入框內容
+            store_name_f.style.border = '1px solid #CCC';
+            store_name_f.nextElementSibling.innerHTML = "";
+            store_account_f.style.border = '1px solid #CCC';
+            store_account_f.nextElementSibling.innerHTML = "";
+            store_email_f.style.border = '1px solid #CCC';
+            store_email_f.nextElementSibling.innerHTML = "";
+            store_tel_f.style.border = '1px solid #CCC';
+            store_tel_f.nextElementSibling.innerHTML = "";
+
+            // alert() 是同步函式，盡量別用
+            // TODO: 資料送出之前, 要做檢查 (有沒有填寫, 格式對不對)
+            let isPass = true; // 表單有沒有通過檢查
+
+
+            // 判斷name輸入欄位長度
+            // 姓名
+            if (store_name_f.value.trim().length === 0) {
+                // alert("請填寫正確的姓名");
+                isPass = false;
+                store_name_f.style.border = '1px solid red';
+                store_name_f.nextElementSibling.innerHTML = "請填寫姓名";
+            } else if (store_name_f.value.trim().length < 2) {
+                // alert("請填寫正確的姓名");
+                isPass = false;
+                store_name_f.style.border = '1px solid red';
+                store_name_f.nextElementSibling.innerHTML = "請填寫正確的姓名";
+            }
+
+            // 帳號
+            if (store_account_f.value.trim().length === 0) {
+                isPass = false;
+                store_account_f.style.border = '1px solid red';
+                store_account_f.nextElementSibling.innerHTML = "請填寫帳號";
+            } else if (!validatestore_account(store_account_f.value)) {
+                isPass = false;
+                store_account_f.style.border = '1px solid red';
+                store_account_f.nextElementSibling.innerHTML = "請填寫6~20位數，包含英文及數字的帳號";
+            }
+
+            // 密碼驗證
+            if (store_password_f.value.trim().length === 0) {
+                isPass = false;
+                store_password_f.style.border = '1px solid red';
+                store_password_f.nextElementSibling.innerHTML = "請填寫密碼";
+            } else if (!validatePassword(store_password_f.value)) {
+                isPass = false;
+                store_password_f.style.border = '1px solid red';
+                store_password_f.nextElementSibling.innerHTML = "密碼要求長度在8到16位之間，並包含英文、數字，至少1位特殊字元";
+            }
+
+            // 信箱驗證
+            if (store_email_f.value && !validatestore_email(store_email_f.value)) {
+                isPass = false;
+                store_email_f.style.border = '1px solid red';
+                store_email_f.nextElementSibling.innerHTML = "請填寫正確的信箱";
+            }
+            // 電話驗證
+            if (store_tel_f.value && !validatestore_tel(store_tel_f.value)) {
+                isPass = false;
+                store_tel_f.style.border = '1px solid red';
+                store_tel_f.nextElementSibling.innerHTML = "請填寫正確的手機號碼";
+            }
+
+            // 表單前端驗證通過
+            // 接獲後端傳回的json訊息
+            if (isPass) {
+                // "沒有外觀" 的表單
+                const fd = new FormData(document.form1);
+
+                // fetch完，第一個then =>r 接收到資料，但不清楚接著要怎麼做
+                // r => t.json() 下指令要求 r =>把資料轉成json()型式
+
+                // 第二個then拿到的result =>json() 型式
+                fetch('edit-api.php', {
+                        method: 'POST',
+                        body: fd, // content-type: multipart/form-data
+                    }).then(r => r.json())
+                    .then(result => {
+                        console.log({
+                            result
+                        });
+                        // Modal功能    
+                        if (result.success) {
+                            myModal.show();
+                            // 清除表單輸入的資料
+                            document.form1.reset();
+                        }
+                    })
+                    .catch(ex => console.log(ex))
+            }
         }
-        // 電話驗證
-        if (store_tel_f.value && !validatestore_tel(store_tel_f.value)) {
-            isPass = false;
-            store_tel_f.style.border = '1px solid red';
-            store_tel_f.nextElementSibling.innerHTML = "請填寫正確的手機號碼";
-        }
 
-        // 表單前端驗證通過
-        // 接獲後端傳回的json訊息
-        if (isPass) {
-            // "沒有外觀" 的表單
-            const fd = new FormData(document.form1);
+        document.getElementById('continueEditingBtn').addEventListener('click', () => {
+            // Redirect to the edit.php page
+            window.location.href = 'edit.php';
+        });
 
-            // fetch完，第一個then =>r 接收到資料，但不清楚接著要怎麼做
-            // r => t.json() 下指令要求 r =>把資料轉成json()型式
-
-            // 第二個then拿到的result =>json() 型式
-            fetch('edit-api.php', {
-                    method: 'POST',
-                    body: fd, // content-type: multipart/form-data
-                }).then(r => r.json())
-                .then(result => {
-                    console.log({
-                        result
-                    });
-                    // Modal功能    
-                    if (result.success) {
-                        myModal.show();
-                        // 清除表單輸入的資料
-                        document.form1.reset();
-                    }
-                })
-                .catch(ex => console.log(ex))
-        }
-    }
-
-    // Modal按鈕功能重設
-    const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-</script>
+        // Modal按鈕功能重設
+        const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
     </script>
 
     <?php include '../parts/html-foot.php' ?>
