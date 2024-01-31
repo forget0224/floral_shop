@@ -130,14 +130,13 @@ if (empty($pageName)) {
         </a>
         <div id="collapsePages6" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">小標題/分類</h6>
-                <a class="collapse-item" href="login.php">Login</a>
+                <!-- <h6 class="collapse-header">小標題/分類</h6> -->
+                <!-- <a class="collapse-item" href="login.php">Login</a> -->
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">店家管理</h6>
                 <a class="collapse-item" href="/floral_shop/pages/store/list.php">店家列表</a>
                 <a class="collapse-item" href="/floral_shop/pages/store/add.php">店家新增</a>
-
-                <a class="collapse-item" href="blank.html">Blank Page</a>
+                <!-- <a class="collapse-item" href="blank.html">Blank Page</a> -->
             </div>
         </div>
     </li>
