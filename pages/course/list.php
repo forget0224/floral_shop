@@ -107,7 +107,7 @@ if ($totalRows > 0) {
                                 </nav>
                                 <!-- Topbar Search -->
                                 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                                    <input type="text" id="courseSearch" name="courseSearch" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                    <input type="text" id="courseSearch" name="courseSearch" class="form-control bg-light border small" placeholder="Search for..."
                                         aria-label="Search" aria-describedby="basic-addon2">
                                 </form>
                             </h6>
@@ -118,15 +118,15 @@ if ($totalRows > 0) {
                                     <thead>
                                         <tr>
                                             <th><i class="fa-solid fa-trash"></i></th>
-                                            <th>#</th>
-                                            <th>課程名稱</th>
-                                            <th>課程介紹</th>
-                                            <th class="text-nowrap">課程分類</th>
-                                            <th class="text-nowrap">商家名稱</th>
-                                            <th class="text-nowrap">上課地點</th>
-                                            <th class="text-nowrap">課程定價</th>
-                                            <th class="text-nowrap">最小人數</th>
-                                            <th class="text-nowrap">最大人數</th>
+                                            <th class="text-nowrap text-center">#</th>
+                                            <th class="text-nowrap text-center">課程名稱</th>
+                                            <th class="text-nowrap text-center">課程介紹</th>
+                                            <th class="text-nowrap text-center">課程分類</th>
+                                            <th class="text-nowrap text-center">商家名稱</th>
+                                            <th class="text-nowrap text-center">上課地點</th>
+                                            <th class="text-nowrap text-center">課程定價</th>
+                                            <th class="text-nowrap text-center">最小人數</th>
+                                            <th class="text-nowrap text-center">最大人數</th>
                                             <th><i class="fa-solid fa-file-pen"></i></th>
                                         </tr>
                                     </thead>
