@@ -8,9 +8,14 @@ unset($_SESSION['deleteSuccess']);
 $searchKeyword = isset($_GET['search']) ? $_GET['search'] : '';
 $isSearch = !empty($searchKeyword);
 
-  // 搜尋-類別
-  $searchSelectCategory = isset($_GET['searchCategory']) ? $_GET['searchCategory'] : '';
-  $isSearchCategory = !empty($searchSelectCategory);
+// 搜尋-類別
+$searchSelectCategory = isset($_GET['searchCategory']) ? $_GET['searchCategory'] : '';
+$isSearchCategory = !empty($searchSelectCategory);
+
+// 搜尋-價格
+$searchPriceFirst = isset($_GET['searchPriceFirst']) ? $_GET['searchPriceFirst'] : '';
+$searchPriceSecond = isset($_GET['searchPriceSecond']) ? $_GET['searchPriceSecond'] : '';
+$isSearchPrice = ($searchPriceFirst !== '' && $searchPriceSecond !== '');
 
 $pageName = 'list';
 $title = '商品列表';
@@ -33,20 +38,20 @@ if ($totalRows > 0) {
   }
 
   // 透過inner join將product表格和categories表格連接起來
-  $sql =
-  sprintf(
+  $sql = sprintf(
     "SELECT p.*, c.name AS category_name FROM product p
-      INNER JOIN categories c ON p.categories_id = c.categories_id
-      %s
-      %s
-      ORDER BY p.product_id DESC
-      LIMIT %s, %s",
+    INNER JOIN categories c ON p.categories_id = c.categories_id
+    %s
+    %s
+    %s
+    ORDER BY p.product_id DESC
+    LIMIT %s, %s",
     $isSearch ? "WHERE p.name LIKE :searchKeyword" : "", //搜尋-商品關鍵字
     $isSearchCategory ? "AND p.categories_id = :searchCategory" : "", // 搜尋-類別
+    ($isSearchPrice && $searchPriceFirst !== '' && $searchPriceSecond !== '') ? "AND p.price BETWEEN :searchPriceFirst AND :searchPriceSecond" : "", // 搜尋-價格
     ($page - 1) * $perPage,
     $perPage
   );
-
 
   $stmt = $pdo->prepare($sql);
 
@@ -58,6 +63,11 @@ if ($totalRows > 0) {
   // 搜尋-類別
   if ($isSearchCategory) {
     $stmt->bindParam(':searchCategory', $searchSelectCategory, PDO::PARAM_INT);
+  }
+  //搜尋-價格
+  if ($isSearchPrice) {
+    $stmt->bindParam(':searchPriceFirst', $searchPriceFirst, PDO::PARAM_INT);
+    $stmt->bindParam(':searchPriceSecond', $searchPriceSecond, PDO::PARAM_INT);
   }
   $stmt->execute();
   $rows = $stmt->fetchAll();
@@ -169,7 +179,7 @@ if ($totalRows > 0) {
                 </div>
                 <!-- 搜尋-商品關鍵字結束 -->
                 <!-- 搜尋-商品類別 -->
-                <div class="col-4">
+                <div class="ml-3">
                   <div class="modal fade" id="exampleModalToggleCategory" aria-hidden="true" aria-labelledby="exampleModalToggleLabelCategory" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
@@ -216,6 +226,41 @@ if ($totalRows > 0) {
                   </a>
                 </div>
                 <!-- 搜尋-商品類別結束 -->
+                <!-- 搜尋-價格 -->
+                <div class="ml-3">
+                  <div class="modal fade" id="exampleModalTogglePrice" aria-hidden="true" aria-labelledby="exampleModalToggleLabelPrice" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalToggleLabelPrice">搜尋價格</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form class="form-inline my-2 my-lg-0" id="searchFormPrice" action="">
+                            <input class="form-control mr-sm-2" type="number" placeholder="請輸入價格" aria-label="SearchPrice" id="searchInputPriceFirst" oninput="validatePriceInput()">
+                            <p class="form-text text-danger" id="searchInputPriceErrorFirst"></p>
+
+                            <input class="form-control mr-sm-2" type="number" placeholder="請輸入價格" aria-label="SearchPrice" id="searchInputPriceSecond" oninput="validatePriceInput()">
+                            <p class="form-text text-danger" id="searchInputPriceError"></p>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-outline-success" type="button" onclick="searchPrice()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalTogglePrice" role="button">價格
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                  </a>
+                </div>
+                <!-- 搜尋-價格結束 -->
               </h6>
             </div>
             <div class="card-body">
@@ -329,6 +374,61 @@ if ($totalRows > 0) {
         searchInputCategoryError.textContent = '請選擇類別'
       }
     }
+
+    //搜尋價格
+    function validatePriceInput() {
+      var searchInputPriceFirst = document.getElementById('searchInputPriceFirst');
+      var searchInputPriceSecond = document.getElementById('searchInputPriceSecond');
+      var searchInputPriceError = document.getElementById('searchInputPriceError');
+
+      // Reset error message
+      searchInputPriceError.textContent = '';
+
+      // Check if the first input is empty
+      if (searchInputPriceFirst.value.trim() === '') {
+        // If the first input is empty, clear the second input and return
+        searchInputPriceSecond.value = '';
+        return;
+      }
+    }
+
+    function searchPrice() {
+      var searchInputPriceFirst = document.getElementById('searchInputPriceFirst');
+      var searchInputPriceSecond = document.getElementById('searchInputPriceSecond');
+      var searchInputPriceError = document.getElementById('searchInputPriceError');
+
+      // Reset error message
+      searchInputPriceError.textContent = '';
+
+      var firstPrice = searchInputPriceFirst.value.trim();
+      var secondPrice = searchInputPriceSecond.value.trim();
+
+      if (firstPrice === '' && secondPrice === '') {
+        searchInputPriceError.textContent = '請輸入價格';
+        return;
+      }
+
+      // Check if both inputs are filled
+      if (firstPrice !== '' || secondPrice !== '') {
+        // Check if the first input is less than or equal to the second input
+        if (parseInt(firstPrice) > parseInt(secondPrice)) {
+          searchInputPriceError.textContent = '要高於上一個值';
+          return;
+        }
+      }
+
+      // Construct URL with price range
+      let url = 'list.php?';
+      if (firstPrice !== '') {
+        url += 'searchPriceFirst=' + encodeURIComponent(firstPrice) + '&';
+      }
+      if (secondPrice !== '') {
+        url += 'searchPriceSecond=' + encodeURIComponent(secondPrice);
+      }
+      url += 'search=price';
+      window.location.href = url;
+    }
+    // 搜尋價格結束
 
     //刪除
     function delete_one(product_id) {
