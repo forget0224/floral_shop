@@ -335,7 +335,7 @@ if (empty($row)) {
 
         document.getElementById('continueEditingBtn').addEventListener('click', () => {
             // Redirect to the edit.php page
-            window.location.href = 'edit.php';
+            window.location.href = 'edit.php?store_id=<?= $store_id ?>';
         });
 
         // Modal按鈕功能重設
