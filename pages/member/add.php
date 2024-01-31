@@ -55,7 +55,8 @@ $title = '新增';
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">地址</label>
-                            <textarea class="form-control" name="address" id="address" cols="30" rows="3"></textarea>
+                            <textarea class="form-control" name="address" id="address" cols="30" rows="3" maxlength="100"></textarea>
+                            <div id="addressError" class="error-message"></div>
                         </div>
                         <button type="submit" class="btn btn-primary mx-auto d-block">新增</button>
                     </form>
@@ -539,79 +540,115 @@ $title = '新增';
 
 
     const {
-    name: name_f,
-    email: email_f,
-    phone: phone_f,
-} = document.form1;
+        name: name_f,
+        email: email_f,
+        phone: phone_f,
+        address: address_f,
+    } = document.form1;
 
-function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
+    function validateName(name) {
+        var re = /^[\u4e00-\u9fa5]{2,}$/;
+        return re.test(name);
+    }
 
-function validatePhone(phone) {
-    var re = /^09\d{2}-?\d{3}-?\d{3}$/;
-    return re.test(phone);
-}
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
 
-function validateName(name) {
-    var re = /^[\u4e00-\u9fa5]{2,}$/;
-    return re.test(name);
-}
+    function validatePhone(phone) {
+        var re = /^09\d{2}-?\d{3}-?\d{3}$/;
+        return re.test(phone);
+    }
 
-function showError(element, message) {
-    element.style.border = '1px solid red';
-    element.nextElementSibling.innerHTML = message;
-}
+    function validateAddress(address) {
+    // console.log('validateAddress function called with address:', address);
 
-function clearError(element) {
-    element.style.border = '1px solid #CCC';
-    element.nextElementSibling.innerHTML = "";
-}
+    // 验证地址是否为空
+    if (!address.trim()) {
+        return false; // 如果地址为空，返回 false
+    }
+    
+    // 地址格式验证：只能包含中文字符和数字
+    var re = /^[\u4e00-\u9fa5\d,()\s]+$/;
+    return re.test(address);
+    }
 
-const sendForm = e => {
-    e.preventDefault();
 
-    // 清除所有錯誤消息和邊框
-    clearError(name_f);
-    clearError(email_f);
-    clearError(phone_f);
 
-    let isPass = true;
 
-    if (name_f.value.trim() === "" || !validateName(name_f.value)) {
+
+    const sendForm = e => {
+        e.preventDefault();
+
+        name_f.style.border = '1px solid #CCC';
+        name_f.nextElementSibling.innerHTML = "";
+        email_f.style.border = '1px solid #CCC';
+        email_f.nextElementSibling.innerHTML = "";
+        phone_f.style.border = '1px solid #CCC';
+        phone_f.nextElementSibling.innerHTML = "";
+        // address_f.style.border = '1px solid #CCC';
+        // address_f.nextElementSibling.innerHTML = "";
+        // document.getElementById('addressError').textContent = "";
+        // 获取错误消息元素
+        var addressError = document.getElementById('addressError');
+
+        // 清空之前可能的错误消息
+        address_f.style.border = '1px solid #CCC';
+        addressError.textContent = "";
+
+
+
+
+
+
+        let isPass = true;
+
+        if (name_f.value && !validateName(name_f.value)) {
+            // alert("請填寫正確的姓名");
+            isPass = false;
+            name_f.style.border = '1px solid red';
+            name_f.nextElementSibling.innerHTML = "請填寫正確的姓名";
+        }
+
+        if (email_f.value && !validateEmail(email_f.value)) {
+            isPass = false;
+            email_f.style.border = '1px solid red';
+            email_f.nextElementSibling.innerHTML = "請填寫正確的 Email";
+        }
+
+        if (phone_f.value && !validatePhone(phone_f.value)) {
+            isPass = false;
+            phone_f.style.border = '1px solid red';
+            phone_f.nextElementSibling.innerHTML = "請填寫正確的手機號碼";
+        }
+
+        if (!validateAddress(address_f.value)) {
         isPass = false;
-        showError(name_f, "請填寫正確的姓名");
+        address_f.style.border = '1px solid red';
+        addressError.textContent = "請填寫正確的地址";
     }
 
-    if (email_f.value.trim() !== "" && !validateEmail(email_f.value)) {
-        isPass = false;
-        showError(email_f, "請填寫正確的 Email");
-    }
+        if (isPass) {
+            const fd = new FormData(document.form1);
 
-    if (phone_f.value.trim() !== "" && !validatePhone(phone_f.value)) {
-        isPass = false;
-        showError(phone_f, "請填寫正確的手機號碼");
+            fetch('add-api.php', {
+                    method: 'POST',
+                    body: fd,
+                }).then(r => r.json())
+                .then(result => {
+                    console.log({
+                        result
+                    });
+                    if (result.success) {
+                        myModal.show();
+                    }
+                    myModal.hide();
+                    document.form1.reset();
+                })
+                .catch(ex => console.log(ex));
+        }
     }
-
-    if (isPass) {
-        const fd = new FormData(document.form1);
-
-        fetch('add-api.php', {
-            method: 'POST',
-            body: fd,
-        }).then(r => r.json())
-        .then(result => {
-            console.log({ result });
-            if (result.success) {
-                myModal.show();
-            }
-            myModal.hide();
-            document.form1.reset();
-        })
-        .catch(ex => console.log(ex));
-    }
-}
 
 
 

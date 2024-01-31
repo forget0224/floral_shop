@@ -13,21 +13,13 @@ $output = [
 ];
 
 
+// 验证地址是否为空
+if (empty($_POST['address'])) {
+    $output['error'] = "地址不能为空";
+    echo json_encode($output, JSON_UNESCAPED_UNICODE);
+    exit; // 停止继续执行代码
+}
 
-// TODO: 資料輸入之前, 要做檢查
-# filter_var('bob@example.com', FILTER_VALIDATE_EMAIL)
-
-/* # 會有 SQL injection 的問題
-$sql = "INSERT INTO `address_book`(`name`, `email`, `mobile`, `birthday`, `address`, `created_at`) VALUES (
-  '{$_POST['name']}',
-  '{$_POST['email']}',
-  '{$_POST['mobile']}',
-  '{$_POST['birthday']}',
-  '{$_POST['address']}',
-  NOW() )";
-
-$stmt = $pdo->query($sql);
-*/
 
 
 $sql = "INSERT INTO `member`(`name`, `email`, `phone`, `city`, `district`, `address`) VALUES (?, ?, ?, ?, ?, ?)";
