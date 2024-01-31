@@ -8,6 +8,10 @@ unset($_SESSION['deleteSuccess']);
 $searchKeyword = isset($_GET['search']) ? $_GET['search'] : '';
 $isSearch = !empty($searchKeyword);
 
+  // 搜尋-類別
+  $searchSelectCategory = isset($_GET['searchCategory']) ? $_GET['searchCategory'] : '';
+  $isSearchCategory = !empty($searchSelectCategory);
+
 $pageName = 'list';
 $title = '商品列表';
 $perPage = 20;
@@ -29,22 +33,31 @@ if ($totalRows > 0) {
   }
 
   // 透過inner join將product表格和categories表格連接起來
-  $sql = sprintf(
+  $sql =
+  sprintf(
     "SELECT p.*, c.name AS category_name FROM product p
-    INNER JOIN categories c ON p.categories_id = c.categories_id
-    %s
-    ORDER BY p.product_id DESC
-    LIMIT %s, %s",
+      INNER JOIN categories c ON p.categories_id = c.categories_id
+      %s
+      %s
+      ORDER BY p.product_id DESC
+      LIMIT %s, %s",
     $isSearch ? "WHERE p.name LIKE :searchKeyword" : "", //搜尋-商品關鍵字
+    $isSearchCategory ? "AND p.categories_id = :searchCategory" : "", // 搜尋-類別
     ($page - 1) * $perPage,
     $perPage
   );
 
-  // 搜尋-商品關鍵字
+
   $stmt = $pdo->prepare($sql);
+
+  // 搜尋-商品關鍵字
   if ($isSearch) {
     $searchKeyword = '%' . $searchKeyword . '%';
     $stmt->bindParam(':searchKeyword', $searchKeyword, PDO::PARAM_STR);
+  }
+  // 搜尋-類別
+  if ($isSearchCategory) {
+    $stmt->bindParam(':searchCategory', $searchSelectCategory, PDO::PARAM_INT);
   }
   $stmt->execute();
   $rows = $stmt->fetchAll();
@@ -155,6 +168,54 @@ if ($totalRows > 0) {
                   </a>
                 </div>
                 <!-- 搜尋-商品關鍵字結束 -->
+                <!-- 搜尋-商品類別 -->
+                <div class="col-4">
+                  <div class="modal fade" id="exampleModalToggleCategory" aria-hidden="true" aria-labelledby="exampleModalToggleLabelCategory" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalToggleLabelCategory">搜尋類別</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form class="form-inline my-2 my-lg-0" id="searchForm" action="">
+                            <select class="form-control" id="categories_id" name="categories_id">
+                              <option value="" disabled selected>--請選擇類別--</option>
+                              <?php
+                              // Fetch categories from the database
+                              $categoriesSql = "SELECT * FROM categories";
+                              $categoriesResult = $pdo->query($categoriesSql);
+
+                              // Loop through the categories and generate <option> elements
+                              while ($category = $categoriesResult->fetch(PDO::FETCH_ASSOC)) {
+                                $categoryId = $category['categories_id'];
+                                $categoryName = htmlentities($category['name']);
+
+                                // You can adjust the indentation based on your preference
+                                echo "<option value=\"$categoryId\">$categoryName</option>";
+                              }
+                              ?>
+                            </select>
+                            <p class="form-text text-danger" id="searchInputCategoryError"></p>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-outline-success" type="button" onclick="searchCategory()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggleCategory" role="button">類別
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                  </a>
+                </div>
+                <!-- 搜尋-商品類別結束 -->
               </h6>
             </div>
             <div class="card-body">
@@ -257,6 +318,17 @@ if ($totalRows > 0) {
     }
 
     // 搜尋-類別
+    var searchInputCategoryError = document.getElementById('searchInputCategoryError');
+
+    function searchCategory() {
+      var searchSelectCategory = document.getElementById('categories_id');
+      var searchKeywordCategory = searchSelectCategory.value.trim();
+      if (searchKeywordCategory !== '') {
+        window.location.href = 'list.php?searchCategory=' + encodeURIComponent(searchKeywordCategory);
+      } else {
+        searchInputCategoryError.textContent = '請選擇類別'
+      }
+    }
 
     //刪除
     function delete_one(product_id) {
