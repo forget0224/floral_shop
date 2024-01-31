@@ -73,7 +73,10 @@ if (empty($row)) {
                             <label for="address" class="form-label">地址</label>
                             <textarea class="form-control form-control-lg" name="address" id="address" cols="30" rows="3"><?= $row['address'] ?></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg mx-auto d-block">修改</button>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary btn-lg">確認</button>
+                            <a href="list.php" class="btn btn-secondary btn-lg">取消</a>
+                        </div>
                     </form>
                 </div>
             </div>
