@@ -196,12 +196,10 @@ if ($totalRows > 0) {
                               $categoriesSql = "SELECT * FROM categories";
                               $categoriesResult = $pdo->query($categoriesSql);
 
-                              // Loop through the categories and generate <option> elements
                               while ($category = $categoriesResult->fetch(PDO::FETCH_ASSOC)) {
                                 $categoryId = $category['categories_id'];
                                 $categoryName = htmlentities($category['name']);
 
-                                // You can adjust the indentation based on your preference
                                 echo "<option value=\"$categoryId\">$categoryName</option>";
                               }
                               ?>
@@ -352,6 +350,9 @@ if ($totalRows > 0) {
 
   <script>
     //搜尋-商品關鍵字
+    var searchInputError = document.getElementById('searchInputError');
+    var modalToggle = document.getElementById('exampleModalToggle');
+
     function searchProducts() {
       let searchInput = document.getElementById('searchInput');
       let searchKeyword = searchInput.value.trim();
@@ -362,8 +363,13 @@ if ($totalRows > 0) {
       }
     }
 
+    modalToggle.addEventListener('show.bs.modal', function() {
+      searchInputError.textContent = '';
+    });
+
     // 搜尋-類別
     var searchInputCategoryError = document.getElementById('searchInputCategoryError');
+    var modalToggleCategory = document.getElementById('exampleModalToggleCategory');
 
     function searchCategory() {
       var searchSelectCategory = document.getElementById('categories_id');
@@ -375,34 +381,28 @@ if ($totalRows > 0) {
       }
     }
 
+    modalToggleCategory.addEventListener('show.bs.modal', function() {
+      searchInputCategoryError.textContent = '';
+    });
+
     //搜尋價格
+    var searchInputPriceFirst = document.getElementById('searchInputPriceFirst');
+    var searchInputPriceSecond = document.getElementById('searchInputPriceSecond');
+    var searchInputPriceError = document.getElementById('searchInputPriceError');
+    var modalTogglePrice = document.getElementById('exampleModalTogglePrice');
+
     function validatePriceInput() {
-      var searchInputPriceFirst = document.getElementById('searchInputPriceFirst');
-      var searchInputPriceSecond = document.getElementById('searchInputPriceSecond');
-      var searchInputPriceError = document.getElementById('searchInputPriceError');
-
-      // Reset error message
       searchInputPriceError.textContent = '';
-
-      // Check if the first input is empty
       if (searchInputPriceFirst.value.trim() === '') {
-        // If the first input is empty, clear the second input and return
         searchInputPriceSecond.value = '';
         return;
       }
     }
 
     function searchPrice() {
-      var searchInputPriceFirst = document.getElementById('searchInputPriceFirst');
-      var searchInputPriceSecond = document.getElementById('searchInputPriceSecond');
-      var searchInputPriceError = document.getElementById('searchInputPriceError');
-
-      // Reset error message
       searchInputPriceError.textContent = '';
-
       var firstPrice = searchInputPriceFirst.value.trim();
       var secondPrice = searchInputPriceSecond.value.trim();
-
       if (firstPrice === '' && secondPrice === '') {
         searchInputPriceError.textContent = '請輸入價格';
         return;
@@ -410,7 +410,6 @@ if ($totalRows > 0) {
 
       // Check if both inputs are filled
       if (firstPrice !== '' || secondPrice !== '') {
-        // Check if the first input is less than or equal to the second input
         if (parseInt(firstPrice) > parseInt(secondPrice)) {
           searchInputPriceError.textContent = '要高於上一個值';
           return;
@@ -428,6 +427,10 @@ if ($totalRows > 0) {
       url += 'search=price';
       window.location.href = url;
     }
+
+    modalTogglePrice.addEventListener('show.bs.modal', function() {
+      searchInputPriceError.textContent = '';
+    });
     // 搜尋價格結束
 
     //刪除
