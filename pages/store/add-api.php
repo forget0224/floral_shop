@@ -1,7 +1,7 @@
 <?php
 // 登入有權限才能使用增加頁面
-require __DIR__ . '/admin-required.php';
-require __DIR__ . '/parts/db_connect.php';
+// require __DIR__ . '/admin-required.php';
+require '../parts/db_connect.php';
 
 // 回應給前端的訊息變數格式
 $output = [

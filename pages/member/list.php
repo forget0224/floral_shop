@@ -114,7 +114,7 @@ $rows = $stmt->fetchAll();
         </div>
 
         <div class="row">
-            <div class="col-5 mx-auto">
+            <div class="col-5 mx-auto text-center">
                 <form action="?" method="get">
                     <div class="form-group">
                         <select name="search-field" class="form-control form-control-lg">

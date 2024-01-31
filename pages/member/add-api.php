@@ -2,6 +2,8 @@
 // require __DIR__ . '/admin-required.php';
 require '../parts/db_connect.php';
 
+
+
 $output = [
     "success" => false,
     "error" => "",
@@ -9,6 +11,8 @@ $output = [
     "postData" => $_POST,
     "errors" => [],
 ];
+
+
 
 // TODO: 資料輸入之前, 要做檢查
 # filter_var('bob@example.com', FILTER_VALIDATE_EMAIL)
@@ -25,14 +29,6 @@ $sql = "INSERT INTO `address_book`(`name`, `email`, `mobile`, `birthday`, `addre
 $stmt = $pdo->query($sql);
 */
 
-# 如果沒有值就設定為空值 null
-$birthday = empty($_POST['birthday']) ? null : $_POST['birthday'];
-$birthday = strtotime($birthday); # 轉換為 timestamp
-if ($birthday === false) {
-    $birthday = null;
-} else {
-    $birthday = date('Y-m-d', $birthday);
-}
 
 $sql = "INSERT INTO `member`(`name`, `email`, `phone`, `city`, `district`, `address`) VALUES (?, ?, ?, ?, ?, ?)";
 
