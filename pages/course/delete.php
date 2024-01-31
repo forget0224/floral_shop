@@ -1,5 +1,4 @@
 <?php
-// require __DIR__ . '/parts/db_connect.php';
 require '../parts/db_connect.php';
 
 $course_id = isset($_GET['course_id']) ? intval($_GET['course_id']) : 0;

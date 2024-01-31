@@ -1,5 +1,5 @@
 <?php require '../parts/db_connect.php';
-$pageName = '課程列表';
+$pageName = 'list';
 $title = '課程列表';
 
 $perPage = 10;
