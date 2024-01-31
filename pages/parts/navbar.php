@@ -84,7 +84,7 @@ if (empty($pageName)) {
                 <a class="collapse-item" href="login.php">Login</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">小標題/分類</h6>
-                <a class="collapse-item" href="../course/list.php">課程列表</a>
+                <a class="collapse-item" href="/floral_shop/pages/course/list.php">課程列表</a>
                 <a class="collapse-item" href="blank.php">Blank Page</a>
             </div>
         </div>
