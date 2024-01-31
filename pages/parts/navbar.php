@@ -99,7 +99,7 @@ if (empty($pageName)) {
                 <!-- <h6 class="collapse-header">小標題/分類</h6> -->
                 <!-- <a class="collapse-item" href="login.php">Login</a> -->
                 <!-- <div class="collapse-divider"></div> -->
-                <h6 class="collapse-header">꙳꙳꙳Guide des Fleurs꙳꙳꙳</h6>
+                <h6 class="collapse-header">꙳꙳꙳Fleurs et Jeux꙳꙳꙳</h6>
                 <a class="collapse-item" href="/floral_shop/pages/intro/intro_flower.php">🌺 花圖鑑</a>
                 <a class="collapse-item" href="/floral_shop/pages/intro/intro_add.php">𓇬 新增花朵</a>
             </div>
