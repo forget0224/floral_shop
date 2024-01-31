@@ -121,12 +121,12 @@ if ($totalRows > 0) {
                                             <th>#</th>
                                             <th>課程名稱</th>
                                             <th>課程介紹</th>
-                                            <th>課程分類</th>
-                                            <th>商家名稱</th>
-                                            <th>上課地點</th>
-                                            <th>課程定價</th>
-                                            <th>最小開課人數</th>
-                                            <th>最大開課人數</th>
+                                            <th class="text-nowrap">課程分類</th>
+                                            <th class="text-nowrap">商家名稱</th>
+                                            <th class="text-nowrap">上課地點</th>
+                                            <th class="text-nowrap">課程定價</th>
+                                            <th class="text-nowrap">最小人數</th>
+                                            <th class="text-nowrap">最大人數</th>
                                             <th><i class="fa-solid fa-file-pen"></i></th>
                                         </tr>
                                     </thead>
@@ -140,13 +140,13 @@ if ($totalRows > 0) {
                                         </td>
                                         <td><?= $r['course_id'] ?></td>
                                         <td><?= $r['name'] ?></td>
-                                        <td><?= $r['intro'] ?></td>
-                                        <td><?= $r['category_id'] ?></td>
-                                        <td><?= $r['store_name'] ?></td>
-                                        <td><?= $r['location'] ?></td>
-                                        <td><?= htmlentities($r['price']) ?></td>
-                                        <td><?= $r['min_capacity'] ?></td>
-                                        <td><?= $r['max_capacity'] ?></td>
+                                        <td class="text-justify"><?= $r['intro'] ?></td>
+                                        <td class="text-center"><?= $r['category_id'] ?></td>
+                                        <td class="text-center"><?= $r['store_name'] ?></td>
+                                        <td class="text-justify"><?= $r['location'] ?></td>
+                                        <td class="text-center"><?= htmlentities($r['price']) ?></td>
+                                        <td class="text-center"><?= $r['min_capacity'] ?></td>
+                                        <td class="text-center"><?= $r['max_capacity'] ?></td>
 
                                         <td><a href="edit.php?course_id=<?= $r['course_id'] ?>">
                                             <i class="fa-solid fa-file-pen"></i>
