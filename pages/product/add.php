@@ -163,7 +163,7 @@ $title = '增加商品';
       name: name_f,
       categories_id: categories_f,
       price: price_f,
-      size: size_fv
+      size: size_f
     } = document.form1;
 
 
@@ -234,5 +234,6 @@ $title = '增加商品';
 
     const myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
   </script>
+
 
   <?php include '../parts/html-foot.php' ?>
