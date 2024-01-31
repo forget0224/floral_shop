@@ -92,16 +92,16 @@ if (empty($pageName)) {
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages4" aria-expanded="true" aria-controls="collapsePages4">
             <i class="fas fa-fw fa-folder"></i>
-            <span>遊戲</span>
+            <span>花與遊戲</span>
         </a>
         <div id="collapsePages4" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">小標題/分類</h6>
-                <a class="collapse-item" href="login.php">Login</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">小標題/分類</h6>
-                <a class="collapse-item" href="../intro/list_admin.php">花圖鑑</a>
-                <a class="collapse-item" href="blank.html">I WANT TO PLAY A GAME</a>
+                <!-- <h6 class="collapse-header">小標題/分類</h6> -->
+                <!-- <a class="collapse-item" href="login.php">Login</a> -->
+                <!-- <div class="collapse-divider"></div> -->
+                <h6 class="collapse-header">꙳꙳꙳Guide des Fleurs꙳꙳꙳</h6>
+                <a class="collapse-item" href="/floral_shop/pages/intro/intro_flower.php">🌺 花圖鑑</a>
+                <a class="collapse-item" href="/floral_shop/pages/intro/intro_add.php">𓇬 新增花朵</a>
             </div>
         </div>
     </li>

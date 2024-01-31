@@ -1,4 +1,4 @@
-<?php
+`<?php
 require '../parts/admin-required.php';
 require '../parts/db_connect.php';
 

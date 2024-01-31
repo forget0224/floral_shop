@@ -163,7 +163,7 @@ $title = '增加商品';
       name: name_f,
       categories_id: categories_f,
       price: price_f,
-      size: size_f
+      size: size_fv
     } = document.form1;
 
 
