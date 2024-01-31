@@ -72,7 +72,7 @@ if ($totalRows > 0) {
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">
+                            <h6 class="m-0 font-weight-bold text-primary d-flex flex-row justify-content-between">
                                 <!-- 分頁 start -->
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination mb-0">
@@ -105,12 +105,16 @@ if ($totalRows > 0) {
                                     </li>
                                     </ul>
                                 </nav>
+                                <!-- Topbar Search -->
+                                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                    <input type="text" id="courseSearch" name="courseSearch" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                        aria-label="Search" aria-describedby="basic-addon2">
+                                </form>
                             </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <!-- table裡面的東西 複製近來!!!!!!!!!  -->
+                                <table class="table table-bordered" id="courseTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th><i class="fa-solid fa-trash"></i></th>
@@ -229,6 +233,17 @@ if ($totalRows > 0) {
         });
         }
     }
+    </script>
+    <!-- 搜尋框 -->
+    <script>
+    $(document).ready(function(){
+        $("#courseSearch").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#courseTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+        });
+    });
     </script>
     
     <?php include '../parts/html-foot.php' ?>
