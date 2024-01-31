@@ -6,6 +6,7 @@ unset($_SESSION['deleteSuccess']);
 
 // 搜尋
 $searchKeyword = isset($_GET['search']) ? $_GET['search'] : '';
+$isSearch = !empty($searchKeyword);
 
 $pageName = 'list';
 $title = '商品列表';
@@ -17,9 +18,9 @@ if ($page < 1) {
 }
 $t_sql = "SELECT COUNT(1) FROM product";
 $row = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM);
-$totalRows = $row[0]; 
-$totalPages = 0; 
-$rows = []; 
+$totalRows = $row[0];
+$totalPages = 0;
+$rows = [];
 if ($totalRows > 0) {
   $totalPages = ceil($totalRows / $perPage);
   if ($page > $totalPages) {
@@ -31,15 +32,20 @@ if ($totalRows > 0) {
   $sql = sprintf(
     "SELECT p.*, c.name AS category_name FROM product p
     INNER JOIN categories c ON p.categories_id = c.categories_id
+    %s
     ORDER BY p.product_id DESC
     LIMIT %s, %s",
+    $isSearch ? "WHERE p.name LIKE :searchKeyword" : "",
     ($page - 1) * $perPage,
     $perPage
   );
 
-  // 資料庫的查詢結果
-  $stmt = $pdo->query($sql);
-  // 從資料庫的查詢結果中擷取所有的資料列
+  $stmt = $pdo->prepare($sql);
+  if ($isSearch) {
+    $searchKeyword = '%' . $searchKeyword . '%';
+    $stmt->bindParam(':searchKeyword', $searchKeyword, PDO::PARAM_STR);
+  }
+  $stmt->execute();
   $rows = $stmt->fetchAll();
 }
 ?>
@@ -77,7 +83,8 @@ if ($totalRows > 0) {
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">
+              <h6 class="m-0 font-weight-bold text-primary d-flex">
+                <!-- 分頁 -->
                 <nav aria-label="Page navigation example">
                   <ul class="pagination">
                     <!-- 第一頁 -->
@@ -114,6 +121,33 @@ if ($totalRows > 0) {
                     </li>
                   </ul>
                 </nav>
+                <!-- 分頁結束 -->
+                <!-- 篩選 -->
+                <div class="ml-3">
+                  <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalToggleLabel">篩選商品</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <!-- 篩選搜尋欄位 -->
+                        <div class="modal-body">
+                          <form class="form-inline my-2 my-lg-0" id="searchForm" action="">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchInput" value="">
+                            <p class="form-text text-danger" id="searchInputError"></p>
+                          </form>
+
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-outline-success" type="button" onclick="searchProducts()">Search</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">篩選商品</a>
+                </div>
+                <!-- 篩選結束 -->
               </h6>
             </div>
             <div class="card-body">
@@ -204,6 +238,18 @@ if ($totalRows > 0) {
   </div>
 
   <script>
+    //搜尋
+    function searchProducts() {
+      let searchInput = document.getElementById('searchInput');
+      let searchKeyword = searchInput.value.trim();
+      if (searchKeyword !== '') {
+        window.location.href = 'list.php?search=' + encodeURIComponent(searchKeyword);
+      } else {
+        searchInputError.textContent = '請輸入關鍵字';
+      }
+    }
+
+    //刪除
     function delete_one(product_id) {
       if (confirm(`是否要刪除編號為 ${product_id} 的資料?`)) {
         location.href = `delete.php?product_id=${product_id}`;
