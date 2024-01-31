@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2024-01-31 04:26:17
+-- 產生時間： 2024-01-31 10:22:33
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -493,7 +493,7 @@ INSERT INTO `custom_products` (`product_id`, `product_name`, `products_url`, `pr
 
 CREATE TABLE `custom_stock_status` (
   `stock_id` int(1) NOT NULL,
-  `stock_name` int(11) NOT NULL
+  `stock_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -501,8 +501,100 @@ CREATE TABLE `custom_stock_status` (
 --
 
 INSERT INTO `custom_stock_status` (`stock_id`, `stock_name`) VALUES
-(1, 0),
-(2, 0);
+(1, '上架中'),
+(2, '未上架');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `custom_templates`
+--
+
+CREATE TABLE `custom_templates` (
+  `sid` int(11) NOT NULL,
+  `template_id` varchar(255) DEFAULT NULL,
+  `template_name` varchar(255) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `color_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  `occ_id` int(11) DEFAULT NULL,
+  `stock_status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `custom_templates`
+--
+
+INSERT INTO `custom_templates` (`sid`, `template_id`, `template_name`, `store_id`, `color_id`, `role_id`, `occ_id`, `stock_status`) VALUES
+(1, 'T20240131001', '聖誕花環', 20, 8, 7, 8, 1),
+(2, 'T20240131002', '畢業花束', 16, 3, 2, 3, 1),
+(3, 'T20240131003', '經典花束1', 25, 12, 8, 3, 2),
+(4, 'T20240131004', '經典花束2', 4, 8, 7, 8, 2),
+(5, 'T20240131005', '情人節玫瑰束', 11, 4, 1, 6, 1),
+(6, 'T20240131006', '生日驚喜花束', 8, 3, 4, 1, 2),
+(7, 'T20240131007', '慶祝花束', 2, 3, 7, 2, 1),
+(8, 'T20240131008', '感謝之花', 12, 11, 2, 8, 2),
+(9, 'T20240131009', '婚禮花束', 14, 10, 3, 1, 1),
+(10, 'T20240131010', '友情之花', 6, 1, 7, 3, 1);
+
+--
+-- 觸發器 `custom_templates`
+--
+DELIMITER $$
+CREATE TRIGGER `before_insert_custom_templates` BEFORE INSERT ON `custom_templates` FOR EACH ROW BEGIN
+    DECLARE last_date VARCHAR(8);
+    DECLARE last_count INT;
+
+    -- 取得目前最後一筆記錄的日期
+    SET last_date = (SELECT SUBSTRING(template_id, 2, 8) FROM custom_templates ORDER BY template_id DESC LIMIT 1);
+
+    -- 判斷日期是否與今天相同，以便遞增編號
+    IF last_date IS NULL OR last_date <> DATE_FORMAT(NOW(), '%Y%m%d') THEN
+        SET NEW.template_id = CONCAT('T', DATE_FORMAT(NOW(), '%Y%m%d'), '001');
+    ELSE
+        -- 取得目前最後一筆記錄的編號部分，並轉換為整數
+        SET last_count = CAST(SUBSTRING((SELECT template_id FROM custom_templates ORDER BY template_id DESC LIMIT 1), 10) AS SIGNED);
+
+        -- 遞增編號，並填補至三位數
+        SET NEW.template_id = CONCAT('T', DATE_FORMAT(NOW(), '%Y%m%d'), LPAD(last_count + 1, 3, '0'));
+    END IF;
+
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `custom_template_detail`
+--
+
+CREATE TABLE `custom_template_detail` (
+  `sid` int(11) NOT NULL,
+  `template_id` varchar(255) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `color_id` int(11) DEFAULT NULL,
+  `position_top` int(11) DEFAULT NULL,
+  `position_left` int(11) DEFAULT NULL,
+  `z_index` int(11) DEFAULT NULL,
+  `rotate` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `custom_template_detail`
+--
+
+INSERT INTO `custom_template_detail` (`sid`, `template_id`, `product_id`, `color_id`, `position_top`, `position_left`, `z_index`, `rotate`) VALUES
+(1, 'T20240131001', 1, 1, NULL, NULL, NULL, NULL),
+(2, 'T20240131001', 1, 2, NULL, NULL, NULL, NULL),
+(3, 'T20240131001', 2, 2, NULL, NULL, NULL, NULL),
+(4, 'T20240131001', 2, 3, NULL, NULL, NULL, NULL),
+(5, 'T20240131002', 3, 3, NULL, NULL, NULL, NULL),
+(6, 'T20240131002', 3, 4, NULL, NULL, NULL, NULL),
+(7, 'T20240131003', 4, 5, NULL, NULL, NULL, NULL),
+(8, 'T20240131003', 4, 4, NULL, NULL, NULL, NULL),
+(9, 'T20240131003', 5, 5, NULL, NULL, NULL, NULL),
+(10, 'T20240131003', 5, 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3431,6 +3523,26 @@ ALTER TABLE `custom_stock_status`
   ADD PRIMARY KEY (`stock_id`);
 
 --
+-- 資料表索引 `custom_templates`
+--
+ALTER TABLE `custom_templates`
+  ADD PRIMARY KEY (`sid`),
+  ADD KEY `color_id` (`color_id`),
+  ADD KEY `role_id` (`role_id`),
+  ADD KEY `occ_id` (`occ_id`),
+  ADD KEY `stock_status` (`stock_status`),
+  ADD KEY `template_id` (`template_id`);
+
+--
+-- 資料表索引 `custom_template_detail`
+--
+ALTER TABLE `custom_template_detail`
+  ADD PRIMARY KEY (`sid`),
+  ADD KEY `fk_td_template_id` (`template_id`),
+  ADD KEY `fk_td_product_id` (`product_id`),
+  ADD KEY `fk_td_color_id` (`color_id`);
+
+--
 -- 資料表索引 `intro_flower`
 --
 ALTER TABLE `intro_flower`
@@ -3709,6 +3821,18 @@ ALTER TABLE `custom_products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `custom_templates`
+--
+ALTER TABLE `custom_templates`
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `custom_template_detail`
+--
+ALTER TABLE `custom_template_detail`
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `intro_flower`
 --
 ALTER TABLE `intro_flower`
@@ -3953,6 +4077,23 @@ ALTER TABLE `custom_orders`
 ALTER TABLE `custom_products`
   ADD CONSTRAINT `fk_cp_stock_id` FOREIGN KEY (`product_stock`) REFERENCES `custom_stock_status` (`stock_id`),
   ADD CONSTRAINT `fk_cp_store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`);
+
+--
+-- 資料表的限制式 `custom_templates`
+--
+ALTER TABLE `custom_templates`
+  ADD CONSTRAINT `custom_templates_ibfk_1` FOREIGN KEY (`color_id`) REFERENCES `color_list` (`color_list_id`),
+  ADD CONSTRAINT `custom_templates_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `intro_role` (`role_id`),
+  ADD CONSTRAINT `custom_templates_ibfk_3` FOREIGN KEY (`occ_id`) REFERENCES `intro_occ` (`occ_id`),
+  ADD CONSTRAINT `custom_templates_ibfk_4` FOREIGN KEY (`stock_status`) REFERENCES `custom_stock_status` (`stock_id`);
+
+--
+-- 資料表的限制式 `custom_template_detail`
+--
+ALTER TABLE `custom_template_detail`
+  ADD CONSTRAINT `fk_td_color_id` FOREIGN KEY (`color_id`) REFERENCES `color_list` (`color_list_id`),
+  ADD CONSTRAINT `fk_td_product_id` FOREIGN KEY (`product_id`) REFERENCES `custom_products` (`product_id`),
+  ADD CONSTRAINT `fk_td_template_id` FOREIGN KEY (`template_id`) REFERENCES `custom_templates` (`template_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
