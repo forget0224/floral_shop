@@ -147,7 +147,7 @@ if ($totalRows > 0) {
               <td><?= $r['flower_intro'] ?></td>
               <td>
                 <!-- 編輯按鈕 -->
-                <a href="edit.php?flower_id=<?= $r['flower_id'] ?>">
+                <a href="/floral_shop/pages/intro/intro_edit.php?flower_id=<?= $r['flower_id'] ?>">
                   <i class="fa-solid fa-file-pen"></i>
                 </a>
               </td>
