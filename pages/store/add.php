@@ -1,7 +1,8 @@
-<?php require '../parts/db_connect.php';
-$pageName = 'store_add';
-$title = '店家新增';
-// 你該頁面前面的那些東東
+<?php 
+    require '../parts/db_connect.php';
+    $pageName = 'store_add';
+    $title = '店家新增';
+    // 你該頁面前面的那些東東
 
 ?>
 <?php include '../parts/html-head.php' ?>
