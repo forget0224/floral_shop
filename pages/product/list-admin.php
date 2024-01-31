@@ -408,6 +408,11 @@ if ($totalRows > 0) {
         return;
       }
 
+      if (firstPrice !== '' && secondPrice == '') {
+        searchInputPriceError.textContent = '請輸入第二個價格';
+        return;
+      }
+
       // Check if both inputs are filled
       if (firstPrice !== '' || secondPrice !== '') {
         if (parseInt(firstPrice) > parseInt(secondPrice)) {
