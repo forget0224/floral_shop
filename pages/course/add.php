@@ -30,74 +30,70 @@ $title = '新增課程';
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">新增課程</h1>
                     <p class="mb-4">請新增您的課程</p>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-body">
-                            <!-- 新增卡片放這邊 -->
-                            <div class="col-6 border">
-                                <div class="card-body">
+                    <!-- 新增資料的卡片 -->
+                    <div class="card_container d-flex justify-content-center">
+                        <div class="card shadow mb-4 px-0 col-6">
+                            <div class="card-body">
                                 <h5 class="card-title">新增資料</h5>
                                 <form name="form1" method="post" onsubmit="sendForm(event)">
-                                    <div class="mb-3">
-                                    <label for="name" class="form-label">課程名稱</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="請輸入課程名稱(30字內)" maxlength="30">
-                                    <div class="form-text"></div>
-                                    </div>
-                                    <div class="mb-3">
-                                    <label for="intro" class="form-label">課程介紹</label>
-                                    <textarea class="form-control" id="intro" name="intro" rows="5" placeholder="請輸入課程介紹(1000字內)" maxlength="1000"></textarea>
-                                    <div class="form-text"></div>
-                                    </div>
-                                    <div class="mb-3">
-                                    <label for="category_id" class="form-label">課程分類</label>
-                                    <select class="form-control" id="category_id" name="category_id" required>
-                                        <option value="" disabled selected>請選擇課程分類</option>
-                                        <option value="1">花藝基礎課程</option>
-                                        <option value="2">植栽相關課程</option>
-                                        <option value="3">節慶主題課程</option>
-                                        <option value="4">進階商業課程</option>
-                                    </select>
-                                    <div class="form-text"></div>
-                                    </div>
-                                    <div class="mb-3">
-                                    <label for="store_id" class="form-label">商家名稱</label>
-                                    <input type="text" class="form-control" id="store_name" name="store_name" disabled value="(代入商家名稱)"></input>
-                                    <div class="form-text"></div>
-                                    </div>
-                                    <div class="mb-3">
-                                    <label for="location" class="form-label">上課地點</label>
-                                    <input type="checkbox" id="useStoreAddress" onclick="useStoreAddress()">帶入商家預設地址
-                                    <input type="text" class="form-control" id="location" name="location" placeholder="帶入商家預設地址">
-                                    <div class="form-text"></div>
-                                    </div>
-                                    <div class="mb-3">
-                                    <label for="price" class="form-label">課程定價</label>
-                                    <input type="number" class="form-control" id="price" name="price" placeholder="請輸入課程定價" step="100" min="0" max="30000">
-                                    <div class="form-text"></div>
-                                    </div>
-                                    <div class="mb-3">
-                                    <label for="min_capacity" class="form-label">最小開課人數</label>
-                                    <input type="number" class="form-control" id="min_capacity" name="min_capacity" placeholder="請輸入最小開課人數" min="1" max="300">
-                                    <div class="form-text"></div>
-                                    </div>
-                                    <div class="mb-3">
-                                    <label for="max_capacity" class="form-label">最大開課人數</label>
-                                    <input type="number" class="form-control" id="max_capacity" name="max_capacity" placeholder="請輸入最大開課人數" min="1" max="300">
-                                    <div class="form-text"></div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">新增</button>
+                                            <div class="mb-3">
+                                            <label for="name" class="form-label">課程名稱</label>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="請輸入課程名稱(30字內)" maxlength="30">
+                                            <div class="form-text"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                            <label for="intro" class="form-label">課程介紹</label>
+                                            <textarea class="form-control" id="intro" name="intro" rows="5" placeholder="請輸入課程介紹(1000字內)" maxlength="1000"></textarea>
+                                            <div class="form-text"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                            <label for="category_id" class="form-label">課程分類</label>
+                                            <select class="form-control" id="category_id" name="category_id" required>
+                                                <option value="" disabled selected>請選擇課程分類</option>
+                                                <option value="1">花藝基礎課程</option>
+                                                <option value="2">植栽相關課程</option>
+                                                <option value="3">節慶主題課程</option>
+                                                <option value="4">進階商業課程</option>
+                                            </select>
+                                            <div class="form-text"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                            <label for="store_id" class="form-label">商家名稱</label>
+                                            <input type="text" class="form-control" id="store_name" name="store_name" disabled value="(代入商家名稱)"></input>
+                                            <div class="form-text"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                            <label for="location" class="form-label">上課地點</label>
+                                            <input type="checkbox" id="useStoreAddress" onclick="useStoreAddress()">帶入商家預設地址
+                                            <input type="text" class="form-control" id="location" name="location" placeholder="帶入商家預設地址">
+                                            <div class="form-text"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                            <label for="price" class="form-label">課程定價</label>
+                                            <input type="number" class="form-control" id="price" name="price" placeholder="請輸入課程定價" step="100" min="0" max="30000">
+                                            <div class="form-text"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                            <label for="min_capacity" class="form-label">最小開課人數</label>
+                                            <input type="number" class="form-control" id="min_capacity" name="min_capacity" placeholder="請輸入最小開課人數" min="1" max="300">
+                                            <div class="form-text"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                            <label for="max_capacity" class="form-label">最大開課人數</label>
+                                            <input type="number" class="form-control" id="max_capacity" name="max_capacity" placeholder="請輸入最大開課人數" min="1" max="300">
+                                            <div class="form-text"></div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">新增</button>
                                 </form>
-
-                                </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- </div> -->
                 </div>
                 <!-- /.container-fluid -->
 
