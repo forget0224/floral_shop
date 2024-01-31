@@ -1,8 +1,8 @@
-<?php 
-    require '../parts/db_connect.php';
-    $pageName = 'store_add';
-    $title = '店家新增';
-    // 你該頁面前面的那些東東
+<?php
+require '../parts/db_connect.php';
+$pageName = 'store_add';
+$title = '店家新增';
+// 你該頁面前面的那些東東
 
 ?>
 <?php include '../parts/html-head.php' ?>
@@ -123,7 +123,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">繼續新增</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="continueAddingBtn">繼續新增</button>
                                                     <a type="button" class="btn btn-primary" href="list.php">到列表頁</a>
                                                 </div>
                                             </div>
@@ -327,6 +327,11 @@
                     .catch(ex => console.log(ex))
             }
         }
+
+        document.getElementById('continueAddingBtn').addEventListener('click', () => {
+            // Redirect to the add.php page
+            window.location.href = 'add.php';
+        });
 
         // Modal按鈕功能重設
         const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
