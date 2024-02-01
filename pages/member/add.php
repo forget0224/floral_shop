@@ -44,7 +44,9 @@ $title = '新增';
                         </div>
                         <div class="mb-3">
                             <label for="city" class="form-label">城市</label>
-                            <select class="form-select border form-control form-control-lg" id="county_box" name="city"></select>
+                            <select class="form-select border form-control form-control-lg" id="county_box" name="city">
+                                <option value="">請選擇城市</option>
+                            </select>
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
@@ -74,7 +76,7 @@ $title = '新增';
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-success" style="font-size: 20px;" role="alert">
                     新增成功
                 </div>
             </div>
@@ -517,16 +519,18 @@ $title = '新增';
     });
 
     county_box.addEventListener('change', () => {
-        selected_county = county_box.value;
+    selected_county = county_box.value;
 
-        // 清空区域下拉框
-        district_box.innerHTML = '<option value="">選擇鄉鎮市區</option>';
+    // 清空区域下拉框
+    district_box.innerHTML = '<option value="">請選擇鄉鎮市區</option>';
 
-        // 填充区域下拉框
+    // 填充区域下拉框
+    if (selected_county !== '') {
         Object.keys(database[selected_county]).forEach((district) => {
             district_box.innerHTML += `<option value="${district}">${district}</option>`;
         });
-    });
+    }
+});
 
     // 获取"繼續新增"按钮元素
     const continueButton = document.getElementById('continueButton');
@@ -561,16 +565,16 @@ $title = '新增';
     }
 
     function validateAddress(address) {
-    // console.log('validateAddress function called with address:', address);
+        // console.log('validateAddress function called with address:', address);
 
-    // 验证地址是否为空
-    if (!address.trim()) {
-        return false; // 如果地址为空，返回 false
-    }
-    
-    // 地址格式验证：只能包含中文字符和数字
-    var re = /^[\u4e00-\u9fa5\d,()\s]+$/;
-    return re.test(address);
+        // 验证地址是否为空
+        if (!address.trim()) {
+            return false; // 如果地址为空，返回 false
+        }
+
+        // 地址格式验证：只能包含中文字符和数字
+        var re = /^[\u4e00-\u9fa5\d,()\s]+$/;
+        return re.test(address);
     }
 
 
@@ -623,10 +627,10 @@ $title = '新增';
         }
 
         if (!validateAddress(address_f.value)) {
-        isPass = false;
-        address_f.style.border = '1px solid red';
-        addressError.textContent = "請填寫正確的地址";
-    }
+            isPass = false;
+            address_f.style.border = '1px solid red';
+            addressError.textContent = "請填寫正確的地址";
+        }
 
         if (isPass) {
             const fd = new FormData(document.form1);

@@ -28,6 +28,7 @@ if (empty($row)) {
         align-items: center;
         margin-top: 150px; /* 可以根據需要調整上方距離 */
     }
+
     /* form .mb-3 .form-text {
         color: red;
     } */
@@ -86,6 +87,24 @@ if (empty($row)) {
 
 
 <!-- Modal -->
+<!-- 没有更改的提示模态框 -->
+<div class="modal fade" id="noChangesModal" tabindex="-1" aria-labelledby="noChangesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="noChangesModalLabel">提示</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="font-size: 20px;">
+                您並未變更資料
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -107,10 +126,22 @@ if (empty($row)) {
 </div>
 <?php include __DIR__ . '/parts/scripts.php'  ?>
 <script>
+    const originalData = {
+        name: "<?= htmlentities($row['name']) ?>",
+        email: "<?= $row['email'] ?>",
+        phone: "<?= $row['phone'] ?>",
+        city: "<?= $row['city'] ?>",
+        district: "<?= $row['district'] ?>",
+        address: "<?= $row['address'] ?>",
+    };
+
     const {
         name: name_f,
         email: email_f,
         phone: phone_f,
+        city: city_f,
+        district: district_f,
+        address: address_f,
     } = document.form1;
 
     function validateEmail(email) {
@@ -133,6 +164,30 @@ if (empty($row)) {
         phone_f.style.border = '1px solid #CCC';
         phone_f.nextElementSibling.innerHTML = "";
 
+        // 获取表单数据
+        const formData = {
+            name: name_f.value,
+            email: email_f.value,
+            phone: phone_f.value,
+            city: city_f.value,
+            district: district_f.value,
+            address: address_f.value,
+        };
+
+        // 检查是否有更改
+        const hasChanged = Object.keys(formData).some(key => formData[key] !== originalData[key]);
+
+        if (!hasChanged) {
+            // 数据未更改，显示提示模态框
+            showNoChangesModal();
+            return;
+        }
+
+        // 显示数据未更改的模态框
+        function showNoChangesModal() {
+            const noChangesModal = new bootstrap.Modal(document.getElementById('noChangesModal'));
+            noChangesModal.show();
+        }
 
         // TODO: 資料送出之前, 要做檢查 (有沒有填寫, 格式對不對)
         let isPass = true; // 表單有沒有通過檢查
