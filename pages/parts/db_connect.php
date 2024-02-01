@@ -19,7 +19,7 @@ $pdo_options = [
 
 try {
     $pdo = new PDO($dsn, $db_user, $db_pass, $pdo_options);
-    $stmt = $pdo->query("SELECT * FROM custom_orders LIMIT 2");
+    // $stmt = $pdo->query("SELECT * FROM custom_orders LIMIT 2");
 
     // echo json_encode($stmt->fetchAll());
 } catch (PDOException $ex) {   //有pdo的錯誤才會進入catch

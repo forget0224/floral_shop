@@ -1,4 +1,4 @@
-<?php
+<?php 
 require __DIR__ . '/pages/parts/db_connect.php';
 
 header('Content-Type: application/json');
@@ -10,7 +10,7 @@ $output = [
     "error" => '',
 ];
 
-if (empty($_POST['email']) or empty($_POST['password'])) {
+if (empty($_POST['store_account']) or empty($_POST['store_password'])) {
     # 欄位資料不足
     $output['code'] = 401;
     $output['error'] = '欄位資料不足';
@@ -19,9 +19,9 @@ if (empty($_POST['email']) or empty($_POST['password'])) {
 }
 
 # 先由帳號找到該筆
-$sql = "SELECT * FROM members WHERE email=?";
+$sql = "SELECT * FROM store WHERE store_account=?";
 $stmt = $pdo->prepare($sql);
-$stmt->execute([$_POST['email']]);
+$stmt->execute([$_POST['store_account']]);
 $row = $stmt->fetch();
 
 if (empty($row)) {
@@ -32,12 +32,12 @@ if (empty($row)) {
     exit;
 }
 
-$output['success'] = password_verify($_POST['password'], $row['password']);
+$output['success'] = password_verify($_POST['store_password'], $row['store_password']);
 if ($output['success']) {
     $_SESSION['admin'] = [
-        'id' => $row['id'],
-        'email' => $row['email'],
-        'nickname' => $row['nickname'],
+        'store_id' => $row['store_id'],
+        'store_account' => $row['store_account'],
+        'store_name' => $row['store_name'],
     ];
 } else {
     # 密碼是錯的

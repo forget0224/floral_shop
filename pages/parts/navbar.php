@@ -140,6 +140,24 @@ if (empty($pageName)) {
     </li>
 
 
+    <!-- 測試登入登出用 -->
+    <?php if (isset($_SESSION['admin'])) : ?>
+        <li class="nav-item">
+            <!-- 從 $_SESSION['admin'] 取得 ['store_name'] -->
+            <a class="nav-link"><?= $_SESSION['admin']['store_name'] ?></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./logout.php">登出</a>
+        </li>
+    <?php else : ?>
+        <li class="nav-item">
+            <a class="nav-link <?= $pageName == 'login' ? 'active' : '' ?>" href="./login.php">登入</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?= $pageName == 'register' ? 'active' : '' ?>" href="./register.php">註冊</a>
+        </li>
+    <?php endif ?>
+
     <!-- Nav Item - Tables -->
     <li class="nav-item">
         <a class="nav-link" href="tables.html">
