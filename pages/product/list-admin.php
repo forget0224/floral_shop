@@ -316,13 +316,13 @@ if ($totalRows > 0) {
                           <i class="fas <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'product_id' && $_GET['order'] === 'asc') ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up' ?>"></i>
                         </a>
                       </th>
-                      <th>商品名稱</th>
-                      <th>種類列表</th>
-                      <th>價格</th>
-                      <th>尺寸</th>
-                      <th>創建時間</th>
-                      <th>更新時間</th>
-                      <th>描述</th>
+                      <th class="text-nowrap">商品名稱</th>
+                      <th class="text-nowrap">種類列表</th>
+                      <th class="text-nowrap">價格</th>
+                      <th class="text-nowrap">尺寸</th>
+                      <th class="text-nowrap">創建時間</th>
+                      <th class="text-nowrap">更新時間</th>
+                      <th class="text-nowrap">描述</th>
                       <th><i class="fa-solid fa-file-pen"></i></th>
                     </tr>
                   </thead>

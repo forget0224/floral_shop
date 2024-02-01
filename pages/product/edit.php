@@ -1,6 +1,6 @@
 <?php
 require '../parts/db_connect.php';
-require '../parts/admin-required.php';
+// require '../parts/admin-required.php';
 $pageName = 'edit';
 $title = '編輯商品';
 
