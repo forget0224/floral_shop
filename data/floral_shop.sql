@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2024-01-31 10:22:33
+-- 產生時間： 2024-02-01 03:03:19
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -60,26 +60,27 @@ INSERT INTO `categories` (`categories_id`, `name`, `parent`, `description`) VALU
 
 CREATE TABLE `color_list` (
   `color_list_id` int(11) NOT NULL,
-  `color_name` varchar(255) NOT NULL
+  `color_name` varchar(255) NOT NULL,
+  `color_english` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 傾印資料表的資料 `color_list`
 --
 
-INSERT INTO `color_list` (`color_list_id`, `color_name`) VALUES
-(1, '紅色'),
-(2, '橙色'),
-(3, '黃色'),
-(4, '綠色'),
-(5, '藍色'),
-(6, '紫色'),
-(7, '粉紅色'),
-(8, '棕色'),
-(9, '灰色'),
-(10, '黑色'),
-(11, '白色'),
-(12, '其他');
+INSERT INTO `color_list` (`color_list_id`, `color_name`, `color_english`) VALUES
+(1, '紅色', 'red'),
+(2, '橙色', 'orange'),
+(3, '黃色', 'yellow'),
+(4, '綠色', 'green'),
+(5, '藍色', 'blue'),
+(6, '紫色', 'purple'),
+(7, '粉紅色', 'pink'),
+(8, '棕色', 'brown'),
+(9, '灰色', 'grey'),
+(10, '黑色', 'black'),
+(11, '白色', 'white'),
+(12, '其他', 'other');
 
 -- --------------------------------------------------------
 
@@ -466,7 +467,30 @@ DELIMITER ;
 
 CREATE TABLE `custom_products` (
   `product_id` int(11) NOT NULL,
-  `product_name` varchar(255) NOT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
+  `product_stock` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `custom_products`
+--
+
+INSERT INTO `custom_products` (`product_id`, `product_name`, `product_stock`) VALUES
+(1, '玫瑰', 1),
+(2, '向日葵', 2),
+(3, '百合', 2),
+(4, '鬱金香', 1),
+(5, '康乃馨', 1);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `custom_product_list`
+--
+
+CREATE TABLE `custom_product_list` (
+  `sid` int(11) NOT NULL,
+  `product_id` varchar(255) NOT NULL,
   `products_url` int(11) NOT NULL,
   `product_color` int(11) NOT NULL,
   `product_stock` int(1) NOT NULL,
@@ -475,15 +499,20 @@ CREATE TABLE `custom_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `custom_products`
+-- 傾印資料表的資料 `custom_product_list`
 --
 
-INSERT INTO `custom_products` (`product_id`, `product_name`, `products_url`, `product_color`, `product_stock`, `product_price`, `store_id`) VALUES
-(1, '玫瑰', 0, 2, 1, 50, 2),
-(2, '向日葵', 0, 5, 1, 70, 4),
-(3, '百合', 0, 1, 2, 80, 1),
-(4, '鬱金香', 0, 2, 1, 60, 5),
-(5, '康乃馨', 0, 4, 1, 90, 4);
+INSERT INTO `custom_product_list` (`sid`, `product_id`, `products_url`, `product_color`, `product_stock`, `product_price`, `store_id`) VALUES
+(1, '1', 0, 2, 1, 50, 2),
+(2, '2', 0, 5, 1, 70, 4),
+(3, '3', 0, 1, 2, 80, 1),
+(4, '4', 0, 2, 1, 60, 5),
+(5, '5', 0, 4, 1, 90, 4),
+(6, '1', 0, 3, 1, 85, 2),
+(7, '2', 0, 7, 1, 75, 4),
+(8, '3', 0, 2, 2, 90, 1),
+(9, '4', 0, 6, 1, 65, 5),
+(10, '5', 0, 12, 1, 100, 4);
 
 -- --------------------------------------------------------
 
@@ -1474,7 +1503,8 @@ INSERT INTO `member` (`member_id`, `name`, `email`, `join_date`, `password`, `ph
 (237, '白雅芳', 'yanglai@example.net', '2023-10-29', '3TxmBory%5', '0917343111', '屏東縣', '長安路724號', '高樹鄉'),
 (238, '李雅雯', 'minglong@example.net', '2019-06-07', 'W+6QP9Smb4', '0975278046', '金門縣', '東興街7段3ˊˊ6號', '烈嶼鄉'),
 (239, '張志豪', 'li09@example.net', '2022-11-12', '5zX9mdYy$V', '0950308139', '新北市', '自由街423號', '石門區'),
-(240, '劉佳樺', 'zengchao@gmail.com', '2020-02-20', '$U%HNCbGn2', '0937042614', '台南市', '東湖街3段4號', '六甲區');
+(240, '劉佳樺', 'zengchao@gmail.com', '2020-02-20', '$U%HNCbGn2', '0937042614', '台南市', '東湖街3段4號', '六甲區'),
+(249, '王曉明', 'aaa@qq.com', '0000-00-00', '', '0912345678', '高雄市', '五福路', '東沙群島');
 
 -- --------------------------------------------------------
 
@@ -3512,7 +3542,13 @@ ALTER TABLE `custom_orders`
 -- 資料表索引 `custom_products`
 --
 ALTER TABLE `custom_products`
-  ADD PRIMARY KEY (`product_id`),
+  ADD PRIMARY KEY (`product_id`);
+
+--
+-- 資料表索引 `custom_product_list`
+--
+ALTER TABLE `custom_product_list`
+  ADD PRIMARY KEY (`sid`),
   ADD KEY `idx_cu_store_id` (`store_id`),
   ADD KEY `fk_cp_stock_id` (`product_stock`);
 
@@ -3821,6 +3857,12 @@ ALTER TABLE `custom_products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `custom_product_list`
+--
+ALTER TABLE `custom_product_list`
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `custom_templates`
 --
 ALTER TABLE `custom_templates`
@@ -3896,7 +3938,7 @@ ALTER TABLE `intro_season`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `member`
 --
 ALTER TABLE `member`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=249;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=250;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `member_coupon`
@@ -4072,9 +4114,9 @@ ALTER TABLE `custom_orders`
   ADD CONSTRAINT `fk_cu_store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`);
 
 --
--- 資料表的限制式 `custom_products`
+-- 資料表的限制式 `custom_product_list`
 --
-ALTER TABLE `custom_products`
+ALTER TABLE `custom_product_list`
   ADD CONSTRAINT `fk_cp_stock_id` FOREIGN KEY (`product_stock`) REFERENCES `custom_stock_status` (`stock_id`),
   ADD CONSTRAINT `fk_cp_store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`);
 
@@ -4092,7 +4134,7 @@ ALTER TABLE `custom_templates`
 --
 ALTER TABLE `custom_template_detail`
   ADD CONSTRAINT `fk_td_color_id` FOREIGN KEY (`color_id`) REFERENCES `color_list` (`color_list_id`),
-  ADD CONSTRAINT `fk_td_product_id` FOREIGN KEY (`product_id`) REFERENCES `custom_products` (`product_id`),
+  ADD CONSTRAINT `fk_td_product_id` FOREIGN KEY (`product_id`) REFERENCES `custom_product_list` (`sid`),
   ADD CONSTRAINT `fk_td_template_id` FOREIGN KEY (`template_id`) REFERENCES `custom_templates` (`template_id`);
 COMMIT;
 
