@@ -144,18 +144,6 @@ if (empty($row)) {
         // TODO: 資料送出之前, 要做檢查 (有沒有填寫, 格式對不對)
         let isPass = true; // 表單有沒有通過檢查
 
-        // if (email_f.value && !validateEmail(email_f.value)) {
-        //   isPass = false;
-        //   email_f.style.border = '1px solid red';
-        //   email_f.nextElementSibling.innerHTML = "請填寫正確的 Email";
-        // }
-
-        // if (mobile_f.value && !validateMobile(mobile_f.value)) {
-        //   isPass = false;
-        //   mobile_f.style.border = '1px solid red';
-        //   mobile_f.nextElementSibling.innerHTML = "請填寫正確的手機號碼";
-        // }
-
         if (isPass) {
         // "沒有外觀" 的表單
         const fd = new FormData(document.form1);

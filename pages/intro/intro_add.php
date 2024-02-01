@@ -35,35 +35,35 @@ $title = '新增';
                             <div class="col-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">新增資料</h5>
+                                        <h5 class="card-title text-center">꧁新增花朵資料꧂</h5><br>
 
                                         <!-- 表單開始 -->
-                                        <form name="form1" method="post" onsubmit="sendForm(event)">
+                                        <form name="form1" method="post" onsubmit="sendForm(event)" class="d-grid gap-2">
                                             <!-- 中文花名輸入欄 -->
                                             <div class="mb-3">
                                                 <label for="flower_name" class="form-label">中文花名</label>
-                                                <input type="text" class="form-control" id="flower_name" name="flower_name">
+                                                <input type="text" class="form-control" id="flower_name" name="flower_name" placeholder="至少兩個中文字元，勿用特殊符號、數字">
                                                 <div class="form-text"></div> <!-- 用來顯示錯誤訊息的元素 -->
                                             </div>
 
                                             <!-- 英文花名輸入欄 -->
                                             <div class="mb-3">
                                                 <label for="flower_engname" class="form-label">英文花名</label>
-                                                <input type="text" class="form-control" id="flower_engname" name="flower_engname">
+                                                <input type="text" class="form-control" id="flower_engname" name="flower_engname" placeholder="至少兩個英文字元，勿用特殊符號、數字">
                                                 <div class="form-text"></div>
                                             </div>
 
                                             <!-- 花語輸入欄 -->
                                             <div class="mb-3">
                                                 <label for="flower_lang" class="form-label">花語</label>
-                                                <input type="text" class="form-control" id="flower_lang" name="flower_lang">
+                                                <input type="text" class="form-control" id="flower_lang" name="flower_lang" placeholder="至少兩個中文字元">
                                                 <div class="form-text"></div>
                                             </div>
 
                                             <!-- 花朵簡介輸入欄 -->
                                             <div class="mb-3">
                                                 <label for="flower_intro" class="form-label">花朵簡介</label>
-                                                <textarea class="form-control" name="flower_intro" id="flower_intro" cols="30" rows="3"></textarea>
+                                                <textarea class="form-control" name="flower_intro" id="flower_intro" cols="30" rows="3" placeholder="至少兩個中文字元"></textarea>
                                                 <div class="form-text"></div>
                                             </div>
 
@@ -173,7 +173,7 @@ $title = '新增';
 
 
             // 檢查花語欄位
-            if (flower_intro.value.length < 2) {
+            if (flower_lang.value.length < 2) {
                 isPass = false;
                 flower_lang.style.border = '1px solid red';
                 flower_lang.nextElementSibling.innerHTML = "請填寫正確的花語（需至少兩個中文字元）";

@@ -8,6 +8,8 @@ $sql = "DELETE FROM intro_flower WHERE flower_id = $flower_id ";
 
 $pdo->query($sql);
 
+// 將 deleteSuccess 設定為 true，表示刪除操作成功
+$_SESSION['deleteSuccess'] = true;
 # $_SERVER['HTTP_REFERER'] # 人從哪裡來
 
 $goto = empty($_SERVER['HTTP_REFERER']) ? 'list.php' : $_SERVER['HTTP_REFERER'];

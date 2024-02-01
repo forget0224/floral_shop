@@ -23,13 +23,13 @@ if (empty($member_id)) {
 }
 
 # 如果沒有值就設定為空值 null
-$join_date = empty($_POST['join_date']) ? null : $_POST['join_date'];
-$join_date = strtotime($join_date); # 轉換為 timestamp
-if ($join_date === false) {
-    $join_date = null;
-} else {
-    $join_date = date('Y-m-d', $join_date);
-}
+// $join_date = empty($_POST['join_date']) ? null : $_POST['join_date'];
+// $join_date = strtotime($join_date); # 轉換為 timestamp
+// if ($join_date === false) {
+//     $join_date = null;
+// } else {
+//     $join_date = date('Y-m-d', $join_date);
+// }
 
 $sql = "UPDATE `member` SET 
     `name`=?,

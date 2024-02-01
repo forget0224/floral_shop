@@ -21,7 +21,8 @@ if (empty($row)) {
 <?php include '../parts/html-head.php' ?>
 
 <style>
-    form .mb-3 .form-text {
+    form .mb-3,
+    .form-text {
         color: red;
     }
 </style>
@@ -114,8 +115,8 @@ if (empty($row)) {
                                                             <label for="sub_id" class="form-label">訂閱方案</label>
                                                             <select class="form-select" id="sub_id" name="sub_id">
                                                                 <option value="1">1個月</option>
-                                                                <option value="3">3個月</option>
-                                                                <option value="6">6個月</option>
+                                                                <option value="2">6個月</option>
+                                                                <option value="3">12個月</option>
                                                             </select>
                                                             <div class="form-text"></div>
                                                         </div>
@@ -135,8 +136,8 @@ if (empty($row)) {
 
 
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <!-- 成功Modal -->
+                                    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -150,6 +151,26 @@ if (empty($row)) {
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="continueEditingBtn">繼續編輯</button>
+                                                    <a type="button" class="btn btn-primary" href="list.php">到列表頁</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 失敗Modal -->
+                                    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">編輯結果</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="alert alert-danger" role="alert" id="errorAlert">
+                                                        沒有更改
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="restartEditingBtn">重新編輯</button>
                                                     <a type="button" class="btn btn-primary" href="list.php">到列表頁</a>
                                                 </div>
                                             </div>
@@ -235,6 +256,10 @@ if (empty($row)) {
             var re = /^09\d{2}-?\d{3}-?\d{3}$/;
             return re.test(store_tel);
         }
+
+
+
+
 
 
         // 表單送出流程
@@ -324,22 +349,32 @@ if (empty($row)) {
                         });
                         // Modal功能    
                         if (result.success) {
-                            myModal.show();
+                            successModal.show();
                             // 清除表單輸入的資料
                             document.form1.reset();
+                        } else {
+                            // 編輯失敗，顯示 errorModal
+                            errorModal.show();
                         }
                     })
                     .catch(ex => console.log(ex))
             }
         }
 
+        // successModal
         document.getElementById('continueEditingBtn').addEventListener('click', () => {
+            // Redirect to the edit.php page
+            window.location.href = 'edit.php?store_id=<?= $store_id ?>';
+        });
+        // errorModal
+        document.getElementById('restartEditingBtn').addEventListener('click', () => {
             // Redirect to the edit.php page
             window.location.href = 'edit.php?store_id=<?= $store_id ?>';
         });
 
         // Modal按鈕功能重設
-        const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
     </script>
 
     <?php include '../parts/html-foot.php' ?>
