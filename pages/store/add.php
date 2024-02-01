@@ -8,9 +8,11 @@ $title = '店家新增';
 <?php include '../parts/html-head.php' ?>
 
 <style>
-    form .mb-3 .form-text {
+    form .mb-3, .form-text {
         color: red;
     }
+
+    
 </style>
 
 
@@ -70,7 +72,7 @@ $title = '店家新增';
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="store_password" class="form-label">密碼</label>
-                                                            <input type="text" class="form-control" id="store_password" name="store_password" placeholder="請輸入包含英文及數字，及1位特殊自元的8~16位數密碼">
+                                                            <input type="text" class="form-control" id="store_password" name="store_password" placeholder="請輸入包含英文及數字，及1位特殊字元的8~16位數密碼">
                                                             <div class="form-text"></div>
                                                         </div>
                                                         <div class="mb-3">
@@ -91,8 +93,8 @@ $title = '店家新增';
                                                             <label for="sub_id" class="form-label">訂閱方案</label>
                                                             <select class="form-select" id="sub_id" name="sub_id">
                                                                 <option value="1">1個月</option>
-                                                                <option value="3">3個月</option>
-                                                                <option value="6">6個月</option>
+                                                                <option value="2">6個月</option>
+                                                                <option value="3">12個月</option>
                                                             </select>
                                                             <div class="form-text"></div>
                                                         </div>
@@ -174,21 +176,6 @@ $title = '店家新增';
 
 
 
-        // placeholder清除
-        let phoneNumberInput = document.querySelector('#store_tel');
-        let passwordInput = document.querySelector('#store_password')
-        phoneNumberInput.addEventListener('focus', function() {
-            clearPlaceholder(phoneNumberInput);
-        });
-        passwordInput.addEventListener('focus', function() {
-            clearPlaceholder(passwordInput);
-        });
-
-        function clearPlaceholder(inputElement) {
-            inputElement.placeholder = '';
-
-        }
-
 
         // 驗證
         // 重新命名input欄位，解構賦子
@@ -261,7 +248,7 @@ $title = '店家新增';
                 // alert("請填寫正確的姓名");
                 isPass = false;
                 store_name_f.style.border = '1px solid red';
-                store_name_f.nextElementSibling.innerHTML = "請填寫正確的姓名";
+                store_name_f.nextElementSibling.innerHTML = "姓名欄位必須填入至少2個非空白字元";
             }
 
             // 帳號

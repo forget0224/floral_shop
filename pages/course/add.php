@@ -42,7 +42,7 @@ $title = '新增課程';
                                 <form name="form1" method="post" onsubmit="sendForm(event)">
                                     <div class="mb-3">
                                     <label for="name" class="form-label">課程名稱</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="請輸入課程名稱(30字內)" maxlength="30">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="請輸入課程名稱(30字內)">
                                     <div class="form-text"></div>
                                     </div>
                                     <div class="mb-3">
@@ -74,7 +74,7 @@ $title = '新增課程';
                                     </div>
                                     <div class="mb-3">
                                     <label for="price" class="form-label">課程定價</label>
-                                    <input type="number" class="form-control" id="price" name="price" placeholder="請輸入課程定價" step="100" min="0" max="30000">
+                                    <input type="number" class="form-control" id="price" name="price" placeholder="請輸入課程定價" step="100" min="1">
                                     <div class="form-text"></div>
                                     </div>
                                     <div class="mb-3">
@@ -142,53 +142,100 @@ $title = '新增課程';
 
     <!-- 送出表單 -->
     <script>
-    // const {
-    //   name: name_f,
-    //   email: email_f,
-    //   mobile: mobile_f,
-    // } = document.form1;
-
-    // function validateEmail(email) {
-    //   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    //   return re.test(email);
-    // }
-
-    // function validateMobile(mobile) {
-    //   var re = /^09\d{2}-?\d{3}-?\d{3}$/;
-    //   return re.test(mobile);
-    // }
-
+    const {
+      name: name_f,
+      intro: intro_f,
+      category_id: category_f,
+      store_id: store_f,
+      location: location_f,
+      price: price_f,
+      min_capacity: min_f,
+      max_capacity: max_f
+    } = document.form1;
 
     const sendForm = e => {
         e.preventDefault();
-        // name_f.style.border = '1px solid #CCC';
-        // name_f.nextElementSibling.innerHTML = "";
-        // email_f.style.border = '1px solid #CCC';
-        // email_f.nextElementSibling.innerHTML = "";
-        // mobile_f.style.border = '1px solid #CCC';
-        // mobile_f.nextElementSibling.innerHTML = "";
+        name_f.style.border = '1px solid #CCC';
+        name_f.nextElementSibling.innerHTML = "";
+        intro_f.style.border = '1px solid #CCC';
+        intro_f.nextElementSibling.innerHTML = "";
+        category_f.style.border = '1px solid #CCC';
+        category_f.nextElementSibling.innerHTML = "";
+        store_f.style.border = '1px solid #CCC';
+        store_f.nextElementSibling.innerHTML = "";
+        location_f.style.border = '1px solid #CCC';
+        location_f.nextElementSibling.innerHTML = "";
+        price_f.style.border = '1px solid #CCC';
+        price_f.nextElementSibling.innerHTML = "";
+        min_f.style.border = '1px solid #CCC';
+        min_f.nextElementSibling.innerHTML = "";
+        max_f.style.border = '1px solid #CCC';
+        max_f.nextElementSibling.innerHTML = "";
 
         // TODO: 資料送出之前, 要做檢查 (有沒有填寫, 格式對不對)
         let isPass = true; // 表單有沒有通過檢查
 
-        // if (name_f.value.length < 2) {
-        //   isPass = false;
-        //   name_f.style.border = '1px solid red';
-        //   name_f.nextElementSibling.innerHTML = "請填寫正確的姓名";
-        // }
-
-        // if (email_f.value && !validateEmail(email_f.value)) {
-        //   isPass = false;
-        //   email_f.style.border = '1px solid red';
-        //   email_f.nextElementSibling.innerHTML = "請填寫正確的 Email";
-        // }
-
-        // if (mobile_f.value && !validateMobile(mobile_f.value)) {
-        //   isPass = false;
-        //   mobile_f.style.border = '1px solid red';
-        //   mobile_f.nextElementSibling.innerHTML = "請填寫正確的手機號碼";
-        // }
-
+        if (name_f.value.length < 2) {
+          isPass = false;
+          name_f.style.border = '1px solid red';
+          name_f.nextElementSibling.innerHTML = "請輸入至少2個字的課程名稱";
+        }
+        
+        if (name_f.value.length > 30) {
+          isPass = false;
+          name_f.style.border = '1px solid red';
+          name_f.nextElementSibling.innerHTML = "課程名稱需小於30字";
+        }
+        
+        if (intro_f.value.length < 2) {
+          isPass = false;
+          intro_f.style.border = '1px solid red';
+          intro_f.nextElementSibling.innerHTML = "請輸入至少2個字的課程介紹";
+        }
+        
+        if (intro_f.value.length > 1000) {
+          isPass = false;
+          intro_f.style.border = '1px solid red';
+          intro_f.nextElementSibling.innerHTML = "課程介紹需小於1000字";
+        }
+        
+        // TODO:之後不用驗證
+        if (!store_f.value) {
+          isPass = false;
+          store_f.style.border = '1px solid red';
+          store_f.nextElementSibling.innerHTML = "請輸入商家id";
+        }
+        
+        // TODO:之後修改驗證
+        if (!location_f.value) {
+          isPass = false;
+          location_f.style.border = '1px solid red';
+          location_f.nextElementSibling.innerHTML = "請輸入上課地點";
+        }
+        
+        if (price_f.value.length < 1) {
+          isPass = false;
+          price_f.style.border = '1px solid red';
+          price_f.nextElementSibling.innerHTML = "請輸入正確的定價";
+        }
+        
+        if (min_f.value.length < 1) {
+          isPass = false;
+          min_f.style.border = '1px solid red';
+          min_f.nextElementSibling.innerHTML = "請輸入正確的最小開課人數";
+        }
+        
+        if (max_f.value.length < 1) {
+          isPass = false;
+          max_f.style.border = '1px solid red';
+          max_f.nextElementSibling.innerHTML = "請輸入正確的最大開課人數";
+        }
+        
+        if (min_f.value > max_f.value) {
+          isPass = false;
+          max_f.style.border = '1px solid red';
+          max_f.nextElementSibling.innerHTML = "最大開課人數需大於最小開課人數";
+        }
 
         if (isPass) {
         // "沒有外觀" 的表單

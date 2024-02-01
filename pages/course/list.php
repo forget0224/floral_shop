@@ -182,27 +182,22 @@ if ($totalRows > 0) {
 
     <?php include '../parts/scripts.php' ?>
 
-    <!-- Modal -->
+    <!-- 刪除的Modal -->
     <div class="modal fade" id="deleteSuccess" tabindex="-1" aria-labelledby="deleteSuccessModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">刪除結果</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="alert alert-success" role="alert">
-            刪除成功
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">刪除結果</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert">刪除成功</div>
+                </div>
             </div>
         </div>
-        <!-- <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">繼續刪除</button>
-            <a type="button" class="btn btn-primary" href="list.php">到列表頁</a>
-        </div> -->
-        </div>
     </div>
-    </div>
-
+    
+    <!-- 刪除的Modal -->
     <script>
     function delete_one(course_id) {
         if (confirm(`是否要刪除編號為 ${course_id} 的資料?`)) {
@@ -216,11 +211,11 @@ if ($totalRows > 0) {
             if (result.success) {
                 // 刪除成功後顯示 Modal
                 $('#deleteSuccess').modal('show');
-
+                
                 // 刪除成功後，等待一段時間再重新導向
                 setTimeout(function() {
                 location.href = 'list.php';
-                }, 2000); // 這裡的 2000 是等待 2 秒，你可以調整成你需要的時間
+                }, 2000);
             } else {
                 // 刪除失敗的處理
                 console.error('刪除失敗');
@@ -234,6 +229,7 @@ if ($totalRows > 0) {
         }
     }
     </script>
+    
     <!-- 搜尋框 -->
     <script>
     $(document).ready(function(){

@@ -73,7 +73,7 @@ if (empty($row)) {
                                     </div>
                                     <div class="mb-3">
                                     <label for="price" class="form-label">課程定價</label>
-                                    <input type="text" class="form-control" id="price" name="price" value="<?= $row['price'] ?>">
+                                    <input type="number" class="form-control" id="price" name="price" step="100" min="0" max="30000" value="<?= $row['price'] ?>">
                                     <div class="form-text"></div>
                                     </div>
                                     <div class="mb-3">
@@ -143,18 +143,6 @@ if (empty($row)) {
 
         // TODO: 資料送出之前, 要做檢查 (有沒有填寫, 格式對不對)
         let isPass = true; // 表單有沒有通過檢查
-
-        // if (email_f.value && !validateEmail(email_f.value)) {
-        //   isPass = false;
-        //   email_f.style.border = '1px solid red';
-        //   email_f.nextElementSibling.innerHTML = "請填寫正確的 Email";
-        // }
-
-        // if (mobile_f.value && !validateMobile(mobile_f.value)) {
-        //   isPass = false;
-        //   mobile_f.style.border = '1px solid red';
-        //   mobile_f.nextElementSibling.innerHTML = "請填寫正確的手機號碼";
-        // }
 
         if (isPass) {
         // "沒有外觀" 的表單
