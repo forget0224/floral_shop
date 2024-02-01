@@ -12,7 +12,7 @@ if (empty($pageName)) {
     <a href="#" class="logo">flower<span>.</span></a>
 
     <nav class="navbar">
-        <a href="#home">首頁</a>
+        <a href="../../../../floral_shop/manager_index.php">首頁</a>
         <a <?= $pageName == 'list' ? 'active' : '' ?>href="./list.php">列表</a>
         <a <?= $pageName == 'add' ? 'active' : '' ?>href="./add.php">新增</a>
         <!-- <a href="#products">products</a>
