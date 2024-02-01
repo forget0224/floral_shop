@@ -3296,7 +3296,7 @@ CREATE TABLE `store` (
   `store_tel` varchar(255) DEFAULT NULL,
   `sub_date` date DEFAULT NULL,
   `sub_id` int(11) DEFAULT NULL,
-  `permission_id` int(11) DEFAULT NULL
+  `permission_id` int(11) NOT NULL DEFAULT 2
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
