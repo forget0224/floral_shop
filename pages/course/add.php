@@ -155,22 +155,22 @@ $title = '新增課程';
 
     const sendForm = e => {
         e.preventDefault();
-        // name_f.style.border = '1px solid #CCC';
-        // name_f.nextElementSibling.innerHTML = "";
-        // intro_f.style.border = '1px solid #CCC';
-        // intro_f.nextElementSibling.innerHTML = "";
-        // category_f.style.border = '1px solid #CCC';
-        // category_f.nextElementSibling.innerHTML = "";
-        // store_f.style.border = '1px solid #CCC';
-        // store_f.nextElementSibling.innerHTML = "";
-        // location_f.style.border = '1px solid #CCC';
-        // location_f.nextElementSibling.innerHTML = "";
-        // price_f.style.border = '1px solid #CCC';
-        // price_f.nextElementSibling.innerHTML = "";
-        // min_f.style.border = '1px solid #CCC';
-        // min_f.nextElementSibling.innerHTML = "";
-        // max_f.style.border = '1px solid #CCC';
-        // max_f.nextElementSibling.innerHTML = "";
+        name_f.style.border = '1px solid #CCC';
+        name_f.nextElementSibling.innerHTML = "";
+        intro_f.style.border = '1px solid #CCC';
+        intro_f.nextElementSibling.innerHTML = "";
+        category_f.style.border = '1px solid #CCC';
+        category_f.nextElementSibling.innerHTML = "";
+        store_f.style.border = '1px solid #CCC';
+        store_f.nextElementSibling.innerHTML = "";
+        location_f.style.border = '1px solid #CCC';
+        location_f.nextElementSibling.innerHTML = "";
+        price_f.style.border = '1px solid #CCC';
+        price_f.nextElementSibling.innerHTML = "";
+        min_f.style.border = '1px solid #CCC';
+        min_f.nextElementSibling.innerHTML = "";
+        max_f.style.border = '1px solid #CCC';
+        max_f.nextElementSibling.innerHTML = "";
 
         // TODO: 資料送出之前, 要做檢查 (有沒有填寫, 格式對不對)
         let isPass = true; // 表單有沒有通過檢查
