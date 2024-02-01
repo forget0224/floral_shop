@@ -74,7 +74,7 @@ $title = '新增課程';
                                     </div>
                                     <div class="mb-3">
                                     <label for="price" class="form-label">課程定價</label>
-                                    <input type="number" class="form-control" id="price" name="price" placeholder="請輸入課程定價" step="100" min="1">
+                                    <input type="number" class="form-control" id="price" name="price" placeholder="請輸入課程定價" step="100" min="0">
                                     <div class="form-text"></div>
                                     </div>
                                     <div class="mb-3">

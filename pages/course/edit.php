@@ -114,8 +114,8 @@ if (empty($row)) {
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- 成功的Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
@@ -135,36 +135,85 @@ if (empty($row)) {
     </div>
     </div>
     
+    <!-- 失敗的Modal -->
+    <div class="modal fade" id="failModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">編輯結果</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success" role="alert">
+                編輯失敗
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">繼續編輯</button>
+                <a type="button" class="btn btn-primary" href="list.php">到列表頁</a>
+            </div>
+            </div>
+        </div>
+    </div>
+    
     <?php include '../parts/scripts.php' ?>
 
     <script>
     const sendForm = e => {
         e.preventDefault();
 
+        // 取得原始資料
+        const originalData = {
+        name: "<?= addslashes($row['name']) ?>",
+        intro: "<?= addslashes($row['intro']) ?>",
+        location: "<?= addslashes($row['location']) ?>",
+        price: <?= $row['price'] ?>,
+        min_capacity: <?= $row['min_capacity'] ?>,
+        max_capacity: <?= $row['max_capacity'] ?>,
+        };
+
+        // 取得表單資料
+        const formData = {
+        name: document.form1.name.value,
+        intro: document.form1.intro.value,
+        location: document.form1.location.value,
+        price: parseInt(document.form1.price.value),
+        min_capacity: parseInt(document.form1.min_capacity.value),
+        max_capacity: parseInt(document.form1.max_capacity.value),
+        };
+        
+        // 檢查是否有修改
+        const isModified = Object.keys(originalData).some(key => originalData[key] !== formData[key]);
+        
         // TODO: 資料送出之前, 要做檢查 (有沒有填寫, 格式對不對)
         let isPass = true; // 表單有沒有通過檢查
 
-        if (isPass) {
-        // "沒有外觀" 的表單
+        if (isModified && isPass) {
+        // 如果有修改且通過驗證，執行表單送出邏輯
         const fd = new FormData(document.form1);
 
         fetch('edit-api.php', {
             method: 'POST',
             body: fd, // content-type: multipart/form-data
-            }).then(r => r.json())
-            .then(result => {
-            console.log({
-                result
-            });
-            if (result.success) {
-                myModal.show();
-            }
             })
+            .then(r => r.json())
+            .then(result => {
+            console.log(result);
+            if (result.success) {
+                // 如果成功，顯示成功的 Modal
+                mySuccessModal.show();
+            } else {
+                // 如果失敗，顯示失敗的 Modal
+                myFailModal.show();
+                // TODO: 沒有顯示
+            }
+        })
             .catch(ex => console.log(ex))
         }
     }
 
-    const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    const mySuccessModal = new bootstrap.Modal(document.getElementById('successModal'));
+    const myFailModal = new bootstrap.Modal(document.getElementById('failModal'));
     </script>
     
     <?php include '../parts/html-foot.php' ?>
