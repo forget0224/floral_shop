@@ -69,7 +69,7 @@ if (empty($pageName)) {
         <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">商城</h6>
-                <a class="collapse-item" href="/floral_shop/pages/product/list-admin.php">商品資料</a>
+                <a class="collapse-item" href="/floral_shop/pages/product/list.php">商品資料</a>
                 <a class="collapse-item" href="/floral_shop/pages/product/add.php">新增商品</a>
                 <div class="collapse-divider"></div>
                 <!-- <h6 class="collapse-header">小標題/分類</h6> -->
