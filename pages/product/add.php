@@ -1,6 +1,6 @@
 <?php
 require '../parts/db_connect.php';
-require '../parts/admin-required.php';
+// require '../parts/admin-required.php';
 $pageName = 'add';
 $title = '增加商品';
 ?>

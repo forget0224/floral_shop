@@ -1,6 +1,6 @@
 <?php
 date_default_timezone_set('Asia/Taipei');
-require '../parts/admin-required.php';
+// require '../parts/admin-required.php';
 require '../parts/db_connect.php';
 header('Content-Type: application/json');
 
