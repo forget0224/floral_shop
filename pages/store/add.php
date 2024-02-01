@@ -93,8 +93,8 @@ $title = '店家新增';
                                                             <label for="sub_id" class="form-label">訂閱方案</label>
                                                             <select class="form-select" id="sub_id" name="sub_id">
                                                                 <option value="1">1個月</option>
-                                                                <option value="3">3個月</option>
-                                                                <option value="6">6個月</option>
+                                                                <option value="2">6個月</option>
+                                                                <option value="3">12個月</option>
                                                             </select>
                                                             <div class="form-text"></div>
                                                         </div>
