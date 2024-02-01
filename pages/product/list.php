@@ -307,42 +307,42 @@ if ($totalRows > 0) {
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th><i class="fa-solid fa-trash"></i></th>
-                      <th>#
+                      <th style="width: 20px;"><i class="fa-solid fa-trash"></i></th>
+                      <th style="width: 20px;">
                         <a href="?orderBy=product_id&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'product_id' && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>">
                           <i class="fas <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'product_id' && $_GET['order'] === 'asc') ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up' ?>"></i>
                         </a>
                       </th>
-                      <th class="text-nowrap">商品名稱</th>
-                      <th class="text-nowrap">種類列表</th>
-                      <th class="text-nowrap">價格</th>
-                      <th class="text-nowrap">尺寸</th>
-                      <th class="text-nowrap">創建時間</th>
-                      <th class="text-nowrap">更新時間</th>
-                      <th class="text-nowrap">描述</th>
-                      <th><i class="fa-solid fa-file-pen"></i></th>
+                      <th style="width: 100px;">商品名稱</th>
+                      <th style="width: 130px;">種類列表</th>
+                      <th style="width: 80px;">價格</th>
+                      <th style="width: 130px;">尺寸</th>
+                      <th style="width: 120px;">創建時間</th>
+                      <th style="width: 120px;">更新時間</th>
+                      <th style="width: 150px;">描述</th>
+                      <th style="width: 20px;"><i class="fa-solid fa-file-pen"></i></th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php foreach ($rows as $r) : ?>
                       <tr>
-                        <td>
+                        <td style="width: 20px;">
                           <a href="javascript: delete_one(<?= $r['product_id'] ?>)">
                             <i class="fa-solid fa-trash"></i>
                           </a>
                         </td>
-                        <td class="w-15"><?= $r['product_id'] ?></td>
-                        <td class="w-15"><?= $r['name'] ?></td>
-                        <td class="w-15"><?= $r['category_name'] ?></td>
-                        <td class="w-15"><?= $r['price'] ?></td>
-                        <td class="w-15"><?= $r['size'] ?></td>
-                        <td class="w-15"><?= $r['created_at'] ?></td>
-                        <td class="w-15"><?= $r['updated_at'] ?></td>
-                        <td class="w-15"><?= $r['description'] ?></td>
-                        <td class="w-15"><a href=" edit.php?product_id=<?= $r['product_id'] ?>">
+                        <td style="width: 20px;"><?= $r['product_id'] ?></td>
+                        <td style="width: 100px;"><?= $r['name'] ?></td>
+                        <td style="width: 130px;"><?= $r['category_name'] ?></td>
+                        <td style="width: 80px;"><?= $r['price'] ?></td>
+                        <td style="width: 130px;"><?= $r['size'] ?></td>
+                        <td style="width: 120px;"><?= $r['created_at'] ?></td>
+                        <td style="width: 120px;"><?= $r['updated_at'] ?></td>
+                        <td style="width: 150px;"><?= $r['description'] ?></td>
+                        <td style="width: 20px;"><a href=" edit.php?product_id=<?= $r['product_id'] ?>">
                             <i class="fa-solid fa-file-pen"></i>
                           </a>
                         </td>
