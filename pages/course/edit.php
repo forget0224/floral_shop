@@ -144,8 +144,8 @@ if (empty($row)) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-success" role="alert">
-                編輯失敗
+                <div class="alert alert-danger" role="alert">
+                沒有更改
                 </div>
             </div>
             <div class="modal-footer">
@@ -158,7 +158,11 @@ if (empty($row)) {
     
     <?php include '../parts/scripts.php' ?>
 
+    <!-- 編輯表單 -->
     <script>
+    const myFailModal = new bootstrap.Modal(document.getElementById('failModal'));
+    const mySuccessModal = new bootstrap.Modal(document.getElementById('successModal'));
+    
     const sendForm = e => {
         e.preventDefault();
 
@@ -187,8 +191,10 @@ if (empty($row)) {
         
         // TODO: 資料送出之前, 要做檢查 (有沒有填寫, 格式對不對)
         let isPass = true; // 表單有沒有通過檢查
+        
+        // 驗證放這邊
 
-        if (isModified && isPass) {
+        if (isPass) {
         // 如果有修改且通過驗證，執行表單送出邏輯
         const fd = new FormData(document.form1);
 
@@ -211,9 +217,6 @@ if (empty($row)) {
             .catch(ex => console.log(ex))
         }
     }
-
-    const mySuccessModal = new bootstrap.Modal(document.getElementById('successModal'));
-    const myFailModal = new bootstrap.Modal(document.getElementById('failModal'));
     </script>
     
     <?php include '../parts/html-foot.php' ?>
