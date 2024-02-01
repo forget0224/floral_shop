@@ -84,6 +84,7 @@ if (empty($pageName)) {
         </a>
         <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">課程管理</h6>
                 <a class="collapse-item" href="/floral_shop/pages/course/list.php">課程列表</a>
                 <a class="collapse-item" href="/floral_shop/pages/course/add.php">新增課程</a>
             </div>

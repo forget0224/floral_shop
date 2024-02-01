@@ -73,7 +73,7 @@ if (empty($row)) {
                                     </div>
                                     <div class="mb-3">
                                     <label for="price" class="form-label">課程定價</label>
-                                    <input type="text" class="form-control" id="price" name="price" value="<?= $row['price'] ?>">
+                                    <input type="number" class="form-control" id="price" name="price" step="100" min="0" max="30000" value="<?= $row['price'] ?>">
                                     <div class="form-text"></div>
                                     </div>
                                     <div class="mb-3">
