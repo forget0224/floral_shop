@@ -49,12 +49,13 @@ if ($totalRows > 0) {
     %s
     %s
     %s
-    ORDER BY p.product_id DESC
+    ORDER BY p.product_id %s
     LIMIT %s, %s",
     $isSearch ? "WHERE p.name LIKE :searchKeyword" : "", //搜尋-商品關鍵字
     $isSearchCategory ? "AND p.categories_id = :searchCategory" : "", // 搜尋-類別
     ($isSearchPrice && $searchPriceFirst !== '' && $searchPriceSecond !== '') ? "AND p.price BETWEEN :searchPriceFirst AND :searchPriceSecond" : "", // 搜尋-價格
     $isSearchDescription ? "AND p.description LIKE :searchDescription" : "", //搜尋-描述關鍵字
+    (isset($_GET['order']) && ($_GET['order'] === 'asc' || $_GET['order'] === 'desc')) ? strtoupper($_GET['order']) : 'DESC', // Sorting order (asc or desc)
     ($page - 1) * $perPage,
     $perPage
   );
@@ -310,7 +311,11 @@ if ($totalRows > 0) {
                   <thead>
                     <tr>
                       <th><i class="fa-solid fa-trash"></i></th>
-                      <th>#</th>
+                      <th>#
+                        <a href="?orderBy=product_id&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'product_id' && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>">
+                          <i class="fas <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'product_id' && $_GET['order'] === 'asc') ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up' ?>"></i>
+                        </a>
+                      </th>
                       <th>商品名稱</th>
                       <th>種類列表</th>
                       <th>價格</th>
