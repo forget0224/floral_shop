@@ -68,13 +68,13 @@ if ($totalRows > 0) {
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">課程列表</h1>
-                    <p class="mb-4">課程列表</p>
+                    <p class="mb-4">在這個令人心動的課程列表中，融合豐富多元的學習體驗，讓你開啟精彩旅程，挑戰自我，迎接知識的奇妙冒險！</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary d-flex flex-row justify-content-between">
-                                <!-- 分頁 start -->
+                                <!-- Pagination start -->
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination mb-0">
                                     <li class="page-item">
@@ -111,6 +111,14 @@ if ($totalRows > 0) {
                                     <input type="text" id="courseSearch" name="courseSearch" class="form-control bg-light border small" placeholder="Search for..."
                                         aria-label="Search" aria-describedby="basic-addon2">
                                 </form>
+                                <!-- Dropdown Select -->
+                                <select class="form-select col-3" id="courseSearch" aria-label="Default select example">
+                                    <option selected disabled>請選擇課程分類</option>
+                                    <option value="1">花藝基礎課程</option>
+                                    <option value="2">植栽相關課程</option>
+                                    <option value="3">節慶主題課程</option>
+                                    <option value="4">進階商業課程</option>
+                                </select>
                             </h6>
                         </div>
                         <div class="card-body">
