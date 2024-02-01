@@ -48,9 +48,9 @@ if (empty($row)) {
                             <div class="col-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">編輯資料</h5>
+                                        <h5 class="card-title  text-center">꧁編輯花朵資料꧂</h5>
                                         <!-- 編輯表單 -->
-                                        <form name="form1" method="post" onsubmit="sendForm(event)">
+                                        <form name="form1" method="post" onsubmit="sendForm(event)" class="d-grid gap-2">
                                             <div class="mb-3">
                                                 <label class="form-label">編號</label>
                                                 <!-- 顯示 flower_id，並設為唯獨狀態 -->
