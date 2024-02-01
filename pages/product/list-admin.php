@@ -164,7 +164,7 @@ if ($totalRows > 0) {
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="exampleModalToggleLabel">搜尋商品</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <form class="form-inline my-2 my-lg-0" id="searchForm" action="">
@@ -182,7 +182,7 @@ if ($totalRows > 0) {
                       </div>
                     </div>
                   </div>
-                  <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">商品
+                  <a class="btn btn-primary" data-toggle="modal" href="#exampleModalToggle" role="button">商品
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                       <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
@@ -196,7 +196,7 @@ if ($totalRows > 0) {
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="exampleModalToggleLabelCategory">搜尋類別</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <form class="form-inline my-2 my-lg-0" id="searchForm" action="">
@@ -228,7 +228,7 @@ if ($totalRows > 0) {
                       </div>
                     </div>
                   </div>
-                  <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggleCategory" role="button">類別
+                  <a class="btn btn-primary" data-toggle="modal" href="#exampleModalToggleCategory" role="button">類別
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                       <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
@@ -242,7 +242,7 @@ if ($totalRows > 0) {
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="exampleModalToggleLabelPrice">搜尋價格</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <form class="form-inline my-2 my-lg-0" id="searchFormPrice" action="">
@@ -263,7 +263,7 @@ if ($totalRows > 0) {
                       </div>
                     </div>
                   </div>
-                  <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalTogglePrice" role="button">價格
+                  <a class="btn btn-primary" data-toggle="modal" href="#exampleModalTogglePrice" role="button">價格
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                       <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
@@ -277,7 +277,7 @@ if ($totalRows > 0) {
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="exampleModalToggleLabelDescription">搜尋描述</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <form class="form-inline my-2 my-lg-0" id="searchFormDescription" action="">
@@ -295,7 +295,7 @@ if ($totalRows > 0) {
                       </div>
                     </div>
                   </div>
-                  <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggleDescription" role="button">描述
+                  <a class="btn btn-primary" data-toggle="modal" href="#exampleModalToggleDescription" role="button">描述
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                       <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
