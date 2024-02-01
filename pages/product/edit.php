@@ -168,7 +168,7 @@ if (empty($row)) {
         </div>
         <div class="modal-body">
           <div class="alert alert-danger" role="alert" id="errorAlert">
-            沒有更改
+            沒有更改 (o´罒`o)
           </div>
         </div>
         <div class="modal-footer">
@@ -188,7 +188,7 @@ if (empty($row)) {
         </div>
         <div class="modal-body">
           <div class="alert alert-success" role="alert" id="successAlert">
-            編輯成功
+            編輯成功 (✪ω✪)
           </div>
         </div>
         <div class="modal-footer">

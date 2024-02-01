@@ -184,25 +184,25 @@ $title = '增加商品';
       if (name_f.value === "" || name_f.value === null) {
         isPass = false;
         name_f.style.border = '1px solid red';
-        name_f.nextElementSibling.innerHTML = "請填寫商品名稱";
+        name_f.nextElementSibling.innerHTML = "請填寫商品名稱 _:(´□`」 ∠):_";
       }
 
       if (categories_f.value === "" || categories_f.value === null) {
         isPass = false;
         categories_f.style.border = '1px solid red';
-        categories_f.nextElementSibling.innerHTML = "請選擇商品類別";
+        categories_f.nextElementSibling.innerHTML = "請選擇商品類別 (｡-_-｡)";
       }
 
       if (price_f.value === "" || price_f.value === null) {
         isPass = false;
         price_f.style.border = '1px solid red';
-        price_f.nextElementSibling.innerHTML = "請填寫價格";
+        price_f.nextElementSibling.innerHTML = "請填寫價格 ㅍ_ㅍ";
       }
 
       if (size_f.value === "" || size_f.value === null) {
         isPass = false;
         size_f.style.border = '1px solid red';
-        size_f.nextElementSibling.innerHTML = "請填寫尺寸";
+        size_f.nextElementSibling.innerHTML = "請填寫尺寸 (≖＿≖)✧";
       }
 
       if (isPass) {

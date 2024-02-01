@@ -170,8 +170,8 @@ if ($totalRows > 0) {
                         <div class="modal-body">
                           <form class="form-inline my-2 my-lg-0" id="searchForm" action="">
                             <input class="form-control mr-sm-2" type="search" placeholder="請輸入關鍵字" aria-label="Search" id="searchInput" value="">
-                            <p class="form-text text-danger" id="searchInputError"></p>
                           </form>
+                          <div class="form-text text-danger" id="searchInputError"></div>
                         </div>
                         <div class="modal-footer">
                           <button class="btn btn-outline-success" type="button" onclick="searchProducts()">
@@ -216,8 +216,8 @@ if ($totalRows > 0) {
                               }
                               ?>
                             </select>
-                            <p class="form-text text-danger" id="searchInputCategoryError"></p>
                           </form>
+                          <div class="form-text text-danger" id="searchInputCategoryError"></div>
                         </div>
                         <div class="modal-footer">
                           <button class="btn btn-outline-success" type="button" onclick="searchCategory()">
@@ -251,8 +251,8 @@ if ($totalRows > 0) {
                             <p class="form-text text-danger" id="searchInputPriceErrorFirst"></p>
 
                             <input class="form-control mr-sm-2" type="number" placeholder="請輸入價格" aria-label="SearchPrice" id="searchInputPriceSecond" oninput="validatePriceInput()">
-                            <p class="form-text text-danger" id="searchInputPriceError"></p>
                           </form>
+                          <div class="form-text text-danger" id="searchInputPriceError"></div>
                         </div>
                         <div class="modal-footer">
                           <button class="btn btn-outline-success" type="button" onclick="searchPrice()">
@@ -283,8 +283,8 @@ if ($totalRows > 0) {
                         <div class="modal-body">
                           <form class="form-inline my-2 my-lg-0" id="searchFormDescription" action="">
                             <input class="form-control mr-sm-2" type="search" placeholder="請輸入關鍵字" aria-label="SearchDescription" id="searchInputDescription" value="">
-                            <p class="form-text text-danger" id="searchInputDescriptionError"></p>
                           </form>
+                          <div class="form-text text-danger" id="searchInputDescriptionError"></div>
                         </div>
                         <div class="modal-footer">
                           <button class="btn btn-outline-success" type="button" onclick="searchDescription()">
@@ -387,137 +387,136 @@ if ($totalRows > 0) {
         </div>
         <div class="modal-body">
           <div class="alert alert-success" role="alert">
-            商品已成功刪除
+            商品已成功刪除 (ﾉ>ω<)ﾉ </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">繼續瀏覽</button>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">繼續瀏覽</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    //搜尋-商品關鍵字
-    var searchInputError = document.getElementById('searchInputError');
-    var modalToggle = document.getElementById('exampleModalToggle');
+    <script>
+      //搜尋-商品關鍵字
+      var searchInputError = document.getElementById('searchInputError');
+      var modalToggle = document.getElementById('exampleModalToggle');
 
-    function searchProducts() {
-      let searchInput = document.getElementById('searchInput');
-      let searchKeyword = searchInput.value.trim();
-      if (searchKeyword !== '') {
-        window.location.href = 'list.php?search=' + encodeURIComponent(searchKeyword);
-      } else {
-        searchInputError.textContent = '請輸入關鍵字';
-      }
-    }
-
-    modalToggle.addEventListener('show.bs.modal', function() {
-      searchInputError.textContent = '';
-    });
-
-    // 搜尋-類別
-    var searchInputCategoryError = document.getElementById('searchInputCategoryError');
-    var modalToggleCategory = document.getElementById('exampleModalToggleCategory');
-
-    function searchCategory() {
-      var searchSelectCategory = document.getElementById('categories_id');
-      var searchKeywordCategory = searchSelectCategory.value.trim();
-      if (searchKeywordCategory !== '') {
-        window.location.href = 'list.php?searchCategory=' + encodeURIComponent(searchKeywordCategory);
-      } else {
-        searchInputCategoryError.textContent = '請選擇類別'
-      }
-    }
-
-    modalToggleCategory.addEventListener('show.bs.modal', function() {
-      searchInputCategoryError.textContent = '';
-    });
-
-    //搜尋-價格
-    var searchInputPriceFirst = document.getElementById('searchInputPriceFirst');
-    var searchInputPriceSecond = document.getElementById('searchInputPriceSecond');
-    var searchInputPriceError = document.getElementById('searchInputPriceError');
-    var modalTogglePrice = document.getElementById('exampleModalTogglePrice');
-
-    function validatePriceInput() {
-      searchInputPriceError.textContent = '';
-      if (searchInputPriceFirst.value.trim() === '') {
-        searchInputPriceSecond.value = '';
-        return;
-      }
-    }
-
-    function searchPrice() {
-      searchInputPriceError.textContent = '';
-      var firstPrice = searchInputPriceFirst.value.trim();
-      var secondPrice = searchInputPriceSecond.value.trim();
-      if (firstPrice === '' && secondPrice === '') {
-        searchInputPriceError.textContent = '請輸入價格';
-        return;
+      function searchProducts() {
+        let searchInput = document.getElementById('searchInput');
+        let searchKeyword = searchInput.value.trim();
+        if (searchKeyword !== '') {
+          window.location.href = 'list.php?search=' + encodeURIComponent(searchKeyword);
+        } else {
+          searchInputError.textContent = '請輸入關鍵字 (ㆆᴗㆆ)';
+        }
       }
 
-      if (firstPrice !== '' && secondPrice == '') {
-        searchInputPriceError.textContent = '請輸入第二個價格';
-        return;
+      modalToggle.addEventListener('show.bs.modal', function() {
+        searchInputError.textContent = '';
+      });
+
+      // 搜尋-類別
+      var searchInputCategoryError = document.getElementById('searchInputCategoryError');
+      var modalToggleCategory = document.getElementById('exampleModalToggleCategory');
+
+      function searchCategory() {
+        var searchSelectCategory = document.getElementById('categories_id');
+        var searchKeywordCategory = searchSelectCategory.value.trim();
+        if (searchKeywordCategory !== '') {
+          window.location.href = 'list.php?searchCategory=' + encodeURIComponent(searchKeywordCategory);
+        } else {
+          searchInputCategoryError.textContent = '請選擇類別 ε≡(ノ´＿ゝ｀）ノ'
+        }
       }
 
-      // Check if both inputs are filled
-      if (firstPrice !== '' || secondPrice !== '') {
-        if (parseInt(firstPrice) > parseInt(secondPrice)) {
-          searchInputPriceError.textContent = '要高於上一個值';
+      modalToggleCategory.addEventListener('show.bs.modal', function() {
+        searchInputCategoryError.textContent = '';
+      });
+
+      //搜尋-價格
+      var searchInputPriceFirst = document.getElementById('searchInputPriceFirst');
+      var searchInputPriceSecond = document.getElementById('searchInputPriceSecond');
+      var searchInputPriceError = document.getElementById('searchInputPriceError');
+      var modalTogglePrice = document.getElementById('exampleModalTogglePrice');
+
+      function validatePriceInput() {
+        searchInputPriceError.textContent = '';
+        if (searchInputPriceFirst.value.trim() === '') {
+          searchInputPriceSecond.value = '';
           return;
         }
       }
 
-      // Construct URL with price range
-      let url = 'list.php?';
-      if (firstPrice !== '') {
-        url += 'searchPriceFirst=' + encodeURIComponent(firstPrice) + '&';
-      }
-      if (secondPrice !== '') {
-        url += 'searchPriceSecond=' + encodeURIComponent(secondPrice);
-      }
-      url += 'search=price';
-      window.location.href = url;
-    }
+      function searchPrice() {
+        searchInputPriceError.textContent = '';
+        var firstPrice = searchInputPriceFirst.value.trim();
+        var secondPrice = searchInputPriceSecond.value.trim();
+        if (firstPrice === '' && secondPrice === '') {
+          searchInputPriceError.textContent = '請輸入價格 ლ(・´ｪ`・ლ)';
+          return;
+        }
 
-    modalTogglePrice.addEventListener('show.bs.modal', function() {
-      searchInputPriceError.textContent = '';
-    });
-    // 搜尋-價格結束
-    // 搜尋-描述
-    var modalToggleDescription = document.getElementById('exampleModalToggleDescription');
-    var searchInputDescriptionError = document.getElementById('searchInputDescriptionError');
-    
-    function searchDescription() {
-      var searchInputDescription = document.getElementById('searchInputDescription');
-      var searchKeywordDescription = searchInputDescription.value.trim();
-      if (searchKeywordDescription !== '') {
-        window.location.href = 'list.php?searchDescription=' + encodeURIComponent(searchKeywordDescription);
-      } else {
-        searchInputDescriptionError.textContent = '請輸入關鍵字'
-      }
-    }
-    modalToggleDescription.addEventListener('show.bs.modal', function() {
-      searchInputDescriptionError.textContent = '';
-    });
-    //搜尋-描述結束
+        if (firstPrice !== '' && secondPrice == '') {
+          searchInputPriceError.textContent = '請輸入第二個價格 (´◓Д◔`)';
+          return;
+        }
 
-    //刪除
-    function delete_one(product_id) {
-      if (confirm(`是否要刪除編號為 ${product_id} 的資料?`)) {
-        location.href = `delete.php?product_id=${product_id}`;
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-          var deleteSuccess = <?= $deleteSuccess ? 'true' : 'false' ?>;
-          if (deleteSuccess) {
-            var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
-            modal.show();
+        // Check if both inputs are filled
+        if (firstPrice !== '' || secondPrice !== '') {
+          if (parseInt(firstPrice) > parseInt(secondPrice)) {
+            searchInputPriceError.textContent = '第二個值要高於第一個值啦! ( ิ◕㉨◕ ิ)';
+            return;
           }
-            });
-  </script>
+        }
 
-  <?php include '../parts/html-foot.php' ?>
+        // Construct URL with price range
+        let url = 'list.php?';
+        if (firstPrice !== '') {
+          url += 'searchPriceFirst=' + encodeURIComponent(firstPrice) + '&';
+        }
+        if (secondPrice !== '') {
+          url += 'searchPriceSecond=' + encodeURIComponent(secondPrice);
+        }
+        url += 'search=price';
+        window.location.href = url;
+      }
+
+      modalTogglePrice.addEventListener('show.bs.modal', function() {
+        searchInputPriceError.textContent = '';
+      });
+      // 搜尋-價格結束
+      // 搜尋-描述
+      var modalToggleDescription = document.getElementById('exampleModalToggleDescription');
+      var searchInputDescriptionError = document.getElementById('searchInputDescriptionError');
+
+      function searchDescription() {
+        var searchInputDescription = document.getElementById('searchInputDescription');
+        var searchKeywordDescription = searchInputDescription.value.trim();
+        if (searchKeywordDescription !== '') {
+          window.location.href = 'list.php?searchDescription=' + encodeURIComponent(searchKeywordDescription);
+        } else {
+          searchInputDescriptionError.textContent = '請輸入關鍵字 ( σ՞ਊ ՞)σ'
+        }
+      }
+      modalToggleDescription.addEventListener('show.bs.modal', function() {
+        searchInputDescriptionError.textContent = '';
+      });
+      //搜尋-描述結束
+
+      //刪除
+      function delete_one(product_id) {
+        if (confirm(`是否要刪除編號為 ${product_id} 的資料?`)) {
+          location.href = `delete.php?product_id=${product_id}`;
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var deleteSuccess = <?= $deleteSuccess ? 'true' : 'false' ?>;
+        if (deleteSuccess) {
+          var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+          modal.show();
+        }
+      });
+    </script>
+
+    <?php include '../parts/html-foot.php' ?>
