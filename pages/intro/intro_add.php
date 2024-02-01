@@ -173,7 +173,7 @@ $title = '新增';
 
 
             // 檢查花語欄位
-            if (flower_intro.value.length < 2) {
+            if (flower_lang.value.length < 2) {
                 isPass = false;
                 flower_lang.style.border = '1px solid red';
                 flower_lang.nextElementSibling.innerHTML = "請填寫正確的花語（需至少兩個中文字元）";
