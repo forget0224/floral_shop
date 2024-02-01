@@ -6,6 +6,11 @@ $title = '新增';
 ?>
 <?php include '../parts/html-head.php' ?>
 
+<style>
+    form .mb-3 .form-text {
+        color: red;
+    }
+</style>
 
 
 <body id="page-top">
