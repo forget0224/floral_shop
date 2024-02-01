@@ -118,15 +118,15 @@ if ($totalRows > 0) {
                                     <thead>
                                         <tr>
                                             <th><i class="fa-solid fa-trash"></i></th>
-                                            <th class="text-nowrap text-center">#</th>
-                                            <th class="text-nowrap text-center">課程名稱</th>
-                                            <th class="text-nowrap text-center">課程介紹</th>
-                                            <th class="text-nowrap text-center">課程分類</th>
-                                            <th class="text-nowrap text-center">商家名稱</th>
-                                            <th class="text-nowrap text-center">上課地點</th>
-                                            <th class="text-nowrap text-center">課程定價</th>
-                                            <th class="text-nowrap text-center">最小人數</th>
-                                            <th class="text-nowrap text-center">最大人數</th>
+                                            <th class="text-nowrap">#</th>
+                                            <th class="text-nowrap">課程名稱</th>
+                                            <th class="text-nowrap">課程介紹</th>
+                                            <th class="text-nowrap">課程分類</th>
+                                            <th class="text-nowrap">商家名稱</th>
+                                            <th class="text-nowrap">上課地點</th>
+                                            <th class="text-nowrap">課程定價</th>
+                                            <th class="text-nowrap">最小人數</th>
+                                            <th class="text-nowrap">最大人數</th>
                                             <th><i class="fa-solid fa-file-pen"></i></th>
                                         </tr>
                                     </thead>

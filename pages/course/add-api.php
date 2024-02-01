@@ -9,7 +9,7 @@ $output = [
   "errors" => [],
 ];
 
-$sql = "INSERT INTO `course`(`name`, `category_id`, `intro`, `store_name`, `location`, `price`, `min_capacity`, `max_capacity`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO `course`(`name`, `category_id`, `intro`, `store_id`, `location`, `price`, `min_capacity`, `max_capacity`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $pdo->prepare($sql);
 
@@ -21,7 +21,7 @@ try {
     $_POST['name'],
     $_POST['category_id'],
     $_POST['intro'],
-    $_POST['store_name'],
+    $_POST['store_id'],
     $_POST['location'],
     $_POST['price'],
     $_POST['min_capacity'],
