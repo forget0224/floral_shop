@@ -111,9 +111,9 @@ if ($totalRows > 0) {
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">商品列表</h1>
+          <h1 class="h3 mb-2 text-gray-800">商品列表 <i class="fa-solid fa-cart-arrow-down"></i></h1>
           <p class="mb-4">
-            商品列表 <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.
+            生活中，若商品列表出現了，我們就不得不考慮它出現了的事實。當前最急迫的事，想必就是釐清疑惑了。
           </p>
 
           <!-- DataTales Example -->
@@ -164,12 +164,12 @@ if ($totalRows > 0) {
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalToggleLabel">搜尋商品</h5>
+                          <h5 class="modal-title" id="exampleModalToggleLabel">搜尋商品 <i class="fa-solid fa-gifts"></i></h5>
                           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <form class="form-inline my-2 my-lg-0" id="searchForm" action="">
-                            <input class="form-control mr-sm-2" type="search" placeholder="請輸入商品關鍵字" aria-label="Search" id="searchInput" value="">
+                            <input class="form-control mr-sm-2" type="search" placeholder="請輸入關鍵字" aria-label="Search" id="searchInput" value="">
                             <p class="form-text text-danger" id="searchInputError"></p>
                           </form>
                         </div>
@@ -196,13 +196,13 @@ if ($totalRows > 0) {
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalToggleLabelCategory">搜尋類別</h5>
+                          <h5 class="modal-title" id="exampleModalToggleLabelCategory">搜尋類別 <i class="fa-solid fa-table-list"></i></h5>
                           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <form class="form-inline my-2 my-lg-0" id="searchForm" action="">
                             <select class="form-control" id="categories_id" name="categories_id">
-                              <option value="" disabled selected>--請選擇類別--</option>
+                              <option value="" disabled selected>-- 請選擇類別 --</option>
                               <?php
                               // Fetch categories from the database
                               $categoriesSql = "SELECT * FROM categories";
@@ -242,7 +242,7 @@ if ($totalRows > 0) {
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalToggleLabelPrice">搜尋價格</h5>
+                          <h5 class="modal-title" id="exampleModalToggleLabelPrice">搜尋價格 <i class="fa-solid fa-sack-dollar"></i></h5>
                           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -277,12 +277,12 @@ if ($totalRows > 0) {
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalToggleLabelDescription">搜尋描述</h5>
+                          <h5 class="modal-title" id="exampleModalToggleLabelDescription">搜尋描述 <i class="fa-solid fa-comment-dots"></i></h5>
                           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <form class="form-inline my-2 my-lg-0" id="searchFormDescription" action="">
-                            <input class="form-control mr-sm-2" type="search" placeholder="請輸入描述關鍵字" aria-label="SearchDescription" id="searchInputDescription" value="">
+                            <input class="form-control mr-sm-2" type="search" placeholder="請輸入關鍵字" aria-label="SearchDescription" id="searchInputDescription" value="">
                             <p class="form-text text-danger" id="searchInputDescriptionError"></p>
                           </form>
                         </div>
@@ -317,12 +317,12 @@ if ($totalRows > 0) {
                         </a>
                       </th>
                       <th style="width: 100px;">商品名稱</th>
-                      <th style="width: 130px;">種類列表</th>
-                      <th style="width: 80px;">價格</th>
-                      <th style="width: 130px;">尺寸</th>
+                      <th style="width: 100px;">種類列表</th>
+                      <th style="width: 60px;">價格</th>
+                      <th style="width: 120px;">尺寸</th>
                       <th style="width: 120px;">創建時間</th>
                       <th style="width: 120px;">更新時間</th>
-                      <th style="width: 150px;">描述</th>
+                      <th style="width: 200px;">描述</th>
                       <th style="width: 20px;"><i class="fa-solid fa-file-pen"></i></th>
                     </tr>
                   </thead>
@@ -336,12 +336,12 @@ if ($totalRows > 0) {
                         </td>
                         <td style="width: 20px;"><?= $r['product_id'] ?></td>
                         <td style="width: 100px;"><?= $r['name'] ?></td>
-                        <td style="width: 130px;"><?= $r['category_name'] ?></td>
-                        <td style="width: 80px;"><?= $r['price'] ?></td>
-                        <td style="width: 130px;"><?= $r['size'] ?></td>
+                        <td style="width: 100px;"><?= $r['category_name'] ?></td>
+                        <td style="width: 60px;"><?= $r['price'] ?></td>
+                        <td style="width: 120px;"><?= $r['size'] ?></td>
                         <td style="width: 120px;"><?= $r['created_at'] ?></td>
                         <td style="width: 120px;"><?= $r['updated_at'] ?></td>
-                        <td style="width: 150px;"><?= $r['description'] ?></td>
+                        <td style="width: 200px;"><?= $r['description'] ?></td>
                         <td style="width: 20px;"><a href=" edit.php?product_id=<?= $r['product_id'] ?>">
                             <i class="fa-solid fa-file-pen"></i>
                           </a>
@@ -489,7 +489,7 @@ if ($totalRows > 0) {
     // 搜尋-描述
     var modalToggleDescription = document.getElementById('exampleModalToggleDescription');
     var searchInputDescriptionError = document.getElementById('searchInputDescriptionError');
-
+    
     function searchDescription() {
       var searchInputDescription = document.getElementById('searchInputDescription');
       var searchKeywordDescription = searchInputDescription.value.trim();
@@ -512,12 +512,12 @@ if ($totalRows > 0) {
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-      var deleteSuccess = <?= $deleteSuccess ? 'true' : 'false' ?>;
-      if (deleteSuccess) {
-        var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
-        modal.show();
-      }
-    });
+          var deleteSuccess = <?= $deleteSuccess ? 'true' : 'false' ?>;
+          if (deleteSuccess) {
+            var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            modal.show();
+          }
+            });
   </script>
 
   <?php include '../parts/html-foot.php' ?>

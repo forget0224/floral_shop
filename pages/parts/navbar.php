@@ -41,8 +41,7 @@ if (empty($pageName)) {
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="true"
-            aria-controls="collapsePages1">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="true" aria-controls="collapsePages1">
             <i class="fas fa-fw fa-folder"></i>
             <span>代客送花</span>
         </a>
@@ -61,15 +60,14 @@ if (empty($pageName)) {
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true"
-            aria-controls="collapsePages2">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages2">
             <i class="fas fa-fw fa-folder"></i>
             <span>線上商城</span>
         </a>
         <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">商城</h6>
-                <a class="collapse-item" href="/floral_shop/pages/product/list.php">商品資料</a>
+                <h6 class="collapse-header">商城管理 <i class="fa-solid fa-cart-arrow-down"></i></h6>
+                <a class="collapse-item" href="/floral_shop/pages/product/list.php">商品列表</a>
                 <a class="collapse-item" href="/floral_shop/pages/product/add.php">新增商品</a>
                 <div class="collapse-divider"></div>
                 <!-- <h6 class="collapse-header">小標題/分類</h6> -->
@@ -77,8 +75,7 @@ if (empty($pageName)) {
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3" aria-expanded="true"
-            aria-controls="collapsePages3">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3" aria-expanded="true" aria-controls="collapsePages3">
             <i class="fas fa-fw fa-folder"></i>
             <span>課程</span>
         </a>
@@ -91,8 +88,7 @@ if (empty($pageName)) {
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages4" aria-expanded="true"
-            aria-controls="collapsePages4">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages4" aria-expanded="true" aria-controls="collapsePages4">
             <i class="fas fa-fw fa-folder"></i>
             <span>花與遊戲</span>
         </a>
@@ -108,8 +104,7 @@ if (empty($pageName)) {
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages5" aria-expanded="true"
-            aria-controls="collapsePages5">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages5" aria-expanded="true" aria-controls="collapsePages5">
             <i class="fas fa-fw fa-folder"></i>
             <span>會員專區</span>
         </a>
@@ -127,8 +122,7 @@ if (empty($pageName)) {
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages6" aria-expanded="true"
-            aria-controls="collapsePages6">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages6" aria-expanded="true" aria-controls="collapsePages6">
             <i class="fas fa-fw fa-folder"></i>
             <span>店家專區</span>
         </a>
