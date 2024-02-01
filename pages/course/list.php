@@ -31,9 +31,10 @@ if ($totalRows > 0) {
   }
 
   $sql = sprintf("
-    SELECT course.*, store.store_name, store.store_address
+    SELECT course.*, store.store_name, store.store_address, course_category.category_name
     FROM course
     INNER JOIN store ON course.store_id = store.store_id
+    INNER JOIN course_category ON course.category_id = course_category.category_id
     ORDER BY course.course_id DESC
     LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
   $stmt = $pdo->query($sql);
@@ -141,12 +142,12 @@ if ($totalRows > 0) {
                                         <td><?= $r['course_id'] ?></td>
                                         <td><?= $r['name'] ?></td>
                                         <td class="text-justify"><?= $r['intro'] ?></td>
-                                        <td class="text-center"><?= $r['category_id'] ?></td>
-                                        <td class="text-center"><?= $r['store_name'] ?></td>
-                                        <td class="text-justify"><?= $r['location'] ?></td>
-                                        <td class="text-center"><?= htmlentities($r['price']) ?></td>
-                                        <td class="text-center"><?= $r['min_capacity'] ?></td>
-                                        <td class="text-center"><?= $r['max_capacity'] ?></td>
+                                        <td class="text-nowrap"><?= $r['category_name'] ?></td>
+                                        <td class="text-left"><?= $r['store_name'] ?></td>
+                                        <td class="text-left"><?= $r['location'] ?></td>
+                                        <td class="text-left"><?= htmlentities($r['price']) ?></td>
+                                        <td class="text-left"><?= $r['min_capacity'] ?></td>
+                                        <td class="text-left"><?= $r['max_capacity'] ?></td>
 
                                         <td><a href="edit.php?course_id=<?= $r['course_id'] ?>">
                                             <i class="fa-solid fa-file-pen"></i>
