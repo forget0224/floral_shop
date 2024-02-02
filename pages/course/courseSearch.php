@@ -29,7 +29,7 @@ if(isset($_POST['input'])){
     if(count($result) > 0){ ?>
         <div class="courseTable">
             <div class="table-responsive">
-                <table class="table table-bordered" id="courseTable" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" id="courseTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th><i class="fa-solid fa-trash"></i></th>
@@ -45,7 +45,6 @@ if(isset($_POST['input'])){
                             <th><i class="fa-solid fa-file-pen"></i></th>
                         </tr>
                     </thead>
-                    <!-- TODO:搜尋結果? -->
                     <tbody>
                     <?php foreach($result as $r): ?>
                         <?php
