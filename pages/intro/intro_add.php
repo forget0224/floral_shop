@@ -126,7 +126,7 @@ $title = '新增';
                     <img src="https://media2.giphy.com/media/QA7nawRHAQV8EzGWTZ/giphy.gif" class="img-fluid" alt="...">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="continueAddingBtn">繼續新增</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="location.href='/floral_shop/pages/intro/intro_add.php'">繼續新增</button>
                     <a type="button" class="btn btn-primary" href="/floral_shop/pages/intro/intro_flower.php">到列表頁</a>
                 </div>
             </div>

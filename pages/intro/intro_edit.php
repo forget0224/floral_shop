@@ -156,7 +156,7 @@ if (empty($row)) {
                 </div>
                 <div class="modal-footer">
                     <!-- 按鈕選項：繼續編輯或返回列表頁 -->
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="location.href='intro_edit.php?flower_id=<?= $flower_id ?>'"">繼續編輯</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="location.href='intro_edit.php?flower_id=<?= $flower_id ?>'">繼續編輯</button>
                     <a type="button" class="btn btn-primary" href="/floral_shop/pages/intro/intro_flower.php">到列表頁</a>
                 </div>
             </div>

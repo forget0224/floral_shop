@@ -3,6 +3,15 @@ $pageName = 'list';
 $title = '花圖鑑';
 // 你該頁面前面的那些東東
 
+// 取得當前頁面的資料，並加入隨機排序（好手氣-1/3）
+// 隨機排序資料
+$randomSql = "SELECT * FROM intro_flower ORDER BY RAND() LIMIT 1";
+$randomStmt = $pdo->query($randomSql);
+$randomData = $randomStmt->fetch();
+
+// 取得當前頁面的資料，並加入隨機排序（好手氣-1/3） end
+
+
 // 每頁顯示的筆數
 $perPage = 20;
 
@@ -43,6 +52,7 @@ $deleteSuccess = isset($_SESSION['deleteSuccess']) && $_SESSION['deleteSuccess']
 unset($_SESSION['deleteSuccess']);
 
 ?>
+
 <?php include '../parts/html-head.php' ?>
 
 
@@ -70,8 +80,10 @@ unset($_SESSION['deleteSuccess']);
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">𓇚《花圖鑑》Guide des Fleurs</h1>
+          <h1 class="h3 mb-2 text-gray-800 d-inline-flex" onclick="showRandomDataModal()">𓇚《花圖鑑》Guide des Fleurs</h1>
+          <!-- <img class="d-inline-flex figure-img w-25 rounded" src="https://media2.giphy.com/media/iehQ1h40viFAumBqD2/giphy.gif" class="img-fluid" alt="..."> -->
           <p class="mb-4">"我可以為自己獻上花束，比你愛我還更愛我自己。"--麥莉．希拉。</p>
+
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -219,7 +231,52 @@ unset($_SESSION['deleteSuccess']);
     </div>
   </div>
 
+  <div class="modal fade <?= $deleteSuccess ? 'show' : '' ?>" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal 對話框的樣式 -->
+    <div class="modal-dialog">
+      <!-- Modal 內容容器 -->
+      <div class="modal-content">
+        <!-- Modal 標頭 -->
+        <div class="modal-header">
+          <!-- Modal 標題 -->
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Le Livre des Réponses</h1>
+          <!-- 關閉 Modal 的按鈕 -->
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- Modal 主要內容區域 -->
+        <div class="modal-body">
+          <!-- 顯示刪除成功的訊息 -->
+          <div class="alert alert-warning text-center" role="alert">
+
+            <h4><?= $randomData['flower_name'] ?></h4>
+            <h5><?= $randomData['flower_engname'] ?></h5>
+            <h4><?= $randomData['flower_lang'] ?></h4>
+            <p><?= $randomData['flower_intro'] ?></p>
+          </div>
+        </div>
+        <!-- Modal 底部區域 -->
+        <img src="https://media2.giphy.com/media/iehQ1h40viFAumBqD2/giphy.gif" class="img-fluid" alt="...">
+        <div class="modal-footer">
+          <!-- 關閉 Modal 並繼續瀏覽的按鈕 -->
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">回頁面</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <script>
+    // 取得當前頁面的資料，並加入隨機排序（好手氣-3/3)
+    // 顯示隨機資料的 JavaScript 函數
+
+    function showRandomDataModal() {
+      // 取得 modal 元素
+      var modal = new bootstrap.Modal(document.getElementById('exampleModal2'));
+      // 顯示 modal
+      modal.show();
+    }
+    // 取得當前頁面的資料，並加入隨機排序（好手氣-3/3)end
+
     // 刪除資料的 JavaScript 函數
     function delete_one(flower_id) {
       if (confirm(`是否要刪除編號為 ${flower_id} 的資料?`)) {
