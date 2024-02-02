@@ -205,9 +205,10 @@ unset($_SESSION['deleteSuccess']);
         <!-- Modal 主要內容區域 -->
         <div class="modal-body">
           <!-- 顯示刪除成功的訊息 -->
-          <div class="alert alert-success" role="alert">
-            花朵已成功刪除
+          <div class="alert alert-success text-center" role="alert">
+            已成功刪除花朵資料
           </div>
+          <img src="https://media2.giphy.com/media/QA7nawRHAQV8EzGWTZ/giphy.gif" class="img-fluid" alt="...">
         </div>
         <!-- Modal 底部區域 -->
         <div class="modal-footer">

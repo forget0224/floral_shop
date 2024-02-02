@@ -128,7 +128,7 @@ if (empty($row)) {
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-danger text-center" role="alert" id="errorAlert" >
-                沒有更改
+                沒有調整任何資料
                     </div>
                     <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZm1qZnB5Z3B5OHRteWcydXJoOHpzZ2F1MjRxNXBwdDlqbDZoZnZieiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/VhKhvVypYbBJhuU4DR/giphy.gif" class="img-fluid" alt="...">
                 </div>

@@ -121,7 +121,7 @@ $title = '新增';
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-success text-center" role="alert">
-                        新增成功
+                    已成功新增資料
                     </div>
                     <img src="https://media2.giphy.com/media/QA7nawRHAQV8EzGWTZ/giphy.gif" class="img-fluid" alt="...">
                 </div>
