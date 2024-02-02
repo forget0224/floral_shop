@@ -20,11 +20,9 @@ if (empty($row)) {
 <?php include '../parts/html-head.php' ?>
 
 <style>
-
     form .mb-3 .form-text {
         color: red;
     }
-    
 </style>
 
 <body id="page-top">
@@ -119,115 +117,270 @@ if (empty($row)) {
 
     <?php include '../parts/scripts.php' ?>
     <!-- 模態框 -->
+
+    <!-- 編輯結果的錯誤提示彈窗 -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">編輯結果</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="location.href='intro_edit.php?flower_id=<?= $flower_id ?>'"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger text-center" role="alert" id="errorAlert" >
+                沒有更改
+                    </div>
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZm1qZnB5Z3B5OHRteWcydXJoOHpzZ2F1MjRxNXBwdDlqbDZoZnZieiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/VhKhvVypYbBJhuU4DR/giphy.gif" class="img-fluid" alt="...">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="location.href='intro_edit.php?flower_id=<?= $flower_id ?>'">繼續編輯</button>
+                    <a type="button" class="btn btn-primary" href="intro_flower.php">到列表頁</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 編輯結果的錯誤提示彈窗end -->
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">編輯結果</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="location.href='intro_edit.php?flower_id=<?= $flower_id ?>'"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-success text-center" role="alert">
                         編輯成功
                     </div>
+                    <img src="https://media2.giphy.com/media/QA7nawRHAQV8EzGWTZ/giphy.gif" class="img-fluid" alt="...">
                 </div>
                 <div class="modal-footer">
                     <!-- 按鈕選項：繼續編輯或返回列表頁 -->
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="continueAddingBtn">繼續編輯</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="location.href='intro_edit.php?flower_id=<?= $flower_id ?>'"">繼續編輯</button>
                     <a type="button" class="btn btn-primary" href="/floral_shop/pages/intro/intro_flower.php">到列表頁</a>
                 </div>
             </div>
         </div>
     </div>
+
+
     <script>
-        const {
-            flower_name: flower_name,
-            flower_engname: flower_engname,
-            flower_lang: flower_lang,
-            flower_intro: flower_intro
-        } = document.form1;
+        //以下是無變更時的modal script
+        let originalData = {};
 
-        // function validateEmail(email) {
-        //   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        //   return re.test(email);
-        // }
+        const hasFormChanged = () => {
+            // 比較每個字段是否與原始數據相同
+            for (const field in originalData) {
+                if (field === 'flower_name' && document.form1[field].value != originalData[field]) {
+                    return true; // 表單已更改
+                } else if (field !== 'flower_name' && document.form1[field].value !== originalData[field]) {
+                    return true; // 表單已更改
+                }
+            }
+            return false; // 表單無變更
+        };
 
-        // function validateMobile(mobile) {
-        //   var re = /^09\d{2}-?\d{3}-?\d{3}$/;
-        //   return re.test(mobile);
-        // }
-
+        function check() {
+            originalData = {
+                flower_name: '<?= $row['flower_name'] ?>',
+                flower_engname: '<?= $row['flower_engname'] ?>',
+                flower_lang: '<?= $row['flower_lang'] ?>',
+                flower_intro: '<?= $row['flower_intro'] ?>',
+            };
+        }
+        check();
+        console.log(originalData.categories_id)
 
         const sendForm = e => {
+
             e.preventDefault();
-            flower_name.style.border = '1px solid #CCC';
-            flower_name.nextElementSibling.innerHTML = "";
-            flower_engname.style.border = '1px solid #CCC';
-            flower_engname.nextElementSibling.innerHTML = "";
-            flower_lang.style.border = '1px solid #CCC';
-            flower_lang.nextElementSibling.innerHTML = "";
-            flower_intro.style.border = '1px solid #CCC';
-            flower_intro.nextElementSibling.innerHTML = "";
+                flower_name.style.border = '1px solid #CCC';
+                flower_name.nextElementSibling.innerHTML = "";
+                flower_engname.style.border = '1px solid #CCC';
+                flower_engname.nextElementSibling.innerHTML = "";
+                flower_lang.style.border = '1px solid #CCC';
+                flower_lang.nextElementSibling.innerHTML = "";
+                flower_intro.style.border = '1px solid #CCC';
+                flower_intro.nextElementSibling.innerHTML = "";
 
 
-            // TODO: 資料送出之前, 要做檢查 (有沒有填寫, 格式對不對)
-            let isPass = true; // 表單有沒有通過檢查
+                // TODO: 資料送出之前, 要做檢查 (有沒有填寫, 格式對不對)
+                let isPass = true; // 表單有沒有通過檢查
 
-            // 檢查中文花名欄位
-            if (!/^[\u4E00-\u9FA5]{2,}$/.test(flower_name.value)) {
-                isPass = false;
-                flower_name.style.border = '1px solid red';
-                flower_name.nextElementSibling.innerHTML = "請填寫正確的中文花名（需至少兩個中文字元且不能包含特殊符號或數字）";
+                // 檢查中文花名欄位
+                if (!/^[\u4E00-\u9FA5]{2,}$/.test(flower_name.value)) {
+                    isPass = false;
+                    flower_name.style.border = '1px solid red';
+                    flower_name.nextElementSibling.innerHTML = "請填寫正確的中文花名（需至少兩個中文字元且不能包含特殊符號或數字）";
+                }
+
+
+
+                // 檢查英文花名欄位
+                if (!/^[a-zA-Z ]{2,}$/.test(flower_engname.value) || /\d/.test(flower_engname.value)) {
+                    isPass = false;
+                    flower_engname.style.border = '1px solid red';
+                    flower_engname.nextElementSibling.innerHTML = "請填寫正確的英文花名（需至少兩個英文字元且不能包含特殊符號或數字）";
+                }
+
+
+
+                // 檢查花語欄位
+                if (flower_lang.value.length < 2) {
+                    isPass = false;
+                    flower_lang.style.border = '1px solid red';
+                    flower_lang.nextElementSibling.innerHTML = "請填寫正確的花語（需至少兩個中文字元）";
+                }
+
+
+
+                // 檢查花朵簡介欄位
+                if (flower_intro.value.length < 2) {
+                    isPass = false;
+                    flower_intro.style.border = '1px solid red';
+                    flower_intro.nextElementSibling.innerHTML = "請填寫正確的花朵簡介（需至少兩個中文字元）";
+                }
+
+                if (isPass) {
+                    // "沒有外觀" 的表單
+                    const fd = new FormData(document.form1);
+
+                    // 
+                    fetch('intro_edit-api.php', {
+                            method: 'POST',
+                            body: fd, // content-type: multipart/form-data
+                        }).then(r => r.json())
+                        .then(result => {
+                            console.log({
+                                result
+                            });
+                            if (result.success) {
+                                myModal.show();
+                            }
+                        })
+                        .catch(ex => console.log(ex))
+                }
+            e.preventDefault();
+
+            const errorAlert = document.getElementById('errorModal') ? new bootstrap.Modal(document.getElementById('errorModal')) : null;
+            const successAlert = document.getElementById('successModal') ? new bootstrap.Modal(document.getElementById('successModal')) : null;
+
+            if (!hasFormChanged()) {
+                errorAlert.show();
+            } else {
+                successAlert.show();
             }
 
 
-
-            // 檢查英文花名欄位
-            if (!/^[a-zA-Z ]{2,}$/.test(flower_engname.value) || /\d/.test(flower_engname.value)) {
-                isPass = false;
-                flower_engname.style.border = '1px solid red';
-                flower_engname.nextElementSibling.innerHTML = "請填寫正確的英文花名（需至少兩個英文字元且不能包含特殊符號或數字）";
-            }
-
-
-
-            // 檢查花語欄位
-            if (flower_lang.value.length < 2) {
-                isPass = false;
-                flower_lang.style.border = '1px solid red';
-                flower_lang.nextElementSibling.innerHTML = "請填寫正確的花語（需至少兩個中文字元）";
-            }
-
-
-
-            // 檢查花朵簡介欄位
-            if (flower_intro.value.length < 2) {
-                isPass = false;
-                flower_intro.style.border = '1px solid red';
-                flower_intro.nextElementSibling.innerHTML = "請填寫正確的花朵簡介（需至少兩個中文字元）";
-            }
-
-            if (isPass) {
-                // "沒有外觀" 的表單
-                const fd = new FormData(document.form1);
-
-                fetch('intro_edit-api.php', {
-                        method: 'POST',
-                        body: fd, // content-type: multipart/form-data
-                    }).then(r => r.json())
-                    .then(result => {
-                        console.log({
-                            result
-                        });
-                        if (result.success) {
-                            myModal.show();
+            // 
+            const fd = new FormData(document.form1);
+            fetch('intro_edit-api.php', {
+                    method: 'POST',
+                    body: fd,
+                })
+                .then(r => r.json())
+                .then(result => {
+                    console.log({
+                        result
+                    });
+                    if (result.success) {
+                        if (hasFormChanged()) {
+                            successAlert.show();
+                        } else {
+                            errorAlert.show();
                         }
-                    })
-                    .catch(ex => console.log(ex))
+                    }
+                })
+                .catch(ex => console.log(ex));
+        };
+
+
+        if (!hasFormChanged()) {
+            if (errorAlert instanceof bootstrap.Modal) {
+                errorAlert.show();
+            } else {
+                console.error('errorAlert 不是有效的 bootstrap 模態對象。', errorAlert);
             }
-
-
         }
+
+        /*//以下是原本的
+            const {
+                flower_name: flower_name,
+                flower_engname: flower_engname,
+                flower_lang: flower_lang,
+                flower_intro: flower_intro
+            } = document.form1;
+
+
+            const sendForm = e => {
+                e.preventDefault();
+                flower_name.style.border = '1px solid #CCC';
+                flower_name.nextElementSibling.innerHTML = "";
+                flower_engname.style.border = '1px solid #CCC';
+                flower_engname.nextElementSibling.innerHTML = "";
+                flower_lang.style.border = '1px solid #CCC';
+                flower_lang.nextElementSibling.innerHTML = "";
+                flower_intro.style.border = '1px solid #CCC';
+                flower_intro.nextElementSibling.innerHTML = "";
+
+
+                // TODO: 資料送出之前, 要做檢查 (有沒有填寫, 格式對不對)
+                let isPass = true; // 表單有沒有通過檢查
+
+                // 檢查中文花名欄位
+                if (!/^[\u4E00-\u9FA5]{2,}$/.test(flower_name.value)) {
+                    isPass = false;
+                    flower_name.style.border = '1px solid red';
+                    flower_name.nextElementSibling.innerHTML = "請填寫正確的中文花名（需至少兩個中文字元且不能包含特殊符號或數字）";
+                }
+
+
+
+                // 檢查英文花名欄位
+                if (!/^[a-zA-Z ]{2,}$/.test(flower_engname.value) || /\d/.test(flower_engname.value)) {
+                    isPass = false;
+                    flower_engname.style.border = '1px solid red';
+                    flower_engname.nextElementSibling.innerHTML = "請填寫正確的英文花名（需至少兩個英文字元且不能包含特殊符號或數字）";
+                }
+
+
+
+                // 檢查花語欄位
+                if (flower_lang.value.length < 2) {
+                    isPass = false;
+                    flower_lang.style.border = '1px solid red';
+                    flower_lang.nextElementSibling.innerHTML = "請填寫正確的花語（需至少兩個中文字元）";
+                }
+
+
+
+                // 檢查花朵簡介欄位
+                if (flower_intro.value.length < 2) {
+                    isPass = false;
+                    flower_intro.style.border = '1px solid red';
+                    flower_intro.nextElementSibling.innerHTML = "請填寫正確的花朵簡介（需至少兩個中文字元）";
+                }
+
+                if (isPass) {
+                    // "沒有外觀" 的表單
+                    const fd = new FormData(document.form1);
+
+                    // 
+                    fetch('intro_edit-api.php', {
+                            method: 'POST',
+                            body: fd, // content-type: multipart/form-data
+                        }).then(r => r.json())
+                        .then(result => {
+                            console.log({
+                                result
+                            });
+                            if (result.success) {
+                                myModal.show();
+                            }
+                        })
+                        .catch(ex => console.log(ex))
+                }
+            }*/
 
         const myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
 
