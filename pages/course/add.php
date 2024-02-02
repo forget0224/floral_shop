@@ -61,15 +61,17 @@ $title = '新增課程';
                                     </select>
                                     <div class="form-text"></div>
                                     </div>
+                                    <!-- TODO:代入商家名稱 -->
                                     <div class="mb-3">
                                     <label for="store_id" class="form-label">商家名稱</label>
-                                    <input type="text" class="form-control" id="store_id" name="store_id" placeholder="請選擇商家id"></input>
+                                    <input type="text" class="form-control" id="store_id" name="store_id" placeholder="請選擇商家id" value="1" readonly></input>
                                     <div class="form-text"></div>
                                     </div>
+                                    <!-- TODO:代入上課地點 -->
                                     <div class="mb-3">
                                     <label for="location" class="form-label">上課地點</label>
-                                    <input type="checkbox" id="useStoreAddress" onclick="useStoreAddress()">帶入商家預設地址
-                                    <input type="text" class="form-control" id="location" name="location" placeholder="帶入商家預設地址">
+                                    <!-- <input type="checkbox" id="useStoreAddress" onclick="useStoreAddress()">帶入商家預設地址 -->
+                                    <input type="text" class="form-control" id="location" name="location" placeholder="帶入商家預設地址" value="桃園市中壢區中華路二段150號" readonly>
                                     <div class="form-text"></div>
                                     </div>
                                     <div class="mb-3">
