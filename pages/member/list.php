@@ -1,6 +1,11 @@
 <?php
 require '../parts/db_connect.php';
 
+
+// 刪除
+$deleteSuccess = isset($_SESSION['deleteSuccess']) && $_SESSION['deleteSuccess'] === true;
+unset($_SESSION['deleteSuccess']);
+
 $pageName = 'list';
 $title = '列表';
 
@@ -86,6 +91,7 @@ $rows = $stmt->fetchAll();
         font-size: 20px;
     }
 </style>
+
 <div class="container">
     <div class="row table h3">
         <div class="col pagination-container">
@@ -193,6 +199,29 @@ $rows = $stmt->fetchAll();
         </div>
     </div>
 
+    <div class="modal fade <?= $deleteSuccess ? 'show' : '' ?>" id="deleteSuccessModal" tabindex="-1" aria-labelledby="deleteSuccessModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteSuccessModalLabel">刪除成功</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-lg">
+                    <div class="alert alert-success" role="alert">
+                    會員資料已成功刪除
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" href="list.php" data-dismiss="modal">關閉</button> -->
+                    <a type="button" class="btn btn-primary" href="list.php">關閉</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 <?php include __DIR__ . '/parts/scripts.php'  ?>
 <script>
@@ -203,9 +232,17 @@ $rows = $stmt->fetchAll();
     totalCountElement.textContent = <?= $totalRows ?>;
 
     function delete_one(member_id) {
-        if (confirm(`是否要刪除編號為 ${member_id} 的會員資料?`)) {
+        if (confirm(`是否要刪除編號為 ${member_id} 的資料?`)) {
             location.href = `delete.php?member_id=${member_id}`;
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var deleteSuccess = <?= $deleteSuccess ? 'true' : 'false' ?>;
+        if (deleteSuccess) {
+            var modal = new bootstrap.Modal(document.getElementById('deleteSuccessModal'));
+            modal.show();
+        }
+    });
 </script>
 <?php include __DIR__ . '/parts/html-foot.php'  ?>

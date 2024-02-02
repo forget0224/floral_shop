@@ -241,8 +241,8 @@ if (empty($row)) {
 
         // 密碼
         function validatePassword(store_password) {
-            // 長度在8到16位之間，包含英文、數字，至少1位特殊字元
-            var re = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+            // 長度在8到16位之間，包含英文和數字
+            var re = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,16}$/;
             return re.test(store_password);
         }
 
@@ -313,7 +313,7 @@ if (empty($row)) {
             } else if (!validatePassword(store_password_f.value)) {
                 isPass = false;
                 store_password_f.style.border = '1px solid red';
-                store_password_f.nextElementSibling.innerHTML = "密碼要求長度在8到16位之間，並包含英文、數字，至少1位特殊字元";
+                store_password_f.nextElementSibling.innerHTML = "請填寫8~16位數，包含英文及數字的密碼";
             }
 
             // 信箱驗證

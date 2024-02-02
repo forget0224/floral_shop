@@ -135,7 +135,10 @@ if ($totalRows > 0) {
                                             <th class="text-nowrap">課程分類</th>
                                             <th class="text-nowrap">商家名稱</th>
                                             <th class="text-nowrap">上課地點</th>
-                                            <th class="text-nowrap">課程定價</th>
+                                            <th class="text-nowrap">
+                                                課程定價
+                                                <a href="#" id="priceFilter"><i class="fa-solid fa-arrow-up-wide-short"></i></a>
+                                            </th>
                                             <th class="text-nowrap">最小人數</th>
                                             <th class="text-nowrap">最大人數</th>
                                             <th><i class="fa-solid fa-file-pen"></i></th>
@@ -159,7 +162,6 @@ if ($totalRows > 0) {
                                         <td class="text-left"><?= htmlentities($r['price']) ?></td>
                                         <td class="text-left"><?= $r['min_capacity'] ?></td>
                                         <td class="text-left"><?= $r['max_capacity'] ?></td>
-
                                         <td><a href="edit.php?course_id=<?= $r['course_id'] ?>">
                                             <i class="fa-solid fa-file-pen"></i>
                                             </a></td>
@@ -202,7 +204,7 @@ if ($totalRows > 0) {
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">刪除結果</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" id="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-success" role="alert">刪除成功</div>
@@ -242,6 +244,9 @@ if ($totalRows > 0) {
         });
         }
     }
+    document.getElementById('btn-close').addEventListener('click', () => {
+        window.location.href = 'list.php';
+    });
     </script>
     
     <!-- 搜尋框 -->
@@ -300,6 +305,54 @@ if ($totalRows > 0) {
             })
             }
         });
+    });
+    </script>
+    
+    <!-- 價格排序 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+           const priceFilterIcon = document.getElementById('priceFilter');
+           const priceHeader = document.getElementById('priceHeader');
+           
+        // 初始排序狀態
+        let ascending = true;
+        
+        priceFilterIcon.addEventListener('click', function(event){
+            event.preventDefault();
+            
+            // 切換箭頭方向
+            ascending = !ascending;
+            
+            if (ascending){
+                priceFilterIcon.innerHTML = '<i class="fa-solid fa-arrow-down-wide-short"></i>'
+            }else{
+                priceFilterIcon.innerHTML = '<i class="fa-solid fa-arrow-up-wide-short"></i>'
+            }
+            sortTableByPrice(acending);
+            
+            ascending = !ascending;
+        });
+        function sortTableByPrice(ascending){
+            // 在這裡實現根據價格排序的邏輯，可以使用JavaScript的Array.sort()
+            // 假設價格所在的欄位索引為2，這裡僅提供參考
+            const tableBody = document.querySelector('tbody');
+            const rows = Array.from(tableBody.getElementsByTagName('tr'));
+
+            rows.sort((a, b) => {
+                const priceA = parseFloat(a.getElementsByTagName('td')[2].textContent);
+                const priceB = parseFloat(b.getElementsByTagName('td')[2].textContent);
+
+                return ascending ? priceA - priceB : priceB - priceA;
+            });
+
+            // 清空表格
+            tableBody.innerHTML = '';
+
+            // 重新插入排序後的行
+            rows.forEach(row => {
+                tableBody.appendChild(row);
+            });
+        }
     });
     </script>
     

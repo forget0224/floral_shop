@@ -3,10 +3,10 @@ require __DIR__ . '/pages/parts/db_connect.php';
 $pageName = 'login';
 $title = '登入';
 
-// if (isset($_SESSION['admin'])) {
-//     header('Location: ./manager_index.php');
-//     exit;
-// }
+if (isset($_SESSION['admin'])) {
+    header('Location: manager_index.php');
+    exit;
+}
 ?>
 <?php include __DIR__ . '/pages/parts/html-head.php' ?>
 

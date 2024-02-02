@@ -72,7 +72,7 @@ $title = '店家新增';
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="store_password" class="form-label">密碼</label>
-                                                            <input type="text" class="form-control" id="store_password" name="store_password" placeholder="請輸入包含英文及數字，及1位特殊字元的8~16位數密碼">
+                                                            <input type="text" class="form-control" id="store_password" name="store_password" placeholder="請輸入包含英文及數字8~16字元的帳號">
                                                             <div class="form-text"></div>
                                                         </div>
                                                         <div class="mb-3">
@@ -198,8 +198,8 @@ $title = '店家新增';
 
         // 密碼
         function validatePassword(store_password) {
-            // 長度在8到16位之間，包含英文、數字，至少1位特殊字元
-            var re = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+            // 長度在8到16位之間，包含英文、數字
+            var re = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,16}$/;
             return re.test(store_password);
         }
 
@@ -270,7 +270,7 @@ $title = '店家新增';
             } else if (!validatePassword(store_password_f.value)) {
                 isPass = false;
                 store_password_f.style.border = '1px solid red';
-                store_password_f.nextElementSibling.innerHTML = "密碼要求長度在8到16位之間，並包含英文、數字，至少1位特殊字元";
+                store_password_f.nextElementSibling.innerHTML = "請填寫8~16位數，包含英文及數字的密碼";
             }
 
             // 信箱驗證

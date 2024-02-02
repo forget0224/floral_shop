@@ -128,7 +128,7 @@ if (empty($row)) {
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" id="continueEditingBtn" data-bs-dismiss="modal">繼續編輯</button>
+            <button type="button" class="btn btn-secondary" id="continueEditingBtn1" data-bs-dismiss="modal">繼續編輯</button>
             <a type="button" class="btn btn-primary" href="list.php">到列表頁</a>
         </div>
         </div>
@@ -149,7 +149,7 @@ if (empty($row)) {
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="continueEditingBtn" data-bs-dismiss="modal">繼續編輯</button>
+                <button type="button" class="btn btn-secondary" id="continueEditingBtn2" data-bs-dismiss="modal">繼續編輯</button>
                 <a type="button" class="btn btn-primary" href="list.php">到列表頁</a>
             </div>
             </div>
@@ -305,7 +305,10 @@ if (empty($row)) {
     document.getElementById('btn-close-fail').addEventListener('click', () => {
         window.location.href = 'edit.php?course_id=<?= $course_id ?>';
     });
-    document.getElementById('continueEditingBtn').addEventListener('click', () => {
+    document.getElementById('continueEditingBtn1').addEventListener('click', () => {
+        window.location.href = 'edit.php?course_id=<?= $course_id ?>';
+    });
+    document.getElementById('continueEditingBtn2').addEventListener('click', () => {
         window.location.href = 'edit.php?course_id=<?= $course_id ?>';
     });
     

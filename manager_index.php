@@ -6,7 +6,7 @@ $title = 'manager';
 
 ?>
 
-
+<?php require 'admin-required.php' ?>
 <?php include 'pages/parts/html-head.php' ?>
 
 
