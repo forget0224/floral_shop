@@ -10,6 +10,13 @@ $title = '登入';
 ?>
 <?php include __DIR__ . '/pages/parts/html-head.php' ?>
 
+<style>
+    form .mb-3 .form-text {
+        color: red;
+    }
+
+    
+</style>
 
 <body class="bg-gradient-primary">
 
@@ -24,7 +31,7 @@ $title = '登入';
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image-flower"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
@@ -36,7 +43,6 @@ $title = '登入';
                                                 id="exampleInputEmail" aria-describedby="emailHelp" name="email"
                                                 placeholder="Enter Email Address...">
                                             <div class="form-text"></div>
-
 
 
                                         </div> -->
@@ -51,6 +57,8 @@ $title = '登入';
                                             <div class="form-text"></div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">登入</button>
+
+
                                         <!-- <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp" name="email"
@@ -92,24 +100,26 @@ $title = '登入';
 
 
 
-    <div class="modal fade" id="loginwrongModal" tabindex="-1" role="dialog" aria-labelledby="loginwrongModal" aria-hidden="true">
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="loginwrongModal">登入結果</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</span>
-                    </button>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">登入結果</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body alert alert-danger">帳號或密碼錯誤</div>
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert">
+                        登入成功
+                    </div>
+                </div>
                 <div class="modal-footer">
-
-                    <a class="btn btn-primary" href="login.php">繼續</a>
+                    <a type="button" class="btn btn-primary" href="/floral_shop/manager_index.php">確認</a>
                 </div>
             </div>
         </div>
     </div>
-
 
 
 
@@ -130,14 +140,6 @@ $title = '登入';
             store_account: store_account_f,
             store_password: store_password_f,
         } = document.form1;
-        
-        function validatestore_account(store_account) {
-            return store_account.trim() !== '';
-        }
-
-        function validatestore_password(store_password) {
-            return store_password.trim() !== '';
-        }
 
         const sendForm = e => {
             e.preventDefault();
@@ -146,27 +148,31 @@ $title = '登入';
             store_account_f.nextElementSibling.innerHTML = "";
             store_password_f.style.border = '1px solid #CCC';
             store_password_f.nextElementSibling.innerHTML = "";
+            
             let isPass = true;
 
-
-
-            if (store_account_f.value && !validatestore_account(store_account_f.value)) {
+            if (store_account_f.value.trim().length === 0) {
+                isPass = false;
+                store_account_f.style.border = '1px solid red';
+                store_account_f.nextElementSibling.innerHTML = "請填寫帳號";
+            } else if (store_account_f.value.trim().length < 4) {
                 isPass = false;
                 store_account_f.style.border = '1px solid red';
                 store_account_f.nextElementSibling.innerHTML = "請填寫正確的帳號";
             }
 
-            if (store_password_f.value && !validatestore_password(store_password_f.value)) {
+            if (store_password_f.value.trim().length === 0) {
+                isPass = false;
+                store_password_f.style.border = '1px solid red';
+                store_password_f.nextElementSibling.innerHTML = "請填寫密碼";
+            } else if (store_password_f.value.trim().length < 5) {
                 isPass = false;
                 store_password_f.style.border = '1px solid red';
                 store_password_f.nextElementSibling.innerHTML = "請填寫正確的密碼";
             }
 
-
             if (isPass) {
-
                 const fd = new FormData(document.form1);
-
                 fetch('login-api.php', {
                         method: 'POST',
                         body: fd,
@@ -175,18 +181,15 @@ $title = '登入';
                         console.log({
                             result
                         });
+                        // Modal功能    
                         if (result.success) {
-                            location.href = './manager_index.php';
-                        } else {
                             myModal.show();
                         }
                     })
                     .catch(ex => console.log(ex))
             }
-
-
         }
 
-        const myModal = new bootstrap.Modal(document.getElementById('loginwrongModal'))
+        const myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
     </script>
     <?php include __DIR__ . '/pages/parts/html-foot.php' ?>
