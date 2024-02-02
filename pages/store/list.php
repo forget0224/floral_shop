@@ -158,6 +158,11 @@ if ($totalRows > 0) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">店家列表</h1>
+                    <p class="mb-4">
+                    "謹記：管理店家列表，如舵手操控著整艘船。確保每次操作都是謹慎的，以維護平台的和諧與穩定。"
+                    </p>
                     <!-- 頁面整塊貼上!!!!!! -->
                     <div class="row">
                         <!-- 分頁切換功能 -->
