@@ -14,8 +14,6 @@ $title = '登入';
     form .mb-3 .form-text {
         color: red;
     }
-
-    
 </style>
 
 <body class="bg-gradient-primary">
@@ -114,9 +112,9 @@ $title = '登入';
                         登入成功
                     </div>
                 </div>
-                <div class="modal-footer">
+                <!-- <div class="modal-footer">
                     <a type="button" class="btn btn-primary" href="/floral_shop/manager_index.php">確認</a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -148,7 +146,7 @@ $title = '登入';
             store_account_f.nextElementSibling.innerHTML = "";
             store_password_f.style.border = '1px solid #CCC';
             store_password_f.nextElementSibling.innerHTML = "";
-            
+
             let isPass = true;
 
             if (store_account_f.value.trim().length === 0) {
@@ -181,9 +179,12 @@ $title = '登入';
                         console.log({
                             result
                         });
-                        // Modal功能    
+                        // 如果登入成功，顯示 modal 並在一定時間後重新導向到 manager_index.php
                         if (result.success) {
                             myModal.show();
+                            setTimeout(() => {
+                                window.location.href = '/floral_shop/manager_index.php';
+                            }, 1500); // 3000 毫秒，即 3 秒後自動重新導向
                         }
                     })
                     .catch(ex => console.log(ex))
