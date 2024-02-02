@@ -106,23 +106,25 @@ if ($totalRows > 0) {
                                     </li>
                                     </ul>
                                 </nav>
-                                <!-- Topbar Search -->
-                                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                                    <input type="text" id="courseSearch" name="courseSearch" class="form-control bg-light border small" placeholder="Search for..."
-                                        aria-label="Search" aria-describedby="basic-addon2">
-                                </form>
-                                <!-- Dropdown Select -->
-                                <select class="form-select col-3" id="courseSearch" aria-label="Default select example">
-                                    <option selected disabled>請選擇課程分類</option>
-                                    <option value="1">花藝基礎課程</option>
-                                    <option value="2">植栽相關課程</option>
-                                    <option value="3">節慶主題課程</option>
-                                    <option value="4">進階商業課程</option>
-                                </select>
+                                <div class="d-flex flex-row justify-content-between">
+                                    <!-- Topbar Search -->
+                                    <div class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                        <input type="text" id="courseSearch" name="courseSearch" class="form-control bg-white border small" placeholder="Search for..."
+                                            aria-label="Search" aria-describedby="basic-addon2">
+                                    </div>
+                                    <!-- Dropdown Select -->
+                                    <select class="form-select ml-3" id="courseSearch" aria-label="Default select example">
+                                        <option selected disabled>請選擇課程分類</option>
+                                        <option value="1">花藝基礎課程</option>
+                                        <option value="2">植栽相關課程</option>
+                                        <option value="3">節慶主題課程</option>
+                                        <option value="4">進階商業課程</option>
+                                    </select>
+                                </div>
                             </h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="courseTable">
                                 <table class="table table-bordered" id="courseTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -139,6 +141,7 @@ if ($totalRows > 0) {
                                             <th><i class="fa-solid fa-file-pen"></i></th>
                                         </tr>
                                     </thead>
+                                    <!-- TODO:搜尋結果? -->
                                     <tbody>
                                     <?php foreach ($rows as $r) : ?>
                                         <tr>
@@ -165,6 +168,8 @@ if ($totalRows > 0) {
                                     </tbody>
                                 </table>
                             </div>
+                            <!-- TODO:結果先獨立出來試試看 -->
+                            <div id="searchResult"></div>
                         </div>
                     </div>
 
@@ -206,7 +211,7 @@ if ($totalRows > 0) {
         </div>
     </div>
     
-    <!-- 刪除的Modal -->
+    <!-- 刪除的Modal的script -->
     <script>
     function delete_one(course_id) {
         if (confirm(`是否要刪除編號為 ${course_id} 的資料?`)) {
@@ -240,7 +245,7 @@ if ($totalRows > 0) {
     </script>
     
     <!-- 搜尋框 -->
-    <script>
+    <!-- <script>
     $(document).ready(function(){
         $("#courseSearch").on("keyup", function() {
         var value = $(this).val().toLowerCase();
@@ -249,6 +254,35 @@ if ($totalRows > 0) {
         });
         });
     });
+    </script> -->
+    
+    <script>
+        $(document).ready(function(){
+            
+            $("#courseSearch").keyup(function(){
+                
+                let input = $(this).val();
+                //alert(input);
+                
+                if(input != ""){
+                    $.ajax({
+                        url:"courseSearch.php",
+                        method:"POST",
+                        data:{input:input},
+                        
+                        success:function(data){
+                            $("#searchResult").html(data);
+                            $("#courseTable").css("display","none");
+                            $("#searchResult").css("display","block");
+                        }
+                    });
+                }else{
+                    $("#courseTable").css("display","block");
+                    $("#searchResult").css("display","none");
+                }
+            })
+            
+        })
     </script>
     
     <?php include '../parts/html-foot.php' ?>
