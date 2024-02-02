@@ -17,12 +17,75 @@ if ($page < 1) {
 }
 
 
+
+
+
+// 考量分頁狀況，取得資料總筆數前就必需放入資料篩選
 // 取得資料總筆數COUNT(1)
-$t_sql = "SELECT COUNT(1) FROM store";
-$row = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM);
+$filterConditionsCount = [];
+
+if (!empty($_GET['filterName'])) {
+    $filterConditionsCount[] = "store_name LIKE :filterName";
+}
+
+if (!empty($_GET['filterPhone'])) {
+    $filterConditionsCount[] = "store_tel LIKE :filterPhone";
+}
+
+if (!empty($_GET['filterEmail'])) {
+    $filterConditionsCount[] = "store_email LIKE :filterEmail";
+}
+
+if (!empty($_GET['filterAddress'])) {
+    $filterConditionsCount[] = "store_address LIKE :filterAddress";
+}
+
+if (!empty($_GET['filterSubscription'])) {
+    $filterConditionsCount[] = "sub_name = :filterSubscription";
+}
+
+$t_sql = "SELECT COUNT(1) 
+        FROM store
+        LEFT JOIN store_sub ON store.sub_id = store_sub.sub_id";
+
+// 將篩選條件加入 SQL 查詢中
+if (!empty($filterConditionsCount)) {
+    $t_sql .= " WHERE " . implode(' AND ', $filterConditionsCount);
+}
+
+// 使用參數化查詢
+$stmtCount = $pdo->prepare($t_sql);
+
+// 綁定參數
+if (!empty($_GET['filterName'])) {
+    $stmtCount->bindValue(':filterName', '%' . $_GET['filterName'] . '%', PDO::PARAM_STR);
+}
+
+if (!empty($_GET['filterPhone'])) {
+    $stmtCount->bindValue(':filterPhone', '%' . $_GET['filterPhone'] . '%', PDO::PARAM_STR);
+}
+
+if (!empty($_GET['filterEmail'])) {
+    $stmtCount->bindValue(':filterEmail', '%' . $_GET['filterEmail'] . '%', PDO::PARAM_STR);
+}
+
+if (!empty($_GET['filterAddress'])) {
+    $stmtCount->bindValue(':filterAddress', '%' . $_GET['filterAddress'] . '%', PDO::PARAM_STR);
+}
+
+if (!empty($_GET['filterSubscription'])) {
+    $stmtCount->bindValue(':filterSubscription', $_GET['filterSubscription'], PDO::PARAM_STR);
+}
+
+// 執行查詢
+$stmtCount->execute();
+
+// 取得結果
+$rowCount = $stmtCount->fetchColumn();
+
 
 // print_r($row); exit;  # 直接離程式
-$totalRows = $row[0]; # 取得總筆數
+$totalRows = $rowCount; # 取得總筆數
 
 
 // 必須先設預設值，html裡面迴圈需要有讀取資料
@@ -31,8 +94,6 @@ $rows = [];
 
 
 
-
-// GPT，添加篩選功能
 // 頁面數量
 // 第一頁 => 顯示1~20筆資料
 // 頁數和顯示資料的關係 => ($page-1)*$perPage
@@ -132,6 +193,9 @@ if ($totalRows > 0) {
 }
 
 
+
+// 頁面按鈕
+
 ?>
 
 <?php include '../parts/html-head.php' ?>
@@ -161,7 +225,7 @@ if ($totalRows > 0) {
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">店家列表</h1>
                     <p class="mb-4">
-                    "謹記：管理店家列表，如舵手操控著整艘船。確保每次操作都是謹慎的，以維護平台的和諧與穩定。"
+                        "謹記：管理店家列表，如舵手操控著整艘船。確保每次操作都是謹慎的，以維護平台的和諧與穩定。"
                     </p>
                     <!-- 頁面整塊貼上!!!!!! -->
                     <div class="row">
@@ -169,44 +233,46 @@ if ($totalRows > 0) {
                         <div class="row my-2">
                             <!-- bootstrap => navigation -->
                             <nav class="mx-2" aria-label="Page navigation example">
-                                <ul class="pagination">
+                                <?php if ($totalPages > 1) : ?>
+                                    <ul class="pagination">
 
-                                    <!-- 第一頁 -->
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page=1&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
+                                        <!-- 回到最前頁 -->
+                                        <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>"">
+                                        <a class=" page-link" href="?page=1&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
                                             <i class="fa-solid fa-angles-left"></i>
-                                        </a>
-                                    </li>
-                                    <!-- 上一頁 -->
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page=<?= $page - 1 ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
+                                            </a>
+                                        </li>
+                                        <!-- 上一頁 -->
+                                        <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>"">
+                                        <a class=" page-link" href="?page=<?= $page - 1 ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
                                             <i class="fa-solid fa-angle-left"></i>
-                                        </a>
-                                    </li>
+                                            </a>
+                                        </li>
 
-                                    <?php for ($i = $page - 2; $i <= $page + 2; $i++) :
-                                        if ($i >= 1 and $i <= $totalPages) : 0
-                                    ?>
-                                            <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                                                <a class="page-link" href="?page=<?= $i ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
-                                                    <?= $i ?>
-                                                </a>
-                                            </li>
-                                    <?php endif;
-                                    endfor; ?>
+                                        <?php for ($i = $page - 2; $i <= $page + 2; $i++) :
+                                            if ($i >= 1 and $i <= $totalPages) : 0
+                                        ?>
+                                                <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                                                    <a class="page-link" href="?page=<?= $i ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
+                                                        <?= $i ?>
+                                                    </a>
+                                                </li>
+                                        <?php endif;
+                                        endfor; ?>
 
-                                    <!-- 下一頁 -->
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page=<?= $page + 1 ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
-                                            <i class="fa-solid fa-angle-right"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page=<?= $totalPages ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
-                                            <i class="fa-solid fa-angles-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
+                                        <!-- 下一頁 -->
+                                        <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="?page=<?= $page + 1 ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
+                                                <i class="fa-solid fa-angle-right"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="?page=<?= $totalPages ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
+                                                <i class="fa-solid fa-angles-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                <?php endif; ?>
                             </nav>
                         </div>
                         <!-- 篩選功能 -->
