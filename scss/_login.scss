@@ -7,6 +7,12 @@
   background-size: cover;
 }
 
+.bg-login-image-flower {
+  background: url($login-image-flower);
+  background-position: center;
+  background-size: cover;
+}
+
 .bg-register-image {
   background: url($register-image);
   background-position: center;
