@@ -113,8 +113,8 @@ if ($totalRows > 0) {
                                             aria-label="Search" aria-describedby="basic-addon2">
                                     </div>
                                     <!-- Dropdown Select -->
-                                    <select class="form-select ml-3" id="courseSearch" aria-label="Default select example">
-                                        <option selected disabled>請選擇課程分類</option>
+                                    <select class="form-select ml-3" name="courseFilter" id="courseFilter" aria-label="Default select example">
+                                        <option selected value="">請選擇課程分類</option>
                                         <option value="1">花藝基礎課程</option>
                                         <option value="2">植栽相關課程</option>
                                         <option value="3">節慶主題課程</option>
@@ -125,7 +125,7 @@ if ($totalRows > 0) {
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" id="courseTable">
-                                <table class="table table-bordered" id="courseTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered table-striped" id="courseTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th><i class="fa-solid fa-trash"></i></th>
@@ -245,17 +245,6 @@ if ($totalRows > 0) {
     </script>
     
     <!-- 搜尋框 -->
-    <!-- <script>
-    $(document).ready(function(){
-        $("#courseSearch").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#courseTable tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-        });
-    });
-    </script> -->
-    
     <script>
         $(document).ready(function(){
             
@@ -283,6 +272,35 @@ if ($totalRows > 0) {
             })
             
         })
+    </script>
+    
+    <!-- 課程分類 -->
+    <script>
+    $(document).ready(function(){
+        $("#courseFilter").on('change', function(){
+            let value = $(this).val();
+            // alert(value);
+            
+            // 檢查選到的值是不是預設值
+            if (!value){
+                window.location.reload();
+            } else {
+                // 如果不是預設值
+                $.ajax({
+                url:"courseFilter.php",
+                method:"POST",
+                data:'request=' + value,
+                beforeSend:function(){
+                    $("#searchResult").html("<span>Working...</span>");
+                },
+                success:function(data){
+                    $("#searchResult").html(data);
+                    $("#courseTable").css("display","none");
+                }
+            })
+            }
+        });
+    });
     </script>
     
     <?php include '../parts/html-foot.php' ?>
