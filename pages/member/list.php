@@ -86,6 +86,7 @@ $rows = $stmt->fetchAll();
         font-size: 20px;
     }
 </style>
+
 <div class="container">
     <div class="row table h3">
         <div class="col pagination-container">
@@ -203,9 +204,14 @@ $rows = $stmt->fetchAll();
     totalCountElement.textContent = <?= $totalRows ?>;
 
     function delete_one(member_id) {
-        if (confirm(`是否要刪除編號為 ${member_id} 的會員資料?`)) {
-            location.href = `delete.php?member_id=${member_id}`;
-        }
+    if (confirm(`是否要刪除編號為 ${member_id} 的會員資料?`)) {
+        // 執行刪除操作
+        location.href = `delete.php?member_id=${member_id}`;
+        
+        // 顯示刪除成功警告
+        alert('會員資料已成功刪除。');
     }
+}
+
 </script>
 <?php include __DIR__ . '/parts/html-foot.php'  ?>
