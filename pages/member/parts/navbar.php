@@ -25,8 +25,8 @@ if (empty($pageName)) {
         <!-- <ul class="navbar-nav mb-2 mb-lg-0"> -->
     <?php if (isset($_SESSION['admin'])) : ?>
         <!-- <li class="nav-item"> -->
+            <!-- <a href="#" class="fas fa-user"><?= $_SESSION['admin']['name'] ?></a> -->
             <!-- <a href="#" class="fas fa-user"><?= $_SESSION['admin'] ?></a> -->
-            <a href="#" class="fas fa-user"><?= $_SESSION['admin'] ?></a>
         <!-- </li>
         <li class="nav-item"> -->
             <a class="nav-link fa-solid fa-right-from-bracket" href="./logout.php"></a>

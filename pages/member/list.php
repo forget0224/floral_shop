@@ -1,4 +1,4 @@
-<?php 
+<?php
 require '../parts/db_connect.php';
 
 $pageName = 'list';
@@ -65,7 +65,7 @@ $rows = $stmt->fetchAll();
 <?php include __DIR__ . '/parts/html-head.php'  ?>
 <?php include __DIR__ . '/parts/navbar.php'  ?>
 <style>
-        /* 使用 Flexbox 讓 pagination-container 元素水平置中 */
+    /* 使用 Flexbox 讓 pagination-container 元素水平置中 */
     .pagination-container {
         display: flex;
         justify-content: center;
@@ -74,75 +74,84 @@ $rows = $stmt->fetchAll();
     }
 
     .container {
-    margin-top: 15rem; 
+        margin-top: 15rem;
     }
+
     .pagination li a {
-        margin-right: 10px; /* 增加右邊距 */
+        margin-right: 10px;
+        /* 增加右邊距 */
+    }
+
+    .text-lg {
+        font-size: 20px;
     }
 </style>
 <div class="container">
     <div class="row table h3">
-            <div class="col pagination-container">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <!-- 更新鏈接以包含搜索城市 -->
-                        <li class="page-item">
+        <div class="col pagination-container">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <!-- 更新鏈接以包含搜索城市 -->
+                    <li class="page-item">
                         <a class="page-link" href="?page=1&search-field=<?= htmlentities($searchField) ?>&search-query=<?= htmlentities($searchQuery) ?>">
                             <i class="fa-solid fa-backward"></i>
                         </a>
-                        </li>
+                    </li>
+                    <!-- 注意：這裡需要加入對前一頁和後一頁鏈接的處理 -->
 
-                        <!-- 注意：這裡需要加入對前一頁和後一頁鏈接的處理 -->
+                    <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
+                        if ($i >= 1 and $i <= $totalPages) : ?>
+                            <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                                <a class="page-link" href="?page=<?= $i ?>&search-field=<?= htmlentities($searchField) ?>&search-query=<?= htmlentities($searchQuery) ?>"><?= $i ?></a>
+                            </li>
+                    <?php endif;
+                    endfor; ?>
 
-                        <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
-                            if ($i >= 1 and $i <= $totalPages) : ?>
-                                <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                                    <a class="page-link" href="?page=<?= $i ?>&search-field=<?= htmlentities($searchField) ?>&search-query=<?= htmlentities($searchQuery) ?>"><?= $i ?></a>
-                                </li>
-                        <?php endif;
-                        endfor; ?>
-
-
-                        <li class="page-item">
+                    <li class="page-item">
                         <a class="page-link" href="?page=<?= $totalPages ?>&search-field=<?= htmlentities($searchField) ?>&search-query=<?= htmlentities($searchQuery) ?>">
                             <i class="fa-solid fa-forward"></i>
                         </a>
-                        </li>
-                    </ul>
-                </nav>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-5 mx-auto text-center">
+            <form action="?" method="get">
+                <div class="form-group">
+                    <select name="search-field" class="form-control form-control-lg">
+                        <option value="" disabled selected>請選擇欄位</option>
+                        <option value="name">姓名</option>
+                        <option value="email">電郵</option>
+                        <option value="phone">手機</option>
+                        <option value="city">城市</option>
+                        <option value="district">區域</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="search-query"></label>
+                    <input type="text" class="form-control form-control-lg" id="search-query" name="search-query" placeholder="請輸入搜尋內容">
+                </div>
+                <button type="submit" class="btn btn-primary ml-2">搜尋</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <div id="total-results" class="mb-3 text-lg">
+                <p>資料總筆數: <span id="total-count"><?= $totalRows ?></span> 筆</p>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-5 mx-auto text-center">
-                <form action="?" method="get">
-                    <div class="form-group">
-                        <select name="search-field" class="form-control form-control-lg">
-                            <option value="name">姓名</option>
-                            <option value="email">電郵</option>
-                            <option value="phone">手機</option>
-                            <option value="city">城市</option>
-                            <option value="district">區域</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="search-query"></label>
-                        <input type="text" class="form-control form-control-lg" id="search-query" name="search-query" placeholder="請輸入搜索內容">
-                    </div>
-                    <button type="submit" class="btn btn-primary ml-2">搜尋</button>
-                </form>
-            </div>
-        </div>
-
-
-
-
+    </div>
     <div class="row table h3">
         <div class="col">
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        
                         <th><i class="fa-solid fa-user-pen"></i></i></th>
                         <th>編號</th>
                         <th>姓名</th>
@@ -159,7 +168,7 @@ $rows = $stmt->fetchAll();
                         <tr>
                             <td>
                                 <a href="edit.php?member_id=<?= $r['member_id'] ?>">
-                                <i class="fa-solid fa-user-pen"></i></i>
+                                    <i class="fa-solid fa-user-pen"></i></i>
                                 </a>
                             </td>
                             <td><?= $r['member_id'] ?></td>
@@ -168,27 +177,31 @@ $rows = $stmt->fetchAll();
                             <td><?= $r['phone'] ?></td>
                             <td><?= $r['city'] ?></td>
                             <td><?= $r['district'] ?></td>
-
                             <td><?= htmlentities($r['address']) ?></td>
                             <!--
                             <td><?= strip_tags($r['address']) ?></td>
                             -->
                             <td>
                                 <a href="javascript: delete_one(<?= $r['member_id'] ?>)">
-                                <i class="fa-solid fa-trash-can"></i>
+                                    <i class="fa-solid fa-trash-can"></i>
                                 </a>
                             </td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>
             </table>
-
         </div>
     </div>
 
 </div>
 <?php include __DIR__ . '/parts/scripts.php'  ?>
 <script>
+    // 獲取總筆數元素
+    var totalCountElement = document.getElementById('total-count');
+
+    // 使用 PHP 變數中的總筆數來設置元素內容
+    totalCountElement.textContent = <?= $totalRows ?>;
+
     function delete_one(member_id) {
         if (confirm(`是否要刪除編號為 ${member_id} 的會員資料?`)) {
             location.href = `delete.php?member_id=${member_id}`;
