@@ -125,6 +125,7 @@ if (empty($row)) {
     </div>
 </div>
 <?php include __DIR__ . '/parts/scripts.php'  ?>
+
 <script>
     const originalData = {
         name: "<?= htmlentities($row['name']) ?>",
