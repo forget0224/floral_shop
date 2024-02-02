@@ -29,9 +29,9 @@ if (empty($row)) {
         margin-top: 150px; /* 可以根據需要調整上方距離 */
     }
 
-    /* form .mb-3 .form-text {
-        color: red;
-    } */
+    .text-lg {
+        font-size: 20px;
+    }
 </style>
 <div class="container">
     <div class="row table h3 pagination-container">
@@ -95,8 +95,10 @@ if (empty($row)) {
                 <h1 class="modal-title" id="noChangesModalLabel">提示</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="font-size: 20px;">
-                您並未變更資料
+            <div class="modal-body text-lg">
+                <div class="alert alert-success" role="alert">
+                    您並未變更資料
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
@@ -112,7 +114,7 @@ if (empty($row)) {
                 <h1 class="modal-title fs-5" id="exampleModalLabel">編輯結果</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-lg">
                 <div class="alert alert-success" role="alert">
                     編輯成功
                 </div>
