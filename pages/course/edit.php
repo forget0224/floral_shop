@@ -120,7 +120,7 @@ if (empty($row)) {
         <div class="modal-content">
         <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">編輯結果</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" id="btn-close-success" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <div class="alert alert-success" role="alert">
@@ -128,7 +128,7 @@ if (empty($row)) {
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">繼續編輯</button>
+            <button type="button" class="btn btn-secondary" id="continueEditingBtn" data-bs-dismiss="modal">繼續編輯</button>
             <a type="button" class="btn btn-primary" href="list.php">到列表頁</a>
         </div>
         </div>
@@ -141,7 +141,7 @@ if (empty($row)) {
             <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">編輯結果</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" id="btn-close-fail" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-danger" role="alert">
@@ -149,7 +149,7 @@ if (empty($row)) {
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">繼續編輯</button>
+                <button type="button" class="btn btn-secondary" id="continueEditingBtn" data-bs-dismiss="modal">繼續編輯</button>
                 <a type="button" class="btn btn-primary" href="list.php">到列表頁</a>
             </div>
             </div>
@@ -163,27 +163,48 @@ if (empty($row)) {
     const myFailModal = new bootstrap.Modal(document.getElementById('failModal'));
     const mySuccessModal = new bootstrap.Modal(document.getElementById('successModal'));
     
+    const {
+      name: name_f,
+      intro: intro_f,
+      location: location_f,
+      price: price_f,
+      min_capacity: min_f,
+      max_capacity: max_f
+    } = document.form1;
+    
     const sendForm = e => {
         e.preventDefault();
-
+        name_f.style.border = '1px solid #CCC';
+        name_f.nextElementSibling.innerHTML = "";
+        intro_f.style.border = '1px solid #CCC';
+        intro_f.nextElementSibling.innerHTML = "";
+        location_f.style.border = '1px solid #CCC';
+        location_f.nextElementSibling.innerHTML = "";
+        price_f.style.border = '1px solid #CCC';
+        price_f.nextElementSibling.innerHTML = "";
+        min_f.style.border = '1px solid #CCC';
+        min_f.nextElementSibling.innerHTML = "";
+        max_f.style.border = '1px solid #CCC';
+        max_f.nextElementSibling.innerHTML = "";
+        
         // 取得原始資料
         const originalData = {
-        name: "<?= addslashes($row['name']) ?>",
-        intro: "<?= addslashes($row['intro']) ?>",
-        location: "<?= addslashes($row['location']) ?>",
-        price: <?= $row['price'] ?>,
-        min_capacity: <?= $row['min_capacity'] ?>,
-        max_capacity: <?= $row['max_capacity'] ?>,
+        name_f: "<?= addslashes($row['name']) ?>",
+        intro_f: "<?= addslashes($row['intro']) ?>",
+        location_f: "<?= addslashes($row['location']) ?>",
+        price_f: <?= $row['price'] ?>,
+        min_f: <?= $row['min_capacity'] ?>,
+        max_f: <?= $row['max_capacity'] ?>,
         };
 
         // 取得表單資料
         const formData = {
-        name: document.form1.name.value,
-        intro: document.form1.intro.value,
-        location: document.form1.location.value,
-        price: parseInt(document.form1.price.value),
-        min_capacity: parseInt(document.form1.min_capacity.value),
-        max_capacity: parseInt(document.form1.max_capacity.value),
+        name_f: document.form1.name.value,
+        intro_f: document.form1.intro.value,
+        location_f: document.form1.location.value,
+        price_f: parseInt(document.form1.price.value),
+        min_f: parseInt(document.form1.min_capacity.value),
+        max_f: parseInt(document.form1.max_capacity.value),
         };
         
         // 檢查是否有修改
@@ -192,7 +213,66 @@ if (empty($row)) {
         // TODO: 資料送出之前, 要做檢查 (有沒有填寫, 格式對不對)
         let isPass = true; // 表單有沒有通過檢查
         
-        // 驗證放這邊
+        // 驗證
+        if (name_f.value.length < 2) {
+          isPass = false;
+          name_f.style.border = '1px solid red';
+          name_f.nextElementSibling.innerHTML = "請輸入至少2個字的課程名稱";
+        }
+        
+        if (name_f.value.length > 30) {
+          isPass = false;
+          name_f.style.border = '1px solid red';
+          name_f.nextElementSibling.innerHTML = "課程名稱需小於30字";
+        }
+        
+        if (intro_f.value.length < 2) {
+          isPass = false;
+          intro_f.style.border = '1px solid red';
+          intro_f.nextElementSibling.innerHTML = "請輸入至少2個字的課程介紹";
+        }
+        
+        if (intro_f.value.length > 1000) {
+          isPass = false;
+          intro_f.style.border = '1px solid red';
+          intro_f.nextElementSibling.innerHTML = "課程介紹需小於1000字";
+        }
+        
+        // TODO:之後修改驗證
+        if (!location_f.value) {
+          isPass = false;
+          location_f.style.border = '1px solid red';
+          location_f.nextElementSibling.innerHTML = "請輸入上課地點";
+        }
+        
+        if (price_f.value.length < 1) {
+          isPass = false;
+          price_f.style.border = '1px solid red';
+          price_f.nextElementSibling.innerHTML = "請輸入正確的定價";
+        }
+        
+        // 先將 min_f 和 max_f 轉換為整數
+        const minVal = parseInt(min_f.value);
+        const maxVal = parseInt(max_f.value);
+
+        // TODO: 之後修改驗證
+        if (minVal < 1 || isNaN(minVal)) {
+            isPass = false;
+            min_f.style.border = '1px solid red';
+            min_f.nextElementSibling.innerHTML = "請輸入正確的最小開課人數";
+        }
+
+        if (maxVal < 1 || isNaN(maxVal)) {
+            isPass = false;
+            max_f.style.border = '1px solid red';
+            max_f.nextElementSibling.innerHTML = "請輸入正確的最大開課人數";
+        }
+
+        if (minVal > maxVal) {
+            isPass = false;
+            max_f.style.border = '1px solid red';
+            max_f.nextElementSibling.innerHTML = "最大開課人數需大於最小開課人數";
+        }
 
         if (isPass) {
         // 如果有修改且通過驗證，執行表單送出邏輯
@@ -217,6 +297,18 @@ if (empty($row)) {
             .catch(ex => console.log(ex))
         }
     }
+    
+    document.getElementById('btn-close-success').addEventListener('click', () => {
+        window.location.href = 'edit.php?course_id=<?= $course_id ?>';
+    });
+    
+    document.getElementById('btn-close-fail').addEventListener('click', () => {
+        window.location.href = 'edit.php?course_id=<?= $course_id ?>';
+    });
+    document.getElementById('continueEditingBtn').addEventListener('click', () => {
+        window.location.href = 'edit.php?course_id=<?= $course_id ?>';
+    });
+    
     </script>
     
     <?php include '../parts/html-foot.php' ?>
