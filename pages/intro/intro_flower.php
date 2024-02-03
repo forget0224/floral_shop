@@ -80,11 +80,15 @@ unset($_SESSION['deleteSuccess']);
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800 d-inline-flex" onclick="showRandomDataModal()">𓇚《花圖鑑》Guide des Fleurs</h1>
-          <!-- <img class="d-inline-flex figure-img w-25 rounded" src="https://media2.giphy.com/media/iehQ1h40viFAumBqD2/giphy.gif" class="img-fluid" alt="..."> -->
-          <p class="mb-4">"我可以為自己獻上花束，比你愛我還更愛我自己。"--麥莉．希拉。</p>
-
-
+          <div class="row">
+            <div class="col-9">
+              <h1 class="h3 mb-2 text-gray-800 d-inline-flex">𓇚《花圖鑑》Guide des Fleurs</h1>
+              <p class="mb-4">"我可以為自己獻上花束，比你愛我還更愛我自己。"--麥莉．希拉。</p>
+            </div>
+            <div class="col-3">
+              <img class="img-fluid float-end w-25" onclick="showRandomDataModal()" src="https://media2.giphy.com/media/iehQ1h40viFAumBqD2/giphy.gif" class="img-fluid" alt="...">
+            </div>
+          </div>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -248,14 +252,14 @@ unset($_SESSION['deleteSuccess']);
           <!-- 顯示刪除成功的訊息 -->
           <div class="alert alert-warning text-center" role="alert">
 
-            <h4><?= $randomData['flower_name'] ?></h4>
+            <h2 class="fw-bold"><?= $randomData['flower_name'] ?></h2>
             <h5><?= $randomData['flower_engname'] ?></h5>
-            <h4><?= $randomData['flower_lang'] ?></h4>
+            <h5 class="fw-bolder"><?= $randomData['flower_lang'] ?></h5>
             <p><?= $randomData['flower_intro'] ?></p>
           </div>
         </div>
         <!-- Modal 底部區域 -->
-        <img src="https://media2.giphy.com/media/iehQ1h40viFAumBqD2/giphy.gif" class="img-fluid" alt="...">
+        <img src="https://media2.giphy.com/media/iehQ1h40viFAumBqD2/giphy.gif" class="img-fluid w-75 mx-auto" alt="...">
         <div class="modal-footer">
           <!-- 關閉 Modal 並繼續瀏覽的按鈕 -->
           <button type="button" class="btn btn-secondary" data-dismiss="modal">回頁面</button>
