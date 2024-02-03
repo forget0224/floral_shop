@@ -99,15 +99,15 @@ unset($_SESSION['deleteSuccess']);
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
+        
           <!-- Page Heading -->
           <div class="row">
             <div class="col-9">
-              <h1 class="h3 mb-2 text-gray-800 d-inline-flex">𓇚《花圖鑑》Guide des Fleurs</h1>
+              <h1 class="h3 mb-2 text-gray-800 d-inline-flex"><a href="/floral_shop/pages/intro/intro_flower.php" class="text-decoration-none text-reset">𓇚《花圖鑑》Guide des Fleurs</a></h1>
               <p class="mb-4">"我可以為自己獻上花束，比你愛我還更愛我自己。"--麥莉．希拉。</p>
             </div>
             <div class="col-3">
-              <img class="img-fluid float-end w-25" onclick="showRandomDataModal()" src="https://media2.giphy.com/media/iehQ1h40viFAumBqD2/giphy.gif" class="img-fluid" alt="...">
+              <img class="img-fluid float-end w-25" onclick="showRandomDataModal() " src="https://media2.giphy.com/media/iehQ1h40viFAumBqD2/giphy.gif" class="img-fluid" alt="...">
             </div>
           </div>
           <!-- DataTales Example -->
