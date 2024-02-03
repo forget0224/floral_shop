@@ -47,6 +47,27 @@ if ($totalRows > 0) {
   $rows = $stmt->fetchAll();
 }
 
+// 搜尋條件
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+  $search = htmlspecialchars($_GET['search']);
+  $sql = sprintf(
+    "SELECT * FROM intro_flower WHERE 
+                  flower_name LIKE '%%%s%%' OR 
+                  flower_engname LIKE '%%%s%%' OR 
+                  flower_lang LIKE '%%%s%%' OR 
+                  flower_intro LIKE '%%%s%%' 
+                  ORDER BY flower_id DESC LIMIT %s, %s",
+    $search,
+    $search,
+    $search,
+    $search,
+    ($page - 1) * $perPage,
+    $perPage
+  );
+}
+
+$stmt = $pdo->query($sql);
+$rows = $stmt->fetchAll();
 // 刪除
 $deleteSuccess = isset($_SESSION['deleteSuccess']) && $_SESSION['deleteSuccess'] === true;
 unset($_SESSION['deleteSuccess']);
@@ -99,7 +120,7 @@ unset($_SESSION['deleteSuccess']);
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <!-- table裡面的東西 複製近來!!!!!!!!!  -->
                   <div class="row">
-                    <div class="col">
+                    <div class="col-6">
                       <!-- 分頁按鈕 -->
                       <nav aria-label="Page navigation example">
                         <ul class="pagination">
@@ -134,6 +155,20 @@ unset($_SESSION['deleteSuccess']);
                           </li>
                         </ul>
                       </nav>
+                    </div>
+                    <div class="col-6">
+                      <!-- 搜尋欄 start-->
+                      <div class="float-end mb-3">
+                        <form action="" method="GET" class="form-inline">
+                          <div class="input-group">
+                            <input type="text" class="form-control" placeholder="搜尋..." name="search" value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-secondary" type="submit">搜尋</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <!-- 搜尋欄 end-->
                     </div>
                   </div>
                   <div class="row">
