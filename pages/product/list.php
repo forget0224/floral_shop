@@ -48,8 +48,12 @@ if ($totalRows > 0) {
 
   // 透過inner join將product表格和categories表格連接起來
   $sql = sprintf(
-    "SELECT p.*, c.name AS category_name FROM product p
+    // "SELECT p.*, c.name AS category_name FROM product p
+    // INNER JOIN categories c ON p.categories_id = c.categories_id
+    "SELECT p.*, c.name AS category_name, imglist.image_url AS image_url, imglist.is_thumbnail AS is_thumbnail FROM product p
     INNER JOIN categories c ON p.categories_id = c.categories_id
+    LEFT JOIN product_image img ON p.product_id = img.product_id
+    LEFT JOIN product_image_list imglist ON img.product_images_id = imglist.product_images_id
     %s
     %s
     %s
@@ -330,6 +334,7 @@ if ($totalRows > 0) {
                         </a>
                         #
                       </th>
+                      <th style="width: 70px;">圖片</th>
                       <th style="width: 100px;">商品名稱</th>
                       <th style="width: 100px;">種類列表</th>
                       <th style="width: 60px;">
@@ -343,13 +348,13 @@ if ($totalRows > 0) {
                       </th>
                       <th style="width: 120px;">尺寸</th>
                       <th style="width: 120px;">
-                        
-                          <a class="text-decoration-none" href="?orderBy=created_at&order=desc">
-                            <i class="fa-solid fa-circle-arrow-up"></i>
-                          </a>
-                          <a class="text-decoration-none" href="?orderBy=created_at&order=asc">
-                            <i class="fa-solid fa-circle-arrow-down"></i>
-                          </a>
+
+                        <a class="text-decoration-none" href="?orderBy=created_at&order=desc">
+                          <i class="fa-solid fa-circle-arrow-up"></i>
+                        </a>
+                        <a class="text-decoration-none" href="?orderBy=created_at&order=asc">
+                          <i class="fa-solid fa-circle-arrow-down"></i>
+                        </a>
                         <br>
                         創建時間
                       </th>
@@ -376,6 +381,13 @@ if ($totalRows > 0) {
                           </a>
                         </td>
                         <td style="width: 20px;"><?= $r['product_id'] ?></td>
+                        <td>
+                          <?php if (!empty($r['image_url']) && $r['is_thumbnail'] !== 0) : ?>
+                            <img src="<?= $r['image_url'] ?>" alt="Product Image" style="max-width: 50px; max-height: 50px;">
+                          <?php else : ?>
+                            <img src="../../img/product-images/defaultimage.jpg" alt="Default Image" style="max-width: 50px; max-height: 50px;">
+                          <?php endif; ?>
+                        </td>
                         <td style="width: 100px;"><?= $r['name'] ?></td>
                         <td style="width: 100px;"><?= $r['category_name'] ?></td>
                         <td style="width: 60px;"><?= $r['price'] ?></td>
