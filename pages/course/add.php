@@ -78,10 +78,10 @@ $title = '新增課程';
                                     </div>
                                     <!-- TODO:代入上課地點 -->
                                     <div class="mb-3">
-                                    <label for="location" class="form-label">上課地點</label>
-                                    <!-- <input type="checkbox" id="useStoreAddress" onclick="useStoreAddress()">帶入商家預設地址 -->
-                                    <input type="text" class="form-control" id="location" name="location" value="桃園市中壢區中華路二段150號" readonly>
-                                    <div class="form-text"></div>
+                                      <label for="location" class="form-label">上課地點</label>
+                                      <input type="checkbox" id="addressCheckbox" onclick="useStoreAddress()">帶入商家預設地址
+                                      <input type="text" class="form-control" id="location" name="location" value="">
+                                      <div class="form-text"></div>
                                     </div>
                                     <div class="mb-3">
                                       <label for="price" class="form-label">課程定價</label>
@@ -266,8 +266,30 @@ $title = '新增課程';
             })
             .catch(ex => console.log(ex))
         }
+    }
+    function useStoreAddress() {
+      const locationInput = document.getElementById('location');
+      const addressCheckbox = document.getElementById('addressCheckbox');
 
+      // 檢查 checkbox 是否被勾選
+      if (addressCheckbox.checked) {
+        // 使用 AJAX 從後端獲取商家地址
+        fetch('get-store-address.php')  // 這裡的 URL 需要指向一個能夠獲取商家地址的後端 API
+          .then(response => response.json())
+          .then(data => {
+            // 將商家地址填入 location 欄位
+            locationInput.value = data.storeAddress;
+          })
+          .catch(error => console.error('Error fetching store address:', error));
 
+        // 加上 readonly
+        locationInput.setAttribute('readonly', true);
+      } else {
+        // 如果 checkbox 沒有勾選，移除 readonly，允許用戶編輯 location
+        locationInput.removeAttribute('readonly');
+        // 清空 location 欄位的值
+        locationInput.value = '';
+      }
     }
 
     const myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
