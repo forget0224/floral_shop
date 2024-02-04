@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 04, 2024 at 08:44 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- 主機： 127.0.0.1
+-- 產生時間： 2024-02-01 03:03:19
+-- 伺服器版本： 10.4.32-MariaDB
+-- PHP 版本： 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `floral_shop`
+-- 資料庫： `floral_shop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- 資料表結構 `categories`
 --
 
 CREATE TABLE `categories` (
@@ -35,7 +35,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `categories`
+-- 傾印資料表的資料 `categories`
 --
 
 INSERT INTO `categories` (`categories_id`, `name`, `parent`, `description`) VALUES
@@ -55,7 +55,7 @@ INSERT INTO `categories` (`categories_id`, `name`, `parent`, `description`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `color_list`
+-- 資料表結構 `color_list`
 --
 
 CREATE TABLE `color_list` (
@@ -65,7 +65,7 @@ CREATE TABLE `color_list` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `color_list`
+-- 傾印資料表的資料 `color_list`
 --
 
 INSERT INTO `color_list` (`color_list_id`, `color_name`, `color_english`) VALUES
@@ -85,7 +85,7 @@ INSERT INTO `color_list` (`color_list_id`, `color_name`, `color_english`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course`
+-- 資料表結構 `course`
 --
 
 CREATE TABLE `course` (
@@ -102,7 +102,7 @@ CREATE TABLE `course` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `course`
+-- 傾印資料表的資料 `course`
 --
 
 INSERT INTO `course` (`course_id`, `store_id`, `category_id`, `name`, `intro`, `location`, `price`, `min_capacity`, `max_capacity`, `created_at`) VALUES
@@ -131,7 +131,7 @@ INSERT INTO `course` (`course_id`, `store_id`, `category_id`, `name`, `intro`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course_category`
+-- 資料表結構 `course_category`
 --
 
 CREATE TABLE `course_category` (
@@ -140,7 +140,7 @@ CREATE TABLE `course_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `course_category`
+-- 傾印資料表的資料 `course_category`
 --
 
 INSERT INTO `course_category` (`category_id`, `category_name`) VALUES
@@ -152,7 +152,7 @@ INSERT INTO `course_category` (`category_id`, `category_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course_datetime`
+-- 資料表結構 `course_datetime`
 --
 
 CREATE TABLE `course_datetime` (
@@ -162,7 +162,7 @@ CREATE TABLE `course_datetime` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `course_datetime`
+-- 傾印資料表的資料 `course_datetime`
 --
 
 INSERT INTO `course_datetime` (`date_id`, `start_datetime`, `end_datetime`) VALUES
@@ -196,7 +196,7 @@ INSERT INTO `course_datetime` (`date_id`, `start_datetime`, `end_datetime`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course_favorite`
+-- 資料表結構 `course_favorite`
 --
 
 CREATE TABLE `course_favorite` (
@@ -207,7 +207,7 @@ CREATE TABLE `course_favorite` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `course_favorite`
+-- 傾印資料表的資料 `course_favorite`
 --
 
 INSERT INTO `course_favorite` (`favorite_id`, `course_id`, `member_id`, `added_at`) VALUES
@@ -220,7 +220,7 @@ INSERT INTO `course_favorite` (`favorite_id`, `course_id`, `member_id`, `added_a
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course_image`
+-- 資料表結構 `course_image`
 --
 
 CREATE TABLE `course_image` (
@@ -232,7 +232,7 @@ CREATE TABLE `course_image` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `course_image`
+-- 傾印資料表的資料 `course_image`
 --
 
 INSERT INTO `course_image` (`image_id`, `course_id`, `is_thumbnail`, `is_banner`, `image_url`) VALUES
@@ -246,7 +246,7 @@ INSERT INTO `course_image` (`image_id`, `course_id`, `is_thumbnail`, `is_banner`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course_info_date`
+-- 資料表結構 `course_info_date`
 --
 
 CREATE TABLE `course_info_date` (
@@ -256,7 +256,7 @@ CREATE TABLE `course_info_date` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `course_info_date`
+-- 傾印資料表的資料 `course_info_date`
 --
 
 INSERT INTO `course_info_date` (`course_id`, `date_id`, `period`) VALUES
@@ -291,7 +291,7 @@ INSERT INTO `course_info_date` (`course_id`, `date_id`, `period`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course_news`
+-- 資料表結構 `course_news`
 --
 
 CREATE TABLE `course_news` (
@@ -303,7 +303,7 @@ CREATE TABLE `course_news` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `course_news`
+-- 傾印資料表的資料 `course_news`
 --
 
 INSERT INTO `course_news` (`news_id`, `course_id`, `news_title`, `news_content`, `created_at`) VALUES
@@ -316,7 +316,7 @@ INSERT INTO `course_news` (`news_id`, `course_id`, `news_title`, `news_content`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course_order`
+-- 資料表結構 `course_order`
 --
 
 CREATE TABLE `course_order` (
@@ -333,7 +333,7 @@ CREATE TABLE `course_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `course_order`
+-- 傾印資料表的資料 `course_order`
 --
 
 INSERT INTO `course_order` (`order_id`, `order_number`, `course_id`, `member_id`, `order_status`, `reservation_date`, `payment_date`, `canceled_date`, `coupon_id`, `payment_method`) VALUES
@@ -346,7 +346,7 @@ INSERT INTO `course_order` (`order_id`, `order_number`, `course_id`, `member_id`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course_qa`
+-- 資料表結構 `course_qa`
 --
 
 CREATE TABLE `course_qa` (
@@ -360,7 +360,7 @@ CREATE TABLE `course_qa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `course_qa`
+-- 傾印資料表的資料 `course_qa`
 --
 
 INSERT INTO `course_qa` (`qa_id`, `course_id`, `member_id`, `question`, `created_at`, `answer`, `answered_at`) VALUES
@@ -373,7 +373,7 @@ INSERT INTO `course_qa` (`qa_id`, `course_id`, `member_id`, `question`, `created
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course_rating`
+-- 資料表結構 `course_rating`
 --
 
 CREATE TABLE `course_rating` (
@@ -386,7 +386,7 @@ CREATE TABLE `course_rating` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `course_rating`
+-- 傾印資料表的資料 `course_rating`
 --
 
 INSERT INTO `course_rating` (`review_id`, `course_id`, `member_id`, `rating`, `comment`, `created_at`) VALUES
@@ -399,7 +399,7 @@ INSERT INTO `course_rating` (`review_id`, `course_id`, `member_id`, `rating`, `c
 -- --------------------------------------------------------
 
 --
--- Table structure for table `custom_orders`
+-- 資料表結構 `custom_orders`
 --
 
 CREATE TABLE `custom_orders` (
@@ -422,7 +422,7 @@ CREATE TABLE `custom_orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `custom_orders`
+-- 傾印資料表的資料 `custom_orders`
 --
 
 INSERT INTO `custom_orders` (`sid`, `order_id`, `order_date`, `delivery_date`, `member_id`, `store_id`, `shipping_id`, `sender_name`, `sender_tel`, `recipient_name`, `recipient_tel`, `recipient_address`, `payment_method`, `shipping_method`, `shipping_status`, `order_status`) VALUES
@@ -449,7 +449,7 @@ INSERT INTO `custom_orders` (`sid`, `order_id`, `order_date`, `delivery_date`, `
 (63, 'F2024013185967449', '2024-03-26 12:48:17', '2024-03-30', 11, 16, 2, '林小華', '0954321890', '陳大春', '0923123456', '台中市西屯區yy路24號', 3, 2, 1, 2);
 
 --
--- Triggers `custom_orders`
+-- 觸發器 `custom_orders`
 --
 DELIMITER $$
 CREATE TRIGGER `before_insert_table_custom_orders` BEFORE INSERT ON `custom_orders` FOR EACH ROW BEGIN
@@ -462,7 +462,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `custom_products`
+-- 資料表結構 `custom_products`
 --
 
 CREATE TABLE `custom_products` (
@@ -472,7 +472,7 @@ CREATE TABLE `custom_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `custom_products`
+-- 傾印資料表的資料 `custom_products`
 --
 
 INSERT INTO `custom_products` (`product_id`, `product_name`, `product_stock`) VALUES
@@ -485,7 +485,7 @@ INSERT INTO `custom_products` (`product_id`, `product_name`, `product_stock`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `custom_product_list`
+-- 資料表結構 `custom_product_list`
 --
 
 CREATE TABLE `custom_product_list` (
@@ -499,7 +499,7 @@ CREATE TABLE `custom_product_list` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `custom_product_list`
+-- 傾印資料表的資料 `custom_product_list`
 --
 
 INSERT INTO `custom_product_list` (`sid`, `product_id`, `products_url`, `product_color`, `product_stock`, `product_price`, `store_id`) VALUES
@@ -517,7 +517,7 @@ INSERT INTO `custom_product_list` (`sid`, `product_id`, `products_url`, `product
 -- --------------------------------------------------------
 
 --
--- Table structure for table `custom_stock_status`
+-- 資料表結構 `custom_stock_status`
 --
 
 CREATE TABLE `custom_stock_status` (
@@ -526,7 +526,7 @@ CREATE TABLE `custom_stock_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `custom_stock_status`
+-- 傾印資料表的資料 `custom_stock_status`
 --
 
 INSERT INTO `custom_stock_status` (`stock_id`, `stock_name`) VALUES
@@ -536,7 +536,7 @@ INSERT INTO `custom_stock_status` (`stock_id`, `stock_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `custom_templates`
+-- 資料表結構 `custom_templates`
 --
 
 CREATE TABLE `custom_templates` (
@@ -551,7 +551,7 @@ CREATE TABLE `custom_templates` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `custom_templates`
+-- 傾印資料表的資料 `custom_templates`
 --
 
 INSERT INTO `custom_templates` (`sid`, `template_id`, `template_name`, `store_id`, `color_id`, `role_id`, `occ_id`, `stock_status`) VALUES
@@ -567,7 +567,7 @@ INSERT INTO `custom_templates` (`sid`, `template_id`, `template_name`, `store_id
 (10, 'T20240131010', '友情之花', 6, 1, 7, 3, 1);
 
 --
--- Triggers `custom_templates`
+-- 觸發器 `custom_templates`
 --
 DELIMITER $$
 CREATE TRIGGER `before_insert_custom_templates` BEFORE INSERT ON `custom_templates` FOR EACH ROW BEGIN
@@ -595,7 +595,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `custom_template_detail`
+-- 資料表結構 `custom_template_detail`
 --
 
 CREATE TABLE `custom_template_detail` (
@@ -610,7 +610,7 @@ CREATE TABLE `custom_template_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `custom_template_detail`
+-- 傾印資料表的資料 `custom_template_detail`
 --
 
 INSERT INTO `custom_template_detail` (`sid`, `template_id`, `product_id`, `color_id`, `position_top`, `position_left`, `z_index`, `rotate`) VALUES
@@ -628,7 +628,7 @@ INSERT INTO `custom_template_detail` (`sid`, `template_id`, `product_id`, `color
 -- --------------------------------------------------------
 
 --
--- Table structure for table `intro_flower`
+-- 資料表結構 `intro_flower`
 --
 
 CREATE TABLE `intro_flower` (
@@ -640,7 +640,7 @@ CREATE TABLE `intro_flower` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `intro_flower`
+-- 傾印資料表的資料 `intro_flower`
 --
 
 INSERT INTO `intro_flower` (`flower_id`, `flower_name`, `flower_engname`, `flower_lang`, `flower_intro`) VALUES
@@ -689,7 +689,7 @@ INSERT INTO `intro_flower` (`flower_id`, `flower_name`, `flower_engname`, `flowe
 -- --------------------------------------------------------
 
 --
--- Table structure for table `intro_flower_color`
+-- 資料表結構 `intro_flower_color`
 --
 
 CREATE TABLE `intro_flower_color` (
@@ -699,7 +699,7 @@ CREATE TABLE `intro_flower_color` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `intro_flower_color`
+-- 傾印資料表的資料 `intro_flower_color`
 --
 
 INSERT INTO `intro_flower_color` (`flower_color_id`, `flower_id`, `color_list_id`) VALUES
@@ -801,7 +801,7 @@ INSERT INTO `intro_flower_color` (`flower_color_id`, `flower_id`, `color_list_id
 -- --------------------------------------------------------
 
 --
--- Table structure for table `intro_flower_image`
+-- 資料表結構 `intro_flower_image`
 --
 
 CREATE TABLE `intro_flower_image` (
@@ -811,7 +811,7 @@ CREATE TABLE `intro_flower_image` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `intro_flower_image`
+-- 傾印資料表的資料 `intro_flower_image`
 --
 
 INSERT INTO `intro_flower_image` (`flower_image_id`, `flower_id`, `image_id`) VALUES
@@ -860,7 +860,7 @@ INSERT INTO `intro_flower_image` (`flower_image_id`, `flower_id`, `image_id`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `intro_flower_occ`
+-- 資料表結構 `intro_flower_occ`
 --
 
 CREATE TABLE `intro_flower_occ` (
@@ -870,7 +870,7 @@ CREATE TABLE `intro_flower_occ` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `intro_flower_occ`
+-- 傾印資料表的資料 `intro_flower_occ`
 --
 
 INSERT INTO `intro_flower_occ` (`flower_occ_id`, `flower_id`, `occ_id`) VALUES
@@ -955,7 +955,7 @@ INSERT INTO `intro_flower_occ` (`flower_occ_id`, `flower_id`, `occ_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `intro_flower_role`
+-- 資料表結構 `intro_flower_role`
 --
 
 CREATE TABLE `intro_flower_role` (
@@ -965,7 +965,7 @@ CREATE TABLE `intro_flower_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `intro_flower_role`
+-- 傾印資料表的資料 `intro_flower_role`
 --
 
 INSERT INTO `intro_flower_role` (`flower_role_id`, `flower_id`, `role_id`) VALUES
@@ -1053,7 +1053,7 @@ INSERT INTO `intro_flower_role` (`flower_role_id`, `flower_id`, `role_id`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `intro_flower_season`
+-- 資料表結構 `intro_flower_season`
 --
 
 CREATE TABLE `intro_flower_season` (
@@ -1063,7 +1063,7 @@ CREATE TABLE `intro_flower_season` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `intro_flower_season`
+-- 傾印資料表的資料 `intro_flower_season`
 --
 
 INSERT INTO `intro_flower_season` (`flower_season_id`, `flower_id`, `season_id`) VALUES
@@ -1113,7 +1113,7 @@ INSERT INTO `intro_flower_season` (`flower_season_id`, `flower_id`, `season_id`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `intro_image`
+-- 資料表結構 `intro_image`
 --
 
 CREATE TABLE `intro_image` (
@@ -1122,7 +1122,7 @@ CREATE TABLE `intro_image` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `intro_image`
+-- 傾印資料表的資料 `intro_image`
 --
 
 INSERT INTO `intro_image` (`image_id`, `image`) VALUES
@@ -1171,7 +1171,7 @@ INSERT INTO `intro_image` (`image_id`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `intro_occ`
+-- 資料表結構 `intro_occ`
 --
 
 CREATE TABLE `intro_occ` (
@@ -1180,7 +1180,7 @@ CREATE TABLE `intro_occ` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `intro_occ`
+-- 傾印資料表的資料 `intro_occ`
 --
 
 INSERT INTO `intro_occ` (`occ_id`, `occ`) VALUES
@@ -1196,7 +1196,7 @@ INSERT INTO `intro_occ` (`occ_id`, `occ`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `intro_role`
+-- 資料表結構 `intro_role`
 --
 
 CREATE TABLE `intro_role` (
@@ -1205,7 +1205,7 @@ CREATE TABLE `intro_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `intro_role`
+-- 傾印資料表的資料 `intro_role`
 --
 
 INSERT INTO `intro_role` (`role_id`, `role`) VALUES
@@ -1222,7 +1222,7 @@ INSERT INTO `intro_role` (`role_id`, `role`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `intro_season`
+-- 資料表結構 `intro_season`
 --
 
 CREATE TABLE `intro_season` (
@@ -1231,7 +1231,7 @@ CREATE TABLE `intro_season` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `intro_season`
+-- 傾印資料表的資料 `intro_season`
 --
 
 INSERT INTO `intro_season` (`season_id`, `season`) VALUES
@@ -1244,7 +1244,7 @@ INSERT INTO `intro_season` (`season_id`, `season`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `member`
+-- 資料表結構 `member`
 --
 
 CREATE TABLE `member` (
@@ -1260,7 +1260,7 @@ CREATE TABLE `member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `member`
+-- 傾印資料表的資料 `member`
 --
 
 INSERT INTO `member` (`member_id`, `name`, `email`, `join_date`, `password`, `phone`, `city`, `address`, `district`) VALUES
@@ -1509,7 +1509,7 @@ INSERT INTO `member` (`member_id`, `name`, `email`, `join_date`, `password`, `ph
 -- --------------------------------------------------------
 
 --
--- Table structure for table `member_coupon`
+-- 資料表結構 `member_coupon`
 --
 
 CREATE TABLE `member_coupon` (
@@ -1520,7 +1520,7 @@ CREATE TABLE `member_coupon` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `member_coupon`
+-- 傾印資料表的資料 `member_coupon`
 --
 
 INSERT INTO `member_coupon` (`coupon_id`, `coupon_code`, `discount_amount`, `expiration_date`) VALUES
@@ -2039,7 +2039,7 @@ INSERT INTO `member_coupon` (`coupon_id`, `coupon_code`, `discount_amount`, `exp
 -- --------------------------------------------------------
 
 --
--- Table structure for table `member_user_coupon`
+-- 資料表結構 `member_user_coupon`
 --
 
 CREATE TABLE `member_user_coupon` (
@@ -2051,7 +2051,7 @@ CREATE TABLE `member_user_coupon` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `member_user_coupon`
+-- 傾印資料表的資料 `member_user_coupon`
 --
 
 INSERT INTO `member_user_coupon` (`sid`, `member_id`, `coupon_id`, `is_redeemed`, `get_time`) VALUES
@@ -2559,7 +2559,7 @@ INSERT INTO `member_user_coupon` (`sid`, `member_id`, `coupon_id`, `is_redeemed`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_status`
+-- 資料表結構 `order_status`
 --
 
 CREATE TABLE `order_status` (
@@ -2568,7 +2568,7 @@ CREATE TABLE `order_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `order_status`
+-- 傾印資料表的資料 `order_status`
 --
 
 INSERT INTO `order_status` (`order_status_id`, `order_status`) VALUES
@@ -2583,7 +2583,7 @@ INSERT INTO `order_status` (`order_status_id`, `order_status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payment`
+-- 資料表結構 `payment`
 --
 
 CREATE TABLE `payment` (
@@ -2592,7 +2592,7 @@ CREATE TABLE `payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `payment`
+-- 傾印資料表的資料 `payment`
 --
 
 INSERT INTO `payment` (`payment_id`, `payment_method`) VALUES
@@ -2603,7 +2603,7 @@ INSERT INTO `payment` (`payment_id`, `payment_method`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- 資料表結構 `product`
 --
 
 CREATE TABLE `product` (
@@ -2618,7 +2618,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product`
+-- 傾印資料表的資料 `product`
 --
 
 INSERT INTO `product` (`product_id`, `name`, `categories_id`, `price`, `size`, `created_at`, `updated_at`, `description`) VALUES
@@ -2700,13 +2700,12 @@ INSERT INTO `product` (`product_id`, `name`, `categories_id`, `price`, `size`, `
 (76, '花卉網袋', 12, 60, '18cm x 18cm', '2018-06-14 14:05:00', '2018-06-23 07:35:00', '簡約實用，保護花卉不受損。'),
 (77, '花貼紙', 12, 50, '10cm x 10cm', '2017-02-01 14:05:00', '2017-02-08 12:48:00', '多款造型，可隨心黏貼在花束上。'),
 (78, '花卉襯墊', 12, 150, '40cm x 40cm', '2015-07-03 14:05:00', '2015-07-10 14:33:00', '柔軟質感，保護花束不變形。'),
-(79, '花束袋', 12, 70, '15cm x 15cm', '2020-08-27 14:05:00', '2020-09-03 08:10:00', '簡易包裝，方便攜帶。'),
-(80, '花瓶底墊', 12, 100, '直徑25cm', '2022-04-29 14:05:00', '2022-05-06 05:02:00', '防滑設計，保護桌面不受損。');
+(79, '花束袋', 12, 70, '15cm x 15cm', '2020-08-27 14:05:00', '2020-09-03 08:10:00', '簡易包裝，方便攜帶。');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_cart`
+-- 資料表結構 `product_cart`
 --
 
 CREATE TABLE `product_cart` (
@@ -2717,7 +2716,7 @@ CREATE TABLE `product_cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product_cart`
+-- 傾印資料表的資料 `product_cart`
 --
 
 INSERT INTO `product_cart` (`product_cart_id`, `member_id`, `product_id`, `order_quantity`) VALUES
@@ -2775,7 +2774,7 @@ INSERT INTO `product_cart` (`product_cart_id`, `member_id`, `product_id`, `order
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_color`
+-- 資料表結構 `product_color`
 --
 
 CREATE TABLE `product_color` (
@@ -2785,7 +2784,7 @@ CREATE TABLE `product_color` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product_color`
+-- 傾印資料表的資料 `product_color`
 --
 
 INSERT INTO `product_color` (`sid`, `product_id`, `color_list_id`) VALUES
@@ -2843,7 +2842,7 @@ INSERT INTO `product_color` (`sid`, `product_id`, `color_list_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_favorite`
+-- 資料表結構 `product_favorite`
 --
 
 CREATE TABLE `product_favorite` (
@@ -2854,7 +2853,7 @@ CREATE TABLE `product_favorite` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product_favorite`
+-- 傾印資料表的資料 `product_favorite`
 --
 
 INSERT INTO `product_favorite` (`sid`, `product_id`, `member_id`, `created_at`) VALUES
@@ -2912,270 +2911,76 @@ INSERT INTO `product_favorite` (`sid`, `product_id`, `member_id`, `created_at`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_image`
+-- 資料表結構 `product_image`
 --
 
 CREATE TABLE `product_image` (
   `sid` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `product_images_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `product_image`
---
-
-INSERT INTO `product_image` (`sid`, `product_id`, `product_images_id`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(4, 2, 4),
-(5, 2, 5),
-(6, 2, 6),
-(7, 3, 7),
-(8, 3, 8),
-(9, 3, 9),
-(10, 4, 10),
-(11, 4, 11),
-(12, 4, 12),
-(13, 5, 13),
-(14, 5, 14),
-(15, 5, 15),
-(16, 6, 16),
-(17, 6, 17),
-(18, 6, 18),
-(19, 7, 19),
-(20, 7, 20),
-(21, 7, 21),
-(22, 8, 22),
-(23, 8, 23),
-(24, 8, 24),
-(25, 9, 25),
-(26, 9, 26),
-(27, 9, 27),
-(28, 10, 28),
-(29, 10, 29),
-(30, 10, 30),
-(31, 11, 31),
-(32, 11, 32),
-(33, 11, 33),
-(34, 12, 34),
-(35, 12, 35),
-(36, 12, 36),
-(37, 13, 37),
-(38, 13, 38),
-(39, 13, 39),
-(40, 14, 40),
-(41, 14, 41),
-(42, 14, 42),
-(43, 15, 43),
-(44, 15, 44),
-(45, 15, 45),
-(46, 16, 46),
-(47, 16, 47),
-(48, 16, 48),
-(49, 17, 49),
-(50, 17, 50),
-(51, 18, 51),
-(52, 19, 52),
-(53, 20, 53),
-(54, 21, 54),
-(55, 22, 55),
-(56, 23, 56),
-(57, 24, 57),
-(58, 25, 58),
-(59, 26, 59),
-(60, 27, 60),
-(61, 28, 61),
-(62, 29, 62),
-(63, 30, 63),
-(64, 31, 64),
-(65, 32, 65),
-(66, 33, 66),
-(67, 34, 67),
-(68, 35, 68),
-(69, 36, 69),
-(70, 37, 70),
-(71, 38, 71),
-(72, 39, 72),
-(73, 40, 73),
-(74, 41, 74),
-(75, 42, 75),
-(76, 43, 76),
-(77, 44, 77),
-(78, 45, 78),
-(79, 46, 79),
-(80, 47, 80),
-(81, 48, 81),
-(82, 49, 82),
-(83, 50, 83),
-(84, 51, 84),
-(85, 52, 85),
-(86, 53, 86),
-(87, 54, 87),
-(88, 55, 88),
-(89, 56, 89),
-(90, 57, 90),
-(91, 58, 91),
-(92, 59, 92),
-(93, 60, 93),
-(94, 61, 94),
-(95, 62, 95),
-(96, 63, 96),
-(97, 64, 97),
-(98, 65, 98),
-(99, 66, 99),
-(100, 67, 100),
-(101, 68, 101),
-(102, 69, 102),
-(103, 70, 103),
-(104, 71, 104),
-(105, 72, 105),
-(106, 73, 106),
-(107, 74, 107),
-(108, 75, 108),
-(109, 76, 109),
-(110, 77, 110),
-(111, 78, 111),
-(112, 79, 112),
-(113, 80, 113);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product_image_list`
---
-
-CREATE TABLE `product_image_list` (
-  `product_images_id` int(11) NOT NULL,
-  `image_url` varchar(255) NOT NULL,
   `is_thumbnail` int(11) NOT NULL,
-  `description` varchar(255) NOT NULL
+  `image_url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product_image_list`
+-- 傾印資料表的資料 `product_image`
 --
 
-INSERT INTO `product_image_list` (`product_images_id`, `image_url`, `is_thumbnail`, `description`) VALUES
-(1, '../../img/product-images/image1.jpg', 1, '綻放'),
-(2, '../../img/product-images/image2.jpg', 0, '芬芳'),
-(3, '../../img/product-images/image3.jpg', 0, '優雅'),
-(4, '../../img/product-images/image4.jpg', 1, '翠綠'),
-(5, '../../img/product-images/image5.jpg', 0, '燦爛'),
-(6, '../../img/product-images/image6.jpg', 0, '悠閒'),
-(7, '../../img/product-images/image7.jpg', 1, '美麗'),
-(8, '../../img/product-images/image8.jpg', 0, '香氣'),
-(9, '../../img/product-images/image9.jpg', 0, '清新'),
-(10, '../../img/product-images/image10.jpg', 1, '好香'),
-(11, '../../img/product-images/image11.jpg', 0, '輝煌'),
-(12, '../../img/product-images/image12.jpg', 0, '青翠'),
-(13, '../../img/product-images/image13.jpg', 1, '柔美'),
-(14, '../../img/product-images/image14.jpg', 0, '神秘'),
-(15, '../../img/product-images/image15.jpg', 0, '和諧'),
-(16, '../../img/product-images/image16.jpg', 1, '明媚'),
-(17, '../../img/product-images/image17.jpg', 0, '快樂'),
-(18, '../../img/product-images/image18.jpg', 0, '溫暖'),
-(19, '../../img/product-images/image19.jpg', 1, '深邃'),
-(20, '../../img/product-images/image20.jpg', 0, '靈動'),
-(21, '../../img/product-images/image21.jpg', 0, '醉人'),
-(22, '../../img/product-images/image22.jpg', 1, '璀璨'),
-(23, '../../img/product-images/image23.jpg', 0, '氣息'),
-(24, '../../img/product-images/image24.jpg', 0, '嬌豔'),
-(25, '../../img/product-images/image25.jpg', 1, '祥和'),
-(26, '../../img/product-images/image26.jpg', 0, '翩翩'),
-(27, '../../img/product-images/image27.jpg', 0, '映襯'),
-(28, '../../img/product-images/image28.jpg', 1, '春意'),
-(29, '../../img/product-images/image29.jpg', 0, '安詳'),
-(30, '../../img/product-images/image30.jpg', 0, '寧靜'),
-(31, '../../img/product-images/image31.jpg', 1, '心曠神怡'),
-(32, '../../img/product-images/image32.jpg', 0, '絢爛'),
-(33, '../../img/product-images/image33.jpg', 0, '溫馨'),
-(34, '../../img/product-images/image34.jpg', 1, '妖嬈'),
-(35, '../../img/product-images/image35.jpg', 0, '春暖花開'),
-(36, '../../img/product-images/image36.jpg', 0, '宜人'),
-(37, '../../img/product-images/image37.jpg', 1, '富麗'),
-(38, '../../img/product-images/image38.jpg', 0, '幽雅'),
-(39, '../../img/product-images/image39.jpg', 0, '艷麗'),
-(40, '../../img/product-images/image40.jpg', 1, '情懷'),
-(41, '../../img/product-images/image41.jpg', 0, '恬靜'),
-(42, '../../img/product-images/image42.jpg', 0, '艷紅'),
-(43, '../../img/product-images/image43.jpg', 1, '樂觀'),
-(44, '../../img/product-images/image44.jpg', 0, '美好'),
-(45, '../../img/product-images/image45.jpg', 0, '滋潤'),
-(46, '../../img/product-images/image46.jpg', 1, '曼妙'),
-(47, '../../img/product-images/image47.jpg', 0, '艷陽'),
-(48, '../../img/product-images/image48.jpg', 0, '陽光'),
-(49, '../../img/product-images/image49.jpg', 1, '鮮豔'),
-(50, '../../img/product-images/image50.jpg', 0, '寬心'),
-(51, '../../img/product-images/image51.jpg', 1, '綻放'),
-(52, '../../img/product-images/image52.jpg', 1, '芬芳'),
-(53, '../../img/product-images/image53.jpg', 1, '優雅'),
-(54, '../../img/product-images/image54.jpg', 1, '翠綠'),
-(55, '../../img/product-images/image55.jpg', 1, '燦爛'),
-(56, '../../img/product-images/image56.jpg', 1, '悠閒'),
-(57, '../../img/product-images/image57.jpg', 1, '美麗'),
-(58, '../../img/product-images/image58.jpg', 1, '香氣'),
-(59, '../../img/product-images/image59.jpg', 1, '清新'),
-(60, '../../img/product-images/image60.jpg', 1, '好香'),
-(61, '../../img/product-images/image61.jpg', 1, '輝煌'),
-(62, '../../img/product-images/image62.jpg', 1, '青翠'),
-(63, '../../img/product-images/image63.jpg', 1, '柔美'),
-(64, '../../img/product-images/image64.jpg', 1, '神秘'),
-(65, '../../img/product-images/image65.jpg', 1, '和諧'),
-(66, '../../img/product-images/image66.jpg', 1, '明媚'),
-(67, '../../img/product-images/image67.jpg', 1, '快樂'),
-(68, '../../img/product-images/image68.jpg', 1, '溫暖'),
-(69, '../../img/product-images/image69.jpg', 1, '深邃'),
-(70, '../../img/product-images/image70.jpg', 1, '靈動'),
-(71, '../../img/product-images/image71.jpg', 1, '醉人'),
-(72, '../../img/product-images/image72.jpg', 1, '璀璨'),
-(73, '../../img/product-images/image73.jpg', 1, '氣息'),
-(74, '../../img/product-images/image74.jpg', 1, '嬌豔'),
-(75, '../../img/product-images/image75.jpg', 1, '祥和'),
-(76, '../../img/product-images/image76.jpg', 1, '翩翩'),
-(77, '../../img/product-images/image77.jpg', 1, '映襯'),
-(78, '../../img/product-images/image78.jpg', 1, '春意'),
-(79, '../../img/product-images/image79.jpg', 1, '安詳'),
-(80, '../../img/product-images/image80.jpg', 1, '寧靜'),
-(81, '../../img/product-images/image81.jpg', 1, '心曠神怡'),
-(82, '../../img/product-images/image82.jpg', 1, '絢爛'),
-(83, '../../img/product-images/image83.jpg', 1, '溫馨'),
-(84, '../../img/product-images/image84.jpg', 1, '妖嬈'),
-(85, '../../img/product-images/image85.jpg', 1, '春暖花開'),
-(86, '../../img/product-images/image86.jpg', 1, '宜人'),
-(87, '../../img/product-images/image87.jpg', 1, '富麗'),
-(88, '../../img/product-images/image88.jpg', 1, '幽雅'),
-(89, '../../img/product-images/image89.jpg', 1, '艷麗'),
-(90, '../../img/product-images/image90.jpg', 1, '情懷'),
-(91, '../../img/product-images/image91.jpg', 1, '恬靜'),
-(92, '../../img/product-images/image92.jpg', 1, '艷紅'),
-(93, '../../img/product-images/image93.jpg', 1, '樂觀'),
-(94, '../../img/product-images/image94.jpg', 1, '美好'),
-(95, '../../img/product-images/image95.jpg', 1, '滋潤'),
-(96, '../../img/product-images/image96.jpg', 1, '曼妙'),
-(97, '../../img/product-images/image97.jpg', 1, '艷陽'),
-(98, '../../img/product-images/image98.jpg', 1, '陽光'),
-(99, '../../img/product-images/image99.jpg', 1, '鮮豔'),
-(100, '../../img/product-images/image100.jpg', 1, '寬心'),
-(101, '../../img/product-images/image101.jpg', 1, '美好'),
-(102, '../../img/product-images/image102.jpg', 1, '滋潤'),
-(103, '../../img/product-images/image103.jpg', 1, '曼妙'),
-(104, '../../img/product-images/image104.jpg', 1, '艷陽'),
-(105, '../../img/product-images/image105.jpg', 1, '陽光'),
-(106, '../../img/product-images/image106.jpg', 1, '鮮豔'),
-(107, '../../img/product-images/image107.jpg', 1, '寬心'),
-(108, '../../img/product-images/image108.jpg', 1, '美好'),
-(109, '../../img/product-images/image109.jpg', 1, '滋潤'),
-(110, '../../img/product-images/image110.jpg', 1, '曼妙'),
-(111, '../../img/product-images/image111.jpg', 1, '艷陽'),
-(112, '../../img/product-images/image112.jpg', 1, '陽光'),
-(113, '../../img/product-images/image113.jpg', 1, '鮮豔');
+INSERT INTO `product_image` (`sid`, `product_id`, `is_thumbnail`, `image_url`) VALUES
+(1, 1, 1, 'image1.jpg'),
+(2, 1, 0, 'image2.jpg'),
+(3, 1, 0, 'image3.jpg'),
+(4, 2, 1, 'image4.jpg'),
+(5, 2, 0, 'image5.jpg'),
+(6, 2, 0, 'image6.jpg'),
+(7, 3, 1, 'image7.jpg'),
+(8, 3, 0, 'image8.jpg'),
+(9, 3, 0, 'image9.jpg'),
+(10, 4, 1, 'image10.jpg'),
+(11, 4, 0, 'image11.jpg'),
+(12, 4, 0, 'image12.jpg'),
+(13, 5, 1, 'image13.jpg'),
+(14, 5, 0, 'image14.jpg'),
+(15, 5, 0, 'image15.jpg'),
+(16, 6, 1, 'image16.jpg'),
+(17, 6, 0, 'image17.jpg'),
+(18, 6, 0, 'image18.jpg'),
+(19, 7, 1, 'image19.jpg'),
+(20, 7, 0, 'image20.jpg'),
+(21, 7, 0, 'image21.jpg'),
+(22, 8, 1, 'image22.jpg'),
+(23, 8, 0, 'image23.jpg'),
+(24, 8, 0, 'image24.jpg'),
+(25, 9, 1, 'image25.jpg'),
+(26, 9, 0, 'image26.jpg'),
+(27, 9, 0, 'image27.jpg'),
+(28, 10, 1, 'image28.jpg'),
+(29, 10, 0, 'image29.jpg'),
+(30, 10, 0, 'image30.jpg'),
+(31, 11, 1, 'image31.jpg'),
+(32, 11, 0, 'image32.jpg'),
+(33, 11, 0, 'image33.jpg'),
+(34, 12, 1, 'image34.jpg'),
+(35, 12, 0, 'image35.jpg'),
+(36, 12, 0, 'image36.jpg'),
+(37, 13, 1, 'image37.jpg'),
+(38, 13, 0, 'image38.jpg'),
+(39, 13, 0, 'image39.jpg'),
+(40, 14, 1, 'image40.jpg'),
+(41, 14, 0, 'image41.jpg'),
+(42, 14, 0, 'image42.jpg'),
+(43, 15, 1, 'image43.jpg'),
+(44, 15, 0, 'image44.jpg'),
+(45, 15, 0, 'image45.jpg'),
+(46, 16, 1, 'image46.jpg'),
+(47, 16, 0, 'image47.jpg'),
+(48, 16, 0, 'image48.jpg'),
+(49, 17, 1, 'image49.jpg'),
+(50, 17, 0, 'image50.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_order`
+-- 資料表結構 `product_order`
 --
 
 CREATE TABLE `product_order` (
@@ -3191,7 +2996,7 @@ CREATE TABLE `product_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product_order`
+-- 傾印資料表的資料 `product_order`
 --
 
 INSERT INTO `product_order` (`product_order_id`, `member_id`, `coupon_id`, `order_date`, `shipping_id`, `recipient`, `shipping_address`, `payment_id`, `order_status_id`) VALUES
@@ -3249,7 +3054,7 @@ INSERT INTO `product_order` (`product_order_id`, `member_id`, `coupon_id`, `orde
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_order_detail`
+-- 資料表結構 `product_order_detail`
 --
 
 CREATE TABLE `product_order_detail` (
@@ -3261,7 +3066,7 @@ CREATE TABLE `product_order_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product_order_detail`
+-- 傾印資料表的資料 `product_order_detail`
 --
 
 INSERT INTO `product_order_detail` (`product_order_detail_id`, `product_order_id`, `product_id`, `order_quantity`, `order_number`) VALUES
@@ -3319,7 +3124,7 @@ INSERT INTO `product_order_detail` (`product_order_detail_id`, `product_order_id
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_review`
+-- 資料表結構 `product_review`
 --
 
 CREATE TABLE `product_review` (
@@ -3331,7 +3136,7 @@ CREATE TABLE `product_review` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product_review`
+-- 傾印資料表的資料 `product_review`
 --
 
 INSERT INTO `product_review` (`product_review_id`, `product_order_detail_id`, `star_rating`, `text_review`, `created_at`) VALUES
@@ -3389,7 +3194,7 @@ INSERT INTO `product_review` (`product_review_id`, `product_order_detail_id`, `s
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_store`
+-- 資料表結構 `product_store`
 --
 
 CREATE TABLE `product_store` (
@@ -3399,7 +3204,7 @@ CREATE TABLE `product_store` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product_store`
+-- 傾印資料表的資料 `product_store`
 --
 
 INSERT INTO `product_store` (`sid`, `product_id`, `store_id`) VALUES
@@ -3457,7 +3262,7 @@ INSERT INTO `product_store` (`sid`, `product_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shipping`
+-- 資料表結構 `shipping`
 --
 
 CREATE TABLE `shipping` (
@@ -3466,7 +3271,7 @@ CREATE TABLE `shipping` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `shipping`
+-- 傾印資料表的資料 `shipping`
 --
 
 INSERT INTO `shipping` (`shipping_id`, `shipping_method`) VALUES
@@ -3476,7 +3281,7 @@ INSERT INTO `shipping` (`shipping_id`, `shipping_method`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `store`
+-- 資料表結構 `store`
 --
 
 CREATE TABLE `store` (
@@ -3495,7 +3300,7 @@ CREATE TABLE `store` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `store`
+-- 傾印資料表的資料 `store`
 --
 
 INSERT INTO `store` (`store_id`, `store_name`, `store_account`, `store_password`, `store_intro`, `store_address`, `store_path`, `store_email`, `store_tel`, `sub_date`, `sub_id`, `permission_id`) VALUES
@@ -3564,7 +3369,7 @@ INSERT INTO `store` (`store_id`, `store_name`, `store_account`, `store_password`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `store_permission`
+-- 資料表結構 `store_permission`
 --
 
 CREATE TABLE `store_permission` (
@@ -3573,7 +3378,7 @@ CREATE TABLE `store_permission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `store_permission`
+-- 傾印資料表的資料 `store_permission`
 --
 
 INSERT INTO `store_permission` (`permission_id`, `permission_position`) VALUES
@@ -3583,7 +3388,7 @@ INSERT INTO `store_permission` (`permission_id`, `permission_position`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `store_stock_quantity`
+-- 資料表結構 `store_stock_quantity`
 --
 
 CREATE TABLE `store_stock_quantity` (
@@ -3597,7 +3402,7 @@ CREATE TABLE `store_stock_quantity` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `store_stock_quantity`
+-- 傾印資料表的資料 `store_stock_quantity`
 --
 
 INSERT INTO `store_stock_quantity` (`stock_id`, `product_id`, `product_name`, `product_current_quantity`, `purchase_quantity`, `purchase_time`, `store_id`) VALUES
@@ -3610,7 +3415,7 @@ INSERT INTO `store_stock_quantity` (`stock_id`, `product_id`, `product_name`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `store_sub`
+-- 資料表結構 `store_sub`
 --
 
 CREATE TABLE `store_sub` (
@@ -3620,7 +3425,7 @@ CREATE TABLE `store_sub` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `store_sub`
+-- 傾印資料表的資料 `store_sub`
 --
 
 INSERT INTO `store_sub` (`sub_id`, `sub_name`, `price`) VALUES
@@ -3630,23 +3435,23 @@ INSERT INTO `store_sub` (`sub_id`, `sub_name`, `price`) VALUES
 (4, '永久', 1);
 
 --
--- Indexes for dumped tables
+-- 已傾印資料表的索引
 --
 
 --
--- Indexes for table `categories`
+-- 資料表索引 `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`categories_id`);
 
 --
--- Indexes for table `color_list`
+-- 資料表索引 `color_list`
 --
 ALTER TABLE `color_list`
   ADD PRIMARY KEY (`color_list_id`);
 
 --
--- Indexes for table `course`
+-- 資料表索引 `course`
 --
 ALTER TABLE `course`
   ADD PRIMARY KEY (`course_id`),
@@ -3654,19 +3459,19 @@ ALTER TABLE `course`
   ADD KEY `fk_c_store_id` (`store_id`);
 
 --
--- Indexes for table `course_category`
+-- 資料表索引 `course_category`
 --
 ALTER TABLE `course_category`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexes for table `course_datetime`
+-- 資料表索引 `course_datetime`
 --
 ALTER TABLE `course_datetime`
   ADD PRIMARY KEY (`date_id`);
 
 --
--- Indexes for table `course_favorite`
+-- 資料表索引 `course_favorite`
 --
 ALTER TABLE `course_favorite`
   ADD PRIMARY KEY (`favorite_id`),
@@ -3674,28 +3479,28 @@ ALTER TABLE `course_favorite`
   ADD KEY `fk_c_favorite_member_id` (`member_id`);
 
 --
--- Indexes for table `course_image`
+-- 資料表索引 `course_image`
 --
 ALTER TABLE `course_image`
   ADD PRIMARY KEY (`image_id`),
   ADD KEY `fk_c_image_course_id` (`course_id`);
 
 --
--- Indexes for table `course_info_date`
+-- 資料表索引 `course_info_date`
 --
 ALTER TABLE `course_info_date`
   ADD PRIMARY KEY (`date_id`,`course_id`) USING BTREE,
   ADD KEY `fk_c_info_date_course_id` (`course_id`);
 
 --
--- Indexes for table `course_news`
+-- 資料表索引 `course_news`
 --
 ALTER TABLE `course_news`
   ADD PRIMARY KEY (`news_id`),
   ADD KEY `fk_c_news_course_id` (`course_id`);
 
 --
--- Indexes for table `course_order`
+-- 資料表索引 `course_order`
 --
 ALTER TABLE `course_order`
   ADD PRIMARY KEY (`order_id`),
@@ -3706,7 +3511,7 @@ ALTER TABLE `course_order`
   ADD KEY `fk_c_order_coupon_id` (`coupon_id`);
 
 --
--- Indexes for table `course_qa`
+-- 資料表索引 `course_qa`
 --
 ALTER TABLE `course_qa`
   ADD PRIMARY KEY (`qa_id`),
@@ -3714,7 +3519,7 @@ ALTER TABLE `course_qa`
   ADD KEY `fk_c_qa_member_id` (`member_id`);
 
 --
--- Indexes for table `course_rating`
+-- 資料表索引 `course_rating`
 --
 ALTER TABLE `course_rating`
   ADD PRIMARY KEY (`review_id`),
@@ -3722,7 +3527,7 @@ ALTER TABLE `course_rating`
   ADD KEY `fk_c_rating_member_id` (`member_id`);
 
 --
--- Indexes for table `custom_orders`
+-- 資料表索引 `custom_orders`
 --
 ALTER TABLE `custom_orders`
   ADD PRIMARY KEY (`sid`),
@@ -3734,13 +3539,13 @@ ALTER TABLE `custom_orders`
   ADD KEY `fk_cu_shipping_method` (`shipping_method`);
 
 --
--- Indexes for table `custom_products`
+-- 資料表索引 `custom_products`
 --
 ALTER TABLE `custom_products`
   ADD PRIMARY KEY (`product_id`);
 
 --
--- Indexes for table `custom_product_list`
+-- 資料表索引 `custom_product_list`
 --
 ALTER TABLE `custom_product_list`
   ADD PRIMARY KEY (`sid`),
@@ -3748,13 +3553,13 @@ ALTER TABLE `custom_product_list`
   ADD KEY `fk_cp_stock_id` (`product_stock`);
 
 --
--- Indexes for table `custom_stock_status`
+-- 資料表索引 `custom_stock_status`
 --
 ALTER TABLE `custom_stock_status`
   ADD PRIMARY KEY (`stock_id`);
 
 --
--- Indexes for table `custom_templates`
+-- 資料表索引 `custom_templates`
 --
 ALTER TABLE `custom_templates`
   ADD PRIMARY KEY (`sid`),
@@ -3765,7 +3570,7 @@ ALTER TABLE `custom_templates`
   ADD KEY `template_id` (`template_id`);
 
 --
--- Indexes for table `custom_template_detail`
+-- 資料表索引 `custom_template_detail`
 --
 ALTER TABLE `custom_template_detail`
   ADD PRIMARY KEY (`sid`),
@@ -3774,20 +3579,20 @@ ALTER TABLE `custom_template_detail`
   ADD KEY `fk_td_color_id` (`color_id`);
 
 --
--- Indexes for table `intro_flower`
+-- 資料表索引 `intro_flower`
 --
 ALTER TABLE `intro_flower`
   ADD PRIMARY KEY (`flower_id`);
 
 --
--- Indexes for table `intro_flower_color`
+-- 資料表索引 `intro_flower_color`
 --
 ALTER TABLE `intro_flower_color`
   ADD PRIMARY KEY (`flower_color_id`),
   ADD KEY `flower_id` (`flower_id`);
 
 --
--- Indexes for table `intro_flower_image`
+-- 資料表索引 `intro_flower_image`
 --
 ALTER TABLE `intro_flower_image`
   ADD PRIMARY KEY (`flower_image_id`),
@@ -3795,7 +3600,7 @@ ALTER TABLE `intro_flower_image`
   ADD KEY `flower_id` (`flower_id`);
 
 --
--- Indexes for table `intro_flower_occ`
+-- 資料表索引 `intro_flower_occ`
 --
 ALTER TABLE `intro_flower_occ`
   ADD PRIMARY KEY (`flower_occ_id`),
@@ -3803,7 +3608,7 @@ ALTER TABLE `intro_flower_occ`
   ADD KEY `occ_id` (`occ_id`);
 
 --
--- Indexes for table `intro_flower_role`
+-- 資料表索引 `intro_flower_role`
 --
 ALTER TABLE `intro_flower_role`
   ADD PRIMARY KEY (`flower_role_id`),
@@ -3811,7 +3616,7 @@ ALTER TABLE `intro_flower_role`
   ADD KEY `role_id` (`role_id`);
 
 --
--- Indexes for table `intro_flower_season`
+-- 資料表索引 `intro_flower_season`
 --
 ALTER TABLE `intro_flower_season`
   ADD PRIMARY KEY (`flower_season_id`),
@@ -3819,44 +3624,44 @@ ALTER TABLE `intro_flower_season`
   ADD KEY `season_id` (`season_id`);
 
 --
--- Indexes for table `intro_image`
+-- 資料表索引 `intro_image`
 --
 ALTER TABLE `intro_image`
   ADD PRIMARY KEY (`image_id`);
 
 --
--- Indexes for table `intro_occ`
+-- 資料表索引 `intro_occ`
 --
 ALTER TABLE `intro_occ`
   ADD PRIMARY KEY (`occ_id`);
 
 --
--- Indexes for table `intro_role`
+-- 資料表索引 `intro_role`
 --
 ALTER TABLE `intro_role`
   ADD PRIMARY KEY (`role_id`);
 
 --
--- Indexes for table `intro_season`
+-- 資料表索引 `intro_season`
 --
 ALTER TABLE `intro_season`
   ADD PRIMARY KEY (`season_id`);
 
 --
--- Indexes for table `member`
+-- 資料表索引 `member`
 --
 ALTER TABLE `member`
   ADD PRIMARY KEY (`member_id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `member_coupon`
+-- 資料表索引 `member_coupon`
 --
 ALTER TABLE `member_coupon`
   ADD PRIMARY KEY (`coupon_id`);
 
 --
--- Indexes for table `member_user_coupon`
+-- 資料表索引 `member_user_coupon`
 --
 ALTER TABLE `member_user_coupon`
   ADD PRIMARY KEY (`sid`),
@@ -3864,33 +3669,33 @@ ALTER TABLE `member_user_coupon`
   ADD KEY `coupon_id` (`coupon_id`);
 
 --
--- Indexes for table `order_status`
+-- 資料表索引 `order_status`
 --
 ALTER TABLE `order_status`
   ADD PRIMARY KEY (`order_status_id`);
 
 --
--- Indexes for table `payment`
+-- 資料表索引 `payment`
 --
 ALTER TABLE `payment`
   ADD PRIMARY KEY (`payment_id`);
 
 --
--- Indexes for table `product`
+-- 資料表索引 `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `categories_id` (`categories_id`);
 
 --
--- Indexes for table `product_cart`
+-- 資料表索引 `product_cart`
 --
 ALTER TABLE `product_cart`
   ADD PRIMARY KEY (`product_cart_id`),
   ADD KEY `product_id` (`product_id`);
 
 --
--- Indexes for table `product_color`
+-- 資料表索引 `product_color`
 --
 ALTER TABLE `product_color`
   ADD PRIMARY KEY (`sid`),
@@ -3898,26 +3703,21 @@ ALTER TABLE `product_color`
   ADD KEY `color_list_id` (`color_list_id`);
 
 --
--- Indexes for table `product_favorite`
+-- 資料表索引 `product_favorite`
 --
 ALTER TABLE `product_favorite`
   ADD PRIMARY KEY (`sid`),
   ADD KEY `product_id` (`product_id`);
 
 --
--- Indexes for table `product_image`
+-- 資料表索引 `product_image`
 --
 ALTER TABLE `product_image`
-  ADD PRIMARY KEY (`sid`);
+  ADD PRIMARY KEY (`sid`),
+  ADD KEY `product_id` (`product_id`);
 
 --
--- Indexes for table `product_image_list`
---
-ALTER TABLE `product_image_list`
-  ADD PRIMARY KEY (`product_images_id`);
-
---
--- Indexes for table `product_order`
+-- 資料表索引 `product_order`
 --
 ALTER TABLE `product_order`
   ADD PRIMARY KEY (`product_order_id`),
@@ -3926,7 +3726,7 @@ ALTER TABLE `product_order`
   ADD KEY `order_status_id` (`order_status_id`);
 
 --
--- Indexes for table `product_order_detail`
+-- 資料表索引 `product_order_detail`
 --
 ALTER TABLE `product_order_detail`
   ADD PRIMARY KEY (`product_order_detail_id`),
@@ -3934,27 +3734,27 @@ ALTER TABLE `product_order_detail`
   ADD KEY `product_id` (`product_id`);
 
 --
--- Indexes for table `product_review`
+-- 資料表索引 `product_review`
 --
 ALTER TABLE `product_review`
   ADD PRIMARY KEY (`product_review_id`),
   ADD KEY `product_order_detail_id` (`product_order_detail_id`);
 
 --
--- Indexes for table `product_store`
+-- 資料表索引 `product_store`
 --
 ALTER TABLE `product_store`
   ADD PRIMARY KEY (`sid`),
   ADD KEY `product_id` (`product_id`);
 
 --
--- Indexes for table `shipping`
+-- 資料表索引 `shipping`
 --
 ALTER TABLE `shipping`
   ADD PRIMARY KEY (`shipping_id`);
 
 --
--- Indexes for table `store`
+-- 資料表索引 `store`
 --
 ALTER TABLE `store`
   ADD PRIMARY KEY (`store_id`),
@@ -3962,331 +3762,325 @@ ALTER TABLE `store`
   ADD KEY `sub_id` (`sub_id`);
 
 --
--- Indexes for table `store_permission`
+-- 資料表索引 `store_permission`
 --
 ALTER TABLE `store_permission`
   ADD PRIMARY KEY (`permission_id`);
 
 --
--- Indexes for table `store_stock_quantity`
+-- 資料表索引 `store_stock_quantity`
 --
 ALTER TABLE `store_stock_quantity`
   ADD PRIMARY KEY (`stock_id`),
   ADD KEY `store_id` (`store_id`);
 
 --
--- Indexes for table `store_sub`
+-- 資料表索引 `store_sub`
 --
 ALTER TABLE `store_sub`
   ADD PRIMARY KEY (`sub_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
 
 --
--- AUTO_INCREMENT for table `categories`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `categories`
 --
 ALTER TABLE `categories`
   MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `color_list`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `color_list`
 --
 ALTER TABLE `color_list`
   MODIFY `color_list_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `course`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `course`
 --
 ALTER TABLE `course`
   MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
--- AUTO_INCREMENT for table `course_datetime`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `course_datetime`
 --
 ALTER TABLE `course_datetime`
   MODIFY `date_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT for table `course_favorite`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `course_favorite`
 --
 ALTER TABLE `course_favorite`
   MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `course_image`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `course_image`
 --
 ALTER TABLE `course_image`
   MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `course_news`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `course_news`
 --
 ALTER TABLE `course_news`
   MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `course_order`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `course_order`
 --
 ALTER TABLE `course_order`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `course_qa`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `course_qa`
 --
 ALTER TABLE `course_qa`
   MODIFY `qa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `course_rating`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `course_rating`
 --
 ALTER TABLE `course_rating`
   MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `custom_orders`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `custom_orders`
 --
 ALTER TABLE `custom_orders`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
--- AUTO_INCREMENT for table `custom_products`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `custom_products`
 --
 ALTER TABLE `custom_products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `custom_product_list`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `custom_product_list`
 --
 ALTER TABLE `custom_product_list`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `custom_templates`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `custom_templates`
 --
 ALTER TABLE `custom_templates`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `custom_template_detail`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `custom_template_detail`
 --
 ALTER TABLE `custom_template_detail`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `intro_flower`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `intro_flower`
 --
 ALTER TABLE `intro_flower`
   MODIFY `flower_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT for table `intro_flower_color`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `intro_flower_color`
 --
 ALTER TABLE `intro_flower_color`
   MODIFY `flower_color_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
--- AUTO_INCREMENT for table `intro_flower_image`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `intro_flower_image`
 --
 ALTER TABLE `intro_flower_image`
   MODIFY `flower_image_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT for table `intro_flower_occ`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `intro_flower_occ`
 --
 ALTER TABLE `intro_flower_occ`
   MODIFY `flower_occ_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
--- AUTO_INCREMENT for table `intro_flower_role`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `intro_flower_role`
 --
 ALTER TABLE `intro_flower_role`
   MODIFY `flower_role_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
--- AUTO_INCREMENT for table `intro_flower_season`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `intro_flower_season`
 --
 ALTER TABLE `intro_flower_season`
   MODIFY `flower_season_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
--- AUTO_INCREMENT for table `intro_image`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `intro_image`
 --
 ALTER TABLE `intro_image`
   MODIFY `image_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT for table `intro_occ`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `intro_occ`
 --
 ALTER TABLE `intro_occ`
   MODIFY `occ_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `intro_role`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `intro_role`
 --
 ALTER TABLE `intro_role`
   MODIFY `role_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `intro_season`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `intro_season`
 --
 ALTER TABLE `intro_season`
   MODIFY `season_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `member`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `member`
 --
 ALTER TABLE `member`
   MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=250;
 
 --
--- AUTO_INCREMENT for table `member_coupon`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `member_coupon`
 --
 ALTER TABLE `member_coupon`
   MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=514;
 
 --
--- AUTO_INCREMENT for table `member_user_coupon`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `member_user_coupon`
 --
 ALTER TABLE `member_user_coupon`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=501;
 
 --
--- AUTO_INCREMENT for table `order_status`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `order_status`
 --
 ALTER TABLE `order_status`
   MODIFY `order_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `payment`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `payment`
 --
 ALTER TABLE `payment`
   MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `product`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `product`
 --
 ALTER TABLE `product`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
--- AUTO_INCREMENT for table `product_cart`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `product_cart`
 --
 ALTER TABLE `product_cart`
   MODIFY `product_cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `product_color`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `product_color`
 --
 ALTER TABLE `product_color`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `product_favorite`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `product_favorite`
 --
 ALTER TABLE `product_favorite`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `product_image`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `product_image`
 --
 ALTER TABLE `product_image`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `product_image_list`
---
-ALTER TABLE `product_image_list`
-  MODIFY `product_images_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
-
---
--- AUTO_INCREMENT for table `product_order`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `product_order`
 --
 ALTER TABLE `product_order`
   MODIFY `product_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `product_order_detail`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `product_order_detail`
 --
 ALTER TABLE `product_order_detail`
   MODIFY `product_order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `product_review`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `product_review`
 --
 ALTER TABLE `product_review`
   MODIFY `product_review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `shipping`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `shipping`
 --
 ALTER TABLE `shipping`
   MODIFY `shipping_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `store`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `store`
 --
 ALTER TABLE `store`
   MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
--- AUTO_INCREMENT for table `store_permission`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `store_permission`
 --
 ALTER TABLE `store_permission`
   MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `store_stock_quantity`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `store_stock_quantity`
 --
 ALTER TABLE `store_stock_quantity`
   MODIFY `stock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `store_sub`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `store_sub`
 --
 ALTER TABLE `store_sub`
   MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Constraints for dumped tables
+-- 已傾印資料表的限制式
 --
 
 --
--- Constraints for table `course`
+-- 資料表的限制式 `course`
 --
 ALTER TABLE `course`
   ADD CONSTRAINT `fk_c_category_id` FOREIGN KEY (`category_id`) REFERENCES `course_category` (`category_id`),
   ADD CONSTRAINT `fk_c_store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`);
 
 --
--- Constraints for table `course_favorite`
+-- 資料表的限制式 `course_favorite`
 --
 ALTER TABLE `course_favorite`
   ADD CONSTRAINT `fk_c_favorite_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
   ADD CONSTRAINT `fk_c_favorite_member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
 
 --
--- Constraints for table `course_image`
+-- 資料表的限制式 `course_image`
 --
 ALTER TABLE `course_image`
   ADD CONSTRAINT `fk_c_image_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`);
 
 --
--- Constraints for table `course_info_date`
+-- 資料表的限制式 `course_info_date`
 --
 ALTER TABLE `course_info_date`
   ADD CONSTRAINT `fk_c_info_date_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
   ADD CONSTRAINT `fk_c_info_date_date_id` FOREIGN KEY (`date_id`) REFERENCES `course_datetime` (`date_id`);
 
 --
--- Constraints for table `course_news`
+-- 資料表的限制式 `course_news`
 --
 ALTER TABLE `course_news`
   ADD CONSTRAINT `fk_c_news_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`);
 
 --
--- Constraints for table `course_order`
+-- 資料表的限制式 `course_order`
 --
 ALTER TABLE `course_order`
   ADD CONSTRAINT `fk_c_order_coupon_id` FOREIGN KEY (`coupon_id`) REFERENCES `member_coupon` (`coupon_id`),
@@ -4296,21 +4090,21 @@ ALTER TABLE `course_order`
   ADD CONSTRAINT `fk_c_order_status_id` FOREIGN KEY (`order_status`) REFERENCES `order_status` (`order_status_id`);
 
 --
--- Constraints for table `course_qa`
+-- 資料表的限制式 `course_qa`
 --
 ALTER TABLE `course_qa`
   ADD CONSTRAINT `fk_c_qa_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
   ADD CONSTRAINT `fk_c_qa_member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
 
 --
--- Constraints for table `course_rating`
+-- 資料表的限制式 `course_rating`
 --
 ALTER TABLE `course_rating`
   ADD CONSTRAINT `fk_c_rating_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
   ADD CONSTRAINT `fk_c_rating_member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`);
 
 --
--- Constraints for table `custom_orders`
+-- 資料表的限制式 `custom_orders`
 --
 ALTER TABLE `custom_orders`
   ADD CONSTRAINT `fk_cu_member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`),
@@ -4320,14 +4114,14 @@ ALTER TABLE `custom_orders`
   ADD CONSTRAINT `fk_cu_store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`);
 
 --
--- Constraints for table `custom_product_list`
+-- 資料表的限制式 `custom_product_list`
 --
 ALTER TABLE `custom_product_list`
   ADD CONSTRAINT `fk_cp_stock_id` FOREIGN KEY (`product_stock`) REFERENCES `custom_stock_status` (`stock_id`),
   ADD CONSTRAINT `fk_cp_store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`);
 
 --
--- Constraints for table `custom_templates`
+-- 資料表的限制式 `custom_templates`
 --
 ALTER TABLE `custom_templates`
   ADD CONSTRAINT `custom_templates_ibfk_1` FOREIGN KEY (`color_id`) REFERENCES `color_list` (`color_list_id`),
@@ -4336,7 +4130,7 @@ ALTER TABLE `custom_templates`
   ADD CONSTRAINT `custom_templates_ibfk_4` FOREIGN KEY (`stock_status`) REFERENCES `custom_stock_status` (`stock_id`);
 
 --
--- Constraints for table `custom_template_detail`
+-- 資料表的限制式 `custom_template_detail`
 --
 ALTER TABLE `custom_template_detail`
   ADD CONSTRAINT `fk_td_color_id` FOREIGN KEY (`color_id`) REFERENCES `color_list` (`color_list_id`),
