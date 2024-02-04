@@ -76,10 +76,10 @@ $title = '新增課程';
                                       <input type="text" class="form-control" id="store_name" name="store_name" value="<?php echo $store_name; ?>" readonly></input>
                                       <div class="form-text"></div>
                                     </div>
-                                    <!-- TODO:代入上課地點 -->
+                                    <!-- 代入上課地點 -->
                                     <div class="mb-3">
                                       <label for="location" class="form-label">上課地點</label>
-                                      <input type="checkbox" id="addressCheckbox" onclick="useStoreAddress()">帶入商家預設地址
+                                      <input type="checkbox" class="me-1" id="addressCheckbox" onclick="useStoreAddress()">帶入商家預設地址
                                       <input type="text" class="form-control" id="location" name="location" value="">
                                       <div class="form-text"></div>
                                     </div>

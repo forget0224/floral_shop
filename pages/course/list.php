@@ -89,35 +89,44 @@ if ($totalRows > 0) {
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary d-flex flex-row justify-content-between align-items-center">
                                 <!-- Pagination start -->
+                                <!-- 最前頁 -->
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination mb-0">
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page=<?= 1 ?>">
-                                        <i class="fa-solid fa-angles-left"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page=<?= $page-1 ?>">
-                                        <i class="fa-solid fa-angle-left"></i>
-                                        </a>
-                                    </li>
-                                    <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
-                                        if ($i >= 1 and $i <= $totalPages) : ?>
-                                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page=1&orderBy=<?= $_GET['orderBy'] ?? 'course_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>">
+                                            <i class="fa-solid fa-angles-left"></i>
+                                            </a>
                                         </li>
-                                    <?php endif;
-                                    endfor; ?>
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page=<?= $page+1 ?>">
-                                        <i class="fa-solid fa-angle-right"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page=<?= $totalPages ?>">
-                                        <i class="fa-solid fa-angles-right"></i>
-                                        </a>
-                                    </li>
+                                        
+                                        <!-- 上一頁 -->
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page=<?= $page-1 ?>&orderBy=<?= $_GET['orderBy'] ?? 'course_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>">
+                                            <i class="fa-solid fa-angle-left"></i>
+                                            </a>
+                                        </li>
+                                        <!-- 中間頁 -->
+                                        <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
+                                            if ($i >= 1 and $i <= $totalPages) : ?>
+                                            <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                                                <a class="page-link" href="?page=<?= $i ?>&orderBy=<?= $_GET['orderBy'] ?? 'course_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>">
+                                                <?= $i ?>
+                                                </a>
+                                            </li>
+                                        <?php endif;
+                                        endfor; ?>
+                                        <!-- 下一頁 -->
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page=<?= $page+1 ?>&orderBy=<?= $_GET['orderBy'] ?? 'course_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>">
+                                            <i class="fa-solid fa-angle-right"></i>
+                                            </a>
+                                        </li>                                       
+                                        
+                                        <!-- 最末頁 -->
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page=<?= $totalPages ?>&orderBy=<?= $_GET['orderBy'] ?? 'course_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>">
+                                            <i class="fa-solid fa-angles-right"></i>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </nav>
                                 <div class="d-flex flex-row justify-content-between">
@@ -143,23 +152,21 @@ if ($totalRows > 0) {
                                     <thead>
                                         <tr>
                                             <th><i class="fa-solid fa-trash"></i></th>
-                                            <!-- <th class="text-nowrap">
-                                                #
-                                                <a href="#" id="numberFilter"><i class="fa fa-arrow-up-wide-short"></i></a>
-                                            </th> -->
                                             <th class="text-nowrap">#
                                                 <a href="?page=<?= $page ?>&orderBy=course_id&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'course_id' && isset($_GET['order']) && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>">
                                                 <i class="fa <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'course_id' && $_GET['order'] === 'asc') ? 'fa-arrow-up-wide-short' : 'fa-arrow-down-wide-short' ?>"></i>
                                                 </a>
                                             </th>
+                                            <!-- 檢查排序 -->
+                                            <?php # var_dump($_GET); ?>
                                             <th class="text-nowrap">課程名稱</th>
                                             <th class="text-nowrap">課程介紹</th>
                                             <th class="text-nowrap">課程分類</th>
                                             <th class="text-nowrap">商家名稱</th>
                                             <th class="text-nowrap">上課地點</th>
-                                            <th class="text-nowrap">
-                                                課程定價
-                                                <a href="#" id="priceFilter"><i class="fa fa-arrow-up-wide-short"></i></a>
+                                            <th class="text-nowrap">課程定價
+                                                <a href="?page=<?= $page ?>&orderBy=price&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'price' && isset($_GET['order']) && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>">
+                                                <i class="fa <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'price' && $_GET['order'] === 'asc') ? 'fa-arrow-up-wide-short' : 'fa-arrow-down-wide-short' ?>"></i>
                                             </th>
                                             <th class="text-nowrap">最小人數</th>
                                             <th class="text-nowrap">最大人數</th>
@@ -331,7 +338,7 @@ if ($totalRows > 0) {
     </script>
     
     <!-- 價格排序 -->
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function(){
            const priceFilterIcon = document.getElementById('priceFilter');
            const priceHeader = document.getElementById('priceHeader');
@@ -374,7 +381,7 @@ if ($totalRows > 0) {
             });
         }
     });
-    </script>
+    </script> -->
     
     <!-- <script>
         // 序號排序
