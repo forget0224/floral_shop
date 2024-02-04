@@ -83,13 +83,18 @@ $rows = $stmt->fetchAll();
     }
 
     .pagination li a {
-        margin-right: 10px;
+        margin-right: 5px;
         /* 增加右邊距 */
     }
 
     .text-lg {
         font-size: 20px;
     }
+
+    .blue-text {
+    color: blue;
+}
+
 </style>
 
 <div class="container">
@@ -97,14 +102,19 @@ $rows = $stmt->fetchAll();
         <div class="col pagination-container">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <!-- 更新鏈接以包含搜索城市 -->
+                    <!-- 首頁 -->
                     <li class="page-item">
                         <a class="page-link" href="?page=1&search-field=<?= htmlentities($searchField) ?>&search-query=<?= htmlentities($searchQuery) ?>">
-                            <i class="fa-solid fa-backward"></i>
+                            <i class="fa-solid fa-angles-left"></i>
                         </a>
                     </li>
-                    <!-- 注意：這裡需要加入對前一頁和後一頁鏈接的處理 -->
-
+                    <!-- 上一頁 -->
+                    <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= max(1, $page - 1) ?>&search-field=<?= htmlentities($searchField) ?>&search-query=<?= htmlentities($searchQuery) ?>">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    <!-- 分頁數字 -->
                     <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
                         if ($i >= 1 and $i <= $totalPages) : ?>
                             <li class="page-item <?= $i == $page ? 'active' : '' ?>">
@@ -112,10 +122,16 @@ $rows = $stmt->fetchAll();
                             </li>
                     <?php endif;
                     endfor; ?>
-
+                    <!-- 下一頁 -->
+                    <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= min($totalPages, $page + 1) ?>&search-field=<?= htmlentities($searchField) ?>&search-query=<?= htmlentities($searchQuery) ?>">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    <!-- 末頁 -->
                     <li class="page-item">
                         <a class="page-link" href="?page=<?= $totalPages ?>&search-field=<?= htmlentities($searchField) ?>&search-query=<?= htmlentities($searchQuery) ?>">
-                            <i class="fa-solid fa-forward"></i>
+                            <i class="fa-solid fa-angles-right"></i>
                         </a>
                     </li>
                 </ul>
@@ -128,7 +144,7 @@ $rows = $stmt->fetchAll();
             <form action="?" method="get">
                 <div class="form-group">
                     <select name="search-field" class="form-control form-control-lg">
-                        <option value="" disabled selected>請選擇欄位</option>
+                        <option value="" disabled selected>請選擇欄位名稱</option>
                         <option value="name">姓名</option>
                         <option value="email">電郵</option>
                         <option value="phone">手機</option>
@@ -149,10 +165,11 @@ $rows = $stmt->fetchAll();
     <div class="row">
         <div class="col">
             <div id="total-results" class="mb-3 text-lg">
-                <p>資料總筆數: <span id="total-count"><?= $totalRows ?></span> 筆</p>
+                <p>資料總筆數: <span id="total-count" class="blue-text"><?= $totalRows ?></span> 筆</p>
             </div>
         </div>
     </div>
+
     <div class="row table h3">
         <div class="col">
             <table class="table table-bordered table-striped">
@@ -220,9 +237,8 @@ $rows = $stmt->fetchAll();
             </div>
         </div>
     </div>
-
-
 </div>
+
 <?php include __DIR__ . '/parts/scripts.php'  ?>
 <script>
     // 獲取總筆數元素
