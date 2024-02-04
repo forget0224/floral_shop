@@ -11,6 +11,8 @@ if ($page < 1) {
   exit;
 }
 
+$order = isset($_GET['order']) ? $_GET['order'] : 'desc';
+
 $t_sql = "SELECT COUNT(1) FROM course";
 // $t_stmt = $pdo->query($t_sql);
 // $row = $t_stmt->fetch(PDO::FETCH_NUM);
@@ -31,14 +33,26 @@ if ($totalRows > 0) {
   }
 
   $sql = sprintf("
-    SELECT course.*, store.store_name, store.store_address, course_category.category_name
-    FROM course
-    INNER JOIN store ON course.store_id = store.store_id
-    INNER JOIN course_category ON course.category_id = course_category.category_id
-    ORDER BY course.course_id DESC
-    LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
-  $stmt = $pdo->query($sql);
-  $rows = $stmt->fetchAll();
+  SELECT course.*, store.store_name, store.store_address, course_category.category_name
+  FROM course
+  INNER JOIN store ON course.store_id = store.store_id
+  INNER JOIN course_category ON course.category_id = course_category.category_id");
+
+    // 加入排序邏輯
+    if (isset($_GET['orderBy'])) {
+      $orderField = $_GET['orderBy'];
+      $orderType = ($order === 'desc') ? 'DESC' : 'ASC';
+      $sql .= " ORDER BY course.$orderField $orderType";
+    } else {
+      // 若未指定排序條件，預設以 course_id DESC 排序
+      $sql .= " ORDER BY course.course_id DESC";
+    }
+
+    // 加入 LIMIT 子句
+    $sql .= " LIMIT " . (($page - 1) * $perPage) . ", $perPage";
+    
+    $stmt = $pdo->query($sql);
+    $rows = $stmt->fetchAll();
 }
 
 ?>
@@ -73,7 +87,7 @@ if ($totalRows > 0) {
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary d-flex flex-row justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary d-flex flex-row justify-content-between align-items-center">
                                 <!-- Pagination start -->
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination mb-0">
@@ -108,12 +122,12 @@ if ($totalRows > 0) {
                                 </nav>
                                 <div class="d-flex flex-row justify-content-between">
                                     <!-- Topbar Search -->
-                                    <div class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                    <div class="d-none d-sm-inline-block form-inline ml-3 ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                                         <input type="text" id="courseSearch" name="courseSearch" class="form-control bg-white border small" placeholder="Search for..."
                                             aria-label="Search" aria-describedby="basic-addon2">
                                     </div>
                                     <!-- Dropdown Select -->
-                                    <select class="form-select ml-3" name="courseFilter" id="courseFilter" aria-label="Default select example">
+                                    <select class="form-select ml-3 mw-100" name="courseFilter" id="courseFilter" aria-label="Default select example">
                                         <option selected value="">請選擇課程分類</option>
                                         <option value="1">花藝基礎課程</option>
                                         <option value="2">植栽相關課程</option>
@@ -129,7 +143,15 @@ if ($totalRows > 0) {
                                     <thead>
                                         <tr>
                                             <th><i class="fa-solid fa-trash"></i></th>
-                                            <th class="text-nowrap">#</th>
+                                            <!-- <th class="text-nowrap">
+                                                #
+                                                <a href="#" id="numberFilter"><i class="fa fa-arrow-up-wide-short"></i></a>
+                                            </th> -->
+                                            <th class="text-nowrap">#
+                                                <a href="?page=<?= $page ?>&orderBy=course_id&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'course_id' && isset($_GET['order']) && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>">
+                                                <i class="fa <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'course_id' && $_GET['order'] === 'asc') ? 'fa-arrow-up-wide-short' : 'fa-arrow-down-wide-short' ?>"></i>
+                                                </a>
+                                            </th>
                                             <th class="text-nowrap">課程名稱</th>
                                             <th class="text-nowrap">課程介紹</th>
                                             <th class="text-nowrap">課程分類</th>
@@ -137,7 +159,7 @@ if ($totalRows > 0) {
                                             <th class="text-nowrap">上課地點</th>
                                             <th class="text-nowrap">
                                                 課程定價
-                                                <a href="#" id="priceFilter"><i class="fa-solid fa-arrow-up-wide-short"></i></a>
+                                                <a href="#" id="priceFilter"><i class="fa fa-arrow-up-wide-short"></i></a>
                                             </th>
                                             <th class="text-nowrap">最小人數</th>
                                             <th class="text-nowrap">最大人數</th>
@@ -153,13 +175,13 @@ if ($totalRows > 0) {
                                             <i class="fa-solid fa-trash"></i>
                                             </a>
                                         </td>
-                                        <td><?= $r['course_id'] ?></td>
+                                        <td class="numberOrder"><?= $r['course_id'] ?></td>
                                         <td><?= $r['name'] ?></td>
                                         <td class="text-justify"><?= $r['intro'] ?></td>
                                         <td class="text-nowrap"><?= $r['category_name'] ?></td>
                                         <td class="text-left"><?= $r['store_name'] ?></td>
                                         <td class="text-left"><?= $r['location'] ?></td>
-                                        <td class="text-left"><?= htmlentities($r['price']) ?></td>
+                                        <td class="text-left priceOrder"><?= htmlentities($r['price']) ?></td>
                                         <td class="text-left"><?= $r['min_capacity'] ?></td>
                                         <td class="text-left"><?= $r['max_capacity'] ?></td>
                                         <td><a href="edit.php?course_id=<?= $r['course_id'] ?>">
@@ -213,7 +235,7 @@ if ($totalRows > 0) {
         </div>
     </div>
     
-    <!-- 刪除的Modal的script -->
+    <!-- 刪除的script -->
     <script>
     function delete_one(course_id) {
         if (confirm(`是否要刪除編號為 ${course_id} 的資料?`)) {
@@ -328,19 +350,17 @@ if ($totalRows > 0) {
             }else{
                 priceFilterIcon.innerHTML = '<i class="fa-solid fa-arrow-up-wide-short"></i>'
             }
-            sortTableByPrice(acending);
+            sortTableByPrice(ascending);
             
-            ascending = !ascending;
         });
         function sortTableByPrice(ascending){
             // 在這裡實現根據價格排序的邏輯，可以使用JavaScript的Array.sort()
-            // 假設價格所在的欄位索引為2，這裡僅提供參考
             const tableBody = document.querySelector('tbody');
             const rows = Array.from(tableBody.getElementsByTagName('tr'));
 
             rows.sort((a, b) => {
-                const priceA = parseFloat(a.getElementsByTagName('td')[2].textContent);
-                const priceB = parseFloat(b.getElementsByTagName('td')[2].textContent);
+                const priceA = parseFloat(a.getElementsByTagName('td')[7].textContent);
+                const priceB = parseFloat(b.getElementsByTagName('td')[7].textContent);
 
                 return ascending ? priceA - priceB : priceB - priceA;
             });
@@ -355,5 +375,51 @@ if ($totalRows > 0) {
         }
     });
     </script>
+    
+    <!-- <script>
+        // 序號排序
+        document.addEventListener('DOMContentLoaded', function(){
+           const numberFilterIcon = document.getElementById('numberFilter');
+           
+        // 初始排序狀態
+        let ascending = true;
+        
+        numberFilterIcon.addEventListener('click', function(event){
+            event.preventDefault();
+            
+            // 切換箭頭方向
+            ascending = !ascending;
+            
+            if (ascending){
+                numberFilterIcon.innerHTML = '<i class="fa-solid fa-arrow-down-wide-short"></i>'
+            }else{
+                numberFilterIcon.innerHTML = '<i class="fa-solid fa-arrow-up-wide-short"></i>'
+            }
+            sortTableByNumber(ascending);
+            
+        });
+        // id排序
+        function sortTableByNumber(ascending){
+            // 在這裡實現根據價格排序的邏輯，可以使用JavaScript的Array.sort()
+            const tableBody = document.querySelector('tbody');
+            const rows = Array.from(tableBody.getElementsByTagName('tr'));
+
+            rows.sort((a, b) => {
+                const numberA = parseFloat(a.getElementsByTagName('td')[1].textContent);
+                const numberB = parseFloat(b.getElementsByTagName('td')[1].textContent);
+
+                return ascending ? numberA - numberB : numberB - numberA;
+            });
+
+            // 清空表格
+            tableBody.innerHTML = '';
+
+            // 重新插入排序後的行
+            rows.forEach(row => {
+                tableBody.appendChild(row);
+            });
+        }
+    });
+    </script> -->
     
     <?php include '../parts/html-foot.php' ?>
