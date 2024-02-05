@@ -16,9 +16,9 @@ if (empty($pageName)) {
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/floral_shop/manager_index.php">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            <i class="fa-solid fa-seedling"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">FLORAL SHOP<sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">FLORAL SHOP</div>
     </a>
 
     <!-- Divider -->
@@ -36,7 +36,7 @@ if (empty($pageName)) {
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Addons
+        頁面分類
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
@@ -141,11 +141,11 @@ if (empty($pageName)) {
 
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="tables.html">
             <i class="fas fa-fw fa-table"></i>
             <span>Tables</span></a>
-    </li>
+    </li> -->
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
