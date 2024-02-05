@@ -83,28 +83,28 @@ if (empty($row)) {
                                                         <div class="mb-3">
                                                             <label for="store_name" class="form-label">姓名</label>
                                                             <!-- name 要設定 htmlentities() ，以免注入攻擊-->
-                                                            <input type="text" class="form-control" id="store_name" name="store_name" value="<?= htmlentities($row['store_name']) ?>">
+                                                            <input type="text" class="form-control" id="store_name" name="store_name" value="<?= htmlentities($row['store_name']) ?>" placeholder="請輸入兩個字元以上的姓名">
                                                             <div class="form-text"></div>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="store_account" class="form-label">帳號</label>
-                                                            <input type="text" class="form-control" id="store_account" name="store_account" value="<?= $row['store_account'] ?>">
+                                                            <input type="text" class="form-control" id="store_account" name="store_account" value="<?= $row['store_account'] ?>" placeholder="請輸入包含英文及數字6~20字元的帳號">
                                                             <div class="form-text"></div>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="store_password" class="form-label">密碼</label>
-                                                            <input type="text" class="form-control" id="store_password" name="store_password" value="<?= $row['store_password'] ?>">
+                                                            <input type="text" class="form-control" id="store_password" name="store_password" value="<?= $row['store_password'] ?>" placeholder="請輸入包含英文及數字8~16字元的密碼">
                                                             <div class="form-text"></div>
                                                         </div>
 
                                                         <div class="mb-3">
                                                             <label for="store_tel" class="form-label">電話</label>
-                                                            <input type="text" class="form-control" id="store_tel" name="store_tel" value="<?= $row['store_tel'] ?>">
+                                                            <input type="text" class="form-control" id="store_tel" name="store_tel" value="<?= $row['store_tel'] ?>" placeholder="09xx-xxx-xxx">
                                                             <div class="form-text"></div>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="store_email" class="form-label">信箱</label>
-                                                            <input type="text" class="form-control" id="store_email" name="store_email" value="<?= $row['store_email'] ?>">
+                                                            <input type="text" class="form-control" id="store_email" name="store_email" value="<?= $row['store_email'] ?>" placeholder="xxx@gmail.com">
                                                             <div class="form-text"></div>
                                                         </div>
                                                         <div class="mb-3">
