@@ -16,7 +16,7 @@ if (isset($_SESSION['admin'])) {
     }
 </style>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary min-vh-100 d-flex align-items-center">
 
     <div class="container">
 
