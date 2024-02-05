@@ -167,6 +167,7 @@ if ($totalRows > 0) {
                                             <th class="text-nowrap">課程定價
                                                 <a href="?page=<?= $page ?>&orderBy=price&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'price' && isset($_GET['order']) && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>">
                                                 <i class="fa <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'price' && $_GET['order'] === 'asc') ? 'fa-arrow-up-wide-short' : 'fa-arrow-down-wide-short' ?>"></i>
+                                                </a>
                                             </th>
                                             <th class="text-nowrap">最小人數</th>
                                             <th class="text-nowrap">最大人數</th>

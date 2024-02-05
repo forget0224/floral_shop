@@ -24,13 +24,22 @@ if(isset($_POST['request'])){
                     <thead>
                         <tr>
                             <th><i class="fa-solid fa-trash"></i></th>
-                            <th class="text-nowrap">#</th>
+                            <!-- <th class="text-nowrap">#</th> -->
+                            <th class="text-nowrap">#
+                                <a href="?page=<?= $page ?>&orderBy=course_id&order=<?= ($orderBy === 'course_id' && $order === 'ASC') ? 'desc' : 'asc' ?>"><i class="fa <?= ($orderBy === 'course_id' && $order === 'ASC') ? 'fa-arrow-up-wide-short' : 'fa-arrow-down-wide-short' ?>"></i>
+                                </a>
+                            </th>
                             <th class="text-nowrap">課程名稱</th>
                             <th class="text-nowrap">課程介紹</th>
                             <th class="text-nowrap">課程分類</th>
                             <th class="text-nowrap">商家名稱</th>
                             <th class="text-nowrap">上課地點</th>
-                            <th class="text-nowrap">課程定價</th>
+                            <!-- <th class="text-nowrap">課程定價</th> -->
+                            <th class="text-nowrap">課程定價
+                                <a href="?page=<?= $page ?>&orderBy=price&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'price' && isset($_GET['order']) && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>">
+                                <i class="fa <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'price' && $_GET['order'] === 'asc') ? 'fa-arrow-up-wide-short' : 'fa-arrow-down-wide-short' ?>"></i>
+                                </a>
+                            </th>
                             <th class="text-nowrap">最小人數</th>
                             <th class="text-nowrap">最大人數</th>
                             <th><i class="fa-solid fa-file-pen"></i></th>
