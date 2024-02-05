@@ -41,6 +41,9 @@ if ($totalRows > 0) {
     exit;
   }
 
+  $orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'product_id';
+  $order = isset($_GET['order']) && ($_GET['order'] === 'asc' || $_GET['order'] === 'desc') ? strtoupper($_GET['order']) : 'DESC';
+
   // 透過inner join將product表格和categories表格連接起來
   $sql = sprintf(
     "SELECT p.*, c.name AS category_name FROM product p
@@ -49,13 +52,14 @@ if ($totalRows > 0) {
     %s
     %s
     %s
-    ORDER BY p.product_id %s
+    ORDER BY %s %s
     LIMIT %s, %s",
     $isSearch ? "WHERE p.name LIKE :searchKeyword" : "", //搜尋-商品關鍵字
     $isSearchCategory ? "AND p.categories_id = :searchCategory" : "", // 搜尋-類別
     ($isSearchPrice && $searchPriceFirst !== '' && $searchPriceSecond !== '') ? "AND p.price BETWEEN :searchPriceFirst AND :searchPriceSecond" : "", // 搜尋-價格
     $isSearchDescription ? "AND p.description LIKE :searchDescription" : "", //搜尋-描述關鍵字
-    (isset($_GET['order']) && ($_GET['order'] === 'asc' || $_GET['order'] === 'desc')) ? strtoupper($_GET['order']) : 'DESC', // Sorting order (asc or desc)
+    $orderBy,
+    $order,
     ($page - 1) * $perPage,
     $perPage
   );
@@ -139,10 +143,20 @@ if ($totalRows > 0) {
                     <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
                       if ($i >= 1 and $i <= $totalPages) : ?>
                         <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                          <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                          <a class="page-link" href="?page=<?= $i ?>&orderBy=<?= $orderBy ?>&order=<?= $order ?>">
+                            <?= $i ?>
+                          </a>
                         </li>
                     <?php endif;
                     endfor; ?>
+
+                    <!-- <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
+                            if ($i >= 1 and $i <= $totalPages) : ?>
+                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                          <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+                    <?php endif;
+                          endfor; ?> -->
                     <!-- 下一頁 -->
                     <li class="page-item">
                       <a class="page-link" href="?page=<?= ($page + 1 <= $totalPages) ? ($page + 1) : $totalPages ?>">
@@ -311,14 +325,21 @@ if ($totalRows > 0) {
                   <thead>
                     <tr>
                       <th style="width: 20px;"><i class="fa-solid fa-trash"></i></th>
-                      <th style="width: 20px;">
+                      <th style="width: 20px;">#
                         <a href="?orderBy=product_id&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'product_id' && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>">
                           <i class="fas <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'product_id' && $_GET['order'] === 'asc') ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up' ?>"></i>
                         </a>
                       </th>
                       <th style="width: 100px;">商品名稱</th>
                       <th style="width: 100px;">種類列表</th>
-                      <th style="width: 60px;">價格</th>
+                      <th style="width: 60px;">價格
+                        <a class="text-decoration-none" href="?orderBy=price&order=desc">
+                          <i class="fa-solid fa-circle-arrow-up"></i>
+                        </a>
+                        <a class="text-decoration-none" href="?orderBy=price&order=asc">
+                          <i class="fa-solid fa-circle-arrow-down"></i>
+                        </a>
+                      </th>
                       <th style="width: 120px;">尺寸</th>
                       <th style="width: 120px;">創建時間</th>
                       <th style="width: 120px;">更新時間</th>
