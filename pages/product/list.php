@@ -325,20 +325,17 @@ if ($totalRows > 0) {
                   <thead>
                     <tr>
                       <th style="width: 20px;"><i class="fa-solid fa-trash"></i></th>
-                      <th style="width: 20px;">#
+                      <th style="width: 20px;">
                         <a href="?orderBy=product_id&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'product_id' && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>">
                           <i class="fas <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'product_id' && $_GET['order'] === 'asc') ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up' ?>"></i>
-                        </a>
+                        </a>#
                       </th>
                       <th style="width: 100px;">商品名稱</th>
                       <th style="width: 100px;">種類列表</th>
-                      <th style="width: 60px;">價格
-                        <a class="text-decoration-none" href="?orderBy=price&order=desc">
-                          <i class="fa-solid fa-circle-arrow-up"></i>
-                        </a>
-                        <a class="text-decoration-none" href="?orderBy=price&order=asc">
-                          <i class="fa-solid fa-circle-arrow-down"></i>
-                        </a>
+                      <th style="width: 60px;">
+                        <a class="d-block" href="?orderBy=price&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'price' && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>">
+                          <i class="fas <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'price' && $_GET['order'] === 'asc') ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up' ?>"></i>
+                        </a>價格
                       </th>
                       <th style="width: 120px;">尺寸</th>
                       <th style="width: 120px;">創建時間</th>
