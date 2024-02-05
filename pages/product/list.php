@@ -338,8 +338,18 @@ if ($totalRows > 0) {
                         </a>價格
                       </th>
                       <th style="width: 120px;">尺寸</th>
-                      <th style="width: 120px;">創建時間</th>
-                      <th style="width: 120px;">更新時間</th>
+                      <th style="width: 120px;">
+                        <a class="d-block" href="?orderBy=created_at&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'created_at' && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>">
+                          <i class="fas <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'created_at' && $_GET['order'] === 'asc') ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up' ?>"></i>
+                        </a>
+                        創建時間
+                      </th>
+                      <th style="width: 120px;">
+                        <a class="d-block" href="?orderBy=updated_at&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'updated_at' && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>">
+                          <i class="fas <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'updated_at' && $_GET['order'] === 'asc') ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up' ?>"></i>
+                        </a>
+                        更新時間
+                      </th>
                       <th style="width: 200px;">描述</th>
                       <th style="width: 20px;"><i class="fa-solid fa-file-pen"></i></th>
                     </tr>
