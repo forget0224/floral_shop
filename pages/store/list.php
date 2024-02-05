@@ -316,7 +316,7 @@ if ($totalRows > 0) {
                                     <tr>
                                         <!-- 刪除按鈕 -->
                                         <th><i class="fa-solid fa-trash"></i></th>
-                                        <th>#
+                                        <th style="width:60px">#
                                             <a href="?page=<?= $page ?>&orderBy=store_id&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'store_id' && isset($_GET['order']) && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
                                                 <i class="fas <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'store_id' && $_GET['order'] === 'asc') ? 'fa-arrow-up' : 'fa-arrow-down' ?>"></i>
                                             </a>
@@ -325,7 +325,7 @@ if ($totalRows > 0) {
                                         <th>信箱</th>
                                         <th>電話</th>
                                         <th>地址</th>
-                                        <th>訂閱方案
+                                        <th style="width:120px">訂閱方案
                                             <a href="?page=<?= $page ?>&orderBy=sub_id&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'sub_id' && isset($_GET['order']) && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
                                                 <i class="fas <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'sub_id' && $_GET['order'] === 'asc') ? 'fa-arrow-up' : 'fa-arrow-down' ?>"></i>
                                             </a>
