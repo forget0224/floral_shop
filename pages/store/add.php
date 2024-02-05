@@ -72,7 +72,7 @@ $title = '店家新增';
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="store_password" class="form-label">密碼</label>
-                                                            <input type="text" class="form-control" id="store_password" name="store_password" placeholder="請輸入包含英文及數字8~16字元的帳號">
+                                                            <input type="text" class="form-control" id="store_password" name="store_password" placeholder="請輸入包含英文及數字8~16字元的密碼">
                                                             <div class="form-text"></div>
                                                         </div>
                                                         <div class="mb-3">
