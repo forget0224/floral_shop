@@ -72,18 +72,48 @@ foreach ($rows_color as $row) {
 }
 
 
-// 將關聯陣列轉換為 JSON 字符串
+
 $colorJson = json_encode($colorListQueryResult);
-// function write_to_console($data)
-// {
-
-//     $console = 'console.log(' . json_encode($data) . ');';
-//     $console = sprintf('<script>%s</script>', $console);
-//     echo $console;
-// }
+$colorsOptions = fetchColorOptions();
 
 
-// write_to_console($colorJson);
+$storesOptions = fetchStoresOptions();
+
+
+$productsOptions = fetchProductsOptions();
+
+
+function fetchColorOptions()
+{
+    global $pdo;
+
+    $sql = "SELECT color_list_id, color_name FROM color_list WHERE color_list_id IN (SELECT DISTINCT product_color FROM custom_product_list)";
+    $stmt = $pdo->query($sql);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+function fetchStoresOptions()
+{
+    global $pdo;
+
+    $sql = "SELECT store_id, store_name FROM store WHERE store_id IN (SELECT DISTINCT store_id FROM custom_product_list)";
+    $stmt = $pdo->query($sql);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+function fetchProductsOptions()
+{
+    global $pdo;
+
+    $sql = "SELECT product_id, product_name FROM custom_products WHERE product_id IN (SELECT DISTINCT product_id FROM custom_product_list)";
+    $stmt = $pdo->query($sql);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
 
 
@@ -165,6 +195,37 @@ $colorJson = json_encode($colorListQueryResult);
         border: 2px solid #007bff;
 
     }
+
+    #searchContainer {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        width: 0;
+        transition: width 1s;
+    }
+
+    #searchContainer.active {
+        width: 200px;
+    }
+
+    #searchIcon {
+        cursor: pointer;
+    }
+
+    .searchInputContainer {
+        flex: 1;
+        margin-left: 8px;
+        opacity: 0;
+        transition: opacity 1s;
+    }
+
+    #searchContainer.active .searchInputContainer {
+        opacity: 1;
+    }
+
+    #filterSection h6 {
+        border-bottom: 0.1rem solid #858796 !important
+    }
 </style>
 
 <body id="page-top">
@@ -195,139 +256,193 @@ $colorJson = json_encode($colorListQueryResult);
                         For more information about DataTables, please visit the <a target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p>
 
-                    <!-- DataTales Example -->
+
                     <div class="card shadow mb-4 dataTables_wrapper dt-bootstrap4 " id="dataTable_wrapper">
-                        <div class="card-header py-3">
+                        <div class="card-header py-3 d-flex justify-content-between align-items-center">
                             <h6 class="m-0 font-weight-bold text-primary">商品列表</h6>
+                            <div class="d-flex">
+
+                                <div id="searchContainer" class="dataTables_search px-3">
+                                    <span class="icon text-black-50">
+                                        <i id="searchIcon" class="fas fa-search text-black-50"></i>
+                                    </span>
+                                    <div class="searchInputContainer">
+                                        <input type="search" class="form-control form-control-sm" placeholder="Search"
+                                            id="searchInput" aria-controls="productTable">
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="btn ml-2" id="openFilterBtn" data-toggle="modal" data-target="#filterModal">
+                                    <span class="icon text-black-50">
+                                        <i class="fas fa-light fa-filter"></i>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
+
+
 
                         <div class="row">
-                            <div class="col-sm-12 col-md-4">
-                                <div class="dataTables_length py-2 px-3"><label>Show <select name="dataTable_length"
-                                            aria-controls="dataTable"
-                                            class="custom-select custom-select-sm form-control form-control-sm"
-                                            id="dataTable_length">
-                                            <option value="10">10</option>
-                                            <option value="25">25</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                        </select> entries</label></div>
-                            </div>
-                            <div class="col-sm-12 col-md-4">
-                                <div id="" class="dataTables_length py-2 px-3"><label>排序:<select name="dataTable_sort"
-                                            aria-controls="dataTable"
-                                            class="custom-select custom-select-sm form-control form-control-sm">
-                                            <option value="category">商品分類</option>
-                                            <option value="price">商品價格</option>
-                                        </select></label></div>
-                            </div>
-                            <div class="col-sm-12 col-md-4">
-                                <div id="" class="dataTables_filter py-2 px-3"><label>Search:<input type="search"
-                                            class="form-control form-control-sm" placeholder="" id="searchInput"
-                                            aria-controls="productTable"></label></div>
-                            </div>
-                        </div>
 
 
+                            <div class="modal fade" id="filterModal" tabindex="-1" role="dialog"
+                                aria-labelledby="filterModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="filterModalLabel">篩選</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body" id="filterSection">
+                                            <div class="row mt-3">
+                                                <div class="col-sm-12 col-md-4">
+                                                    <h6 class="border-bottom-secondary">顏色</h6>
 
-
-
-                        <div class="card-body">
-
-
-
-                            <div class="row" id="productTable">
-
-
-
-
-                                <?php foreach ($rows as $r): ?>
-                                    <div class="col-12 col-md-6 col-xl-3 cardBox" data-store-id=<?= $r['store_id'] ?>
-                                        data-product-id=<?= $r['product_id'] ?>>
-                                        <div class="shadow mb-4 card">
-                                            <div
-                                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                <h6 class="m-0 font-weight-bold text-primary">
-                                                    <?= $r['store'] ?>
-                                                </h6>
-                                                <div class="dropdown no-arrow">
-                                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                        aria-labelledby="dropdownMenuLink">
-                                                        <div class="dropdown-header">選單標題</div>
-                                                        <a class="dropdown-item editProduct" href="javascript:;">編輯</a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item deleteProduct" href="javascript:;">刪除</a>
-                                                        <!-- <a class="dropdown-item" href="#">其他操作</a> -->
-                                                    </div>
+                                                    <?php
+                                                    foreach ($colorsOptions as $color) {
+                                                        $colorName = htmlspecialchars($color['color_name']);
+                                                        echo '<input type="checkbox" name="color_filter[]" data-color-id="' . $color['color_list_id'] . '" value="' . $colorName . '"> ' . $colorName . '<br>';
+                                                    }
+                                                    ?>
                                                 </div>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="product_img overflow-hidden">
-                                                    <!-- <img src="/floral_shop/img/slide2.jpg" alt="" class="w-100"> -->
-                                                    <img src="<?= !empty($r['products_url']) ? htmlspecialchars($r['products_url']) : 'img/placehold.png' ?>"
-                                                        alt="" class="img-fluid object-fit-cover    ">
+                                                <div class="col-sm-12 col-md-4">
+                                                    <h6 class="border-bottom-secondary">店家</h6>
 
+                                                    <?php
+                                                    foreach ($storesOptions as $store) {
+                                                        $storeName = htmlspecialchars($store['store_name']);
+                                                        echo '<input type="checkbox" name="store_filter[]" data-store-id="' . $store['store_id'] . '" value="' . $storeName . '"> ' . $storeName . '<br>';
+                                                    }
+                                                    ?>
                                                 </div>
-                                                <div class="my-2">
-                                                    <h7 class="product-name">
-                                                        <?= $r['product_name'] ?>
-                                                    </h7>
-                                                    <div class="my-2">
-                                                        <h7>商品顏色</h7>
-                                                        <div class="color-circles">
-                                                            <?php
-                                                            $colors = explode(',', $r['colors']);
-                                                            $prices = explode(',', $r['prices']);
-                                                            $sids = explode(',', $r['sids']);
-                                                            $stocks = explode(',', $r['stocks']);
+                                                <div class="col-sm-12 col-md-4">
+                                                    <h6 class="border-bottom-secondary">商品</h6>
 
-
-                                                            $colorMap = json_decode($colorJson, true);
-
-                                                            foreach ($colors as $key => $colorIndex):
-
-                                                                $colorName = isset($colorMap[$colorIndex - 1]['color_english']) ? $colorMap[$colorIndex - 1]['color_english'] : 'Unknown Color';
-                                                                ?>
-                                                                <div class="color-circle bg-<?= strtolower(trim($colorName)) ?> <?= $key === 0 ? 'active' : '' ?>"
-                                                                    data-price="<?= $prices[$key] ?>"
-                                                                    data-sid="<?= $sids[$key] ?>"
-                                                                    data-color="<?= $colors[$key] ?>"
-                                                                    data-stock="<?= $stocks[$key] ?>" role="button">
-                                                                </div>
-                                                            <?php endforeach; ?>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="my-2">
-                                                        <h7>商品價格</h7>
-                                                        <div class="price-display">
-                                                            <?= $prices[0] ?>元
-                                                        </div>
-                                                    </div>
+                                                    <?php
+                                                    foreach ($productsOptions as $product) {
+                                                        $productName = htmlspecialchars($product['product_name']);
+                                                        echo '<input type="checkbox" name="product_filter[]" data-product-id="' . $product['product_id'] . '" value="' . $productName . '"> ' . $productName . '<br>';
+                                                    }
+                                                    ?>
                                                 </div>
-                                            </div>
-                                            <div
-                                                class="card-footer text-right stock-display <?= (1 != $r['product_stock']) ? 'bg-warning' : '' ?>">
-                                                <?= $r['stock'] ?>
                                             </div>
                                         </div>
+                                        <div class="modal-footer">
+
+                                            <button type="button" class="btn btn-primary" id="completeFilterBtn"
+                                                data-dismiss="modal">完成</button>
+
+                                            <button type="button" class="btn btn-secondary"
+                                                id="cancelFilterBtn">取消</button>
+                                        </div>
                                     </div>
-                                <?php endforeach; ?>
-
-
-
-
-                                <!-- row end  -->
+                                </div>
                             </div>
 
 
+                            <div class="card-body">
 
-                        </div>
-                        <div class="row">
+
+
+                                <div class="row" id="productTable">
+
+
+
+
+                                    <?php foreach ($rows as $r): ?>
+                                        <div class="col-12 col-md-6 col-xl-3 cardBox" data-store-id=<?= $r['store_id'] ?>
+                                            data-product-id=<?= $r['product_id'] ?>>
+                                            <div class="shadow mb-4 card">
+                                                <div
+                                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                    <h6 class="m-0 font-weight-bold text-primary">
+                                                        <?= $r['store'] ?>
+                                                    </h6>
+                                                    <div class="dropdown no-arrow">
+                                                        <a class="dropdown-toggle" href="#" role="button"
+                                                            id="dropdownMenuLink" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">
+                                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                            aria-labelledby="dropdownMenuLink">
+                                                            <div class="dropdown-header">選單標題</div>
+                                                            <a class="dropdown-item editProduct" href="javascript:;">編輯</a>
+                                                            <div class="dropdown-divider"></div>
+                                                            <a class="dropdown-item deleteProduct"
+                                                                href="javascript:;">刪除</a>
+                                                            <!-- <a class="dropdown-item" href="#">其他操作</a> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="product_img overflow-hidden">
+                                                        <!-- <img src="/floral_shop/img/slide2.jpg" alt="" class="w-100"> -->
+                                                        <img src="<?= !empty($r['products_url']) ? htmlspecialchars($r['products_url']) : 'img/placehold.png' ?>"
+                                                            alt="" class="img-fluid object-fit-cover    ">
+
+                                                    </div>
+                                                    <div class="my-2">
+                                                        <h7 class="product-name">
+                                                            <?= $r['product_name'] ?>
+                                                        </h7>
+                                                        <div class="my-2">
+                                                            <h7>商品顏色</h7>
+                                                            <div class="color-circles">
+                                                                <?php
+                                                                $colors = explode(',', $r['colors']);
+                                                                $prices = explode(',', $r['prices']);
+                                                                $sids = explode(',', $r['sids']);
+                                                                $stocks = explode(',', $r['stocks']);
+
+
+                                                                $colorMap = json_decode($colorJson, true);
+
+                                                                foreach ($colors as $key => $colorIndex):
+
+                                                                    $colorName = isset($colorMap[$colorIndex - 1]['color_english']) ? $colorMap[$colorIndex - 1]['color_english'] : 'Unknown Color';
+                                                                    ?>
+                                                                    <div class="color-circle bg-<?= strtolower(trim($colorName)) ?> <?= $key === 0 ? 'active' : '' ?>"
+                                                                        data-price="<?= $prices[$key] ?>"
+                                                                        data-sid="<?= $sids[$key] ?>"
+                                                                        data-color="<?= $colors[$key] ?>"
+                                                                        data-stock="<?= $stocks[$key] ?>" role="button">
+                                                                    </div>
+                                                                <?php endforeach; ?>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="my-2">
+                                                            <h7>商品價格</h7>
+                                                            <div class="price-display">
+                                                                <?= $prices[0] ?>元
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="card-footer text-right stock-display <?= (1 != $r['product_stock']) ? 'bg-warning' : '' ?>">
+                                                    <?= $r['stock'] ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+
+
+
+
+                                    <!-- row end  -->
+                                </div>
+
+
+
+                            </div>
+                            <!-- <div class="row">
                             <div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">顯示第 1
                                     到 10 總共 21 個</div>
@@ -358,154 +473,223 @@ $colorJson = json_encode($colorListQueryResult);
                                     </ul>
                                 </div>
                             </div>
+                        </div> -->
                         </div>
+                        <!-- /.container-fluid -->
+
                     </div>
-                    <!-- /.container-fluid -->
+                    <!-- End of Main Content -->
+
+                    <!-- Footer -->
+                    <?php include '../parts/footer.php' ?>
+                    <!-- End of Footer -->
 
                 </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <?php include '../parts/footer.php' ?>
-                <!-- End of Footer -->
+                <!-- End of Content Wrapper -->
 
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Page Wrapper -->
 
-        </div>
-        <!-- End of Page Wrapper -->
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+            <?php include '../parts/scripts.php' ?>
 
-        <?php include '../parts/scripts.php' ?>
+            <script>
+                $(document).ready(function () {
 
-        <script>
-            $(document).ready(function () {
+                    $('th[data-column="delete"]').removeClass().addClass("sorting_disabled");
 
-                $('th[data-column="delete"]').removeClass().addClass("sorting_disabled");
-
-                $('.color-circle').first().addClass('active');
-                $('.color-circle').click(function () {
+                    $('.color-circle').first().addClass('active');
+                    $('.color-circle').click(function () {
 
 
 
-                    $(this).closest('.cardBox').find('.color-circle').removeClass('active');
-                    $(this).addClass('active');
-                    const price = $(this).data('price');
-                    const stock = $(this).data('stock');
+                        $(this).closest('.cardBox').find('.color-circle').removeClass('active');
+                        $(this).addClass('active');
+                        const price = $(this).data('price');
+                        const stock = $(this).data('stock');
 
 
-                    $(this).closest('.cardBox').find('.price-display').text(price + '元');
-                    $(this).closest('.cardBox').find('.stock-display').text(stock);
+                        $(this).closest('.cardBox').find('.price-display').text(price + '元');
+                        $(this).closest('.cardBox').find('.stock-display').text(stock);
 
 
-                    if (stock != 1) {
-                        $(this).closest('.cardBox').find('.stock-display').addClass('bg-warning').text('未上架');
-                    } else {
-                        $(this).closest('.cardBox').find('.stock-display').removeClass('bg-warning').text('上架中');
-                    }
+                        if (stock != 1) {
+                            $(this).closest('.cardBox').find('.stock-display').addClass('bg-warning').text('未上架');
+                        } else {
+                            $(this).closest('.cardBox').find('.stock-display').removeClass('bg-warning').text('上架中');
+                        }
+                    });
+
+
+
+                    $("#searchInput").on("input", filterProducts);
+
+                });
+                $('.deleteProduct').click(function () {
+                    deleteProduct(this);
+                });
+                $('.editProduct').click(function () {
+                    editProduct(this);
                 });
 
+                const filterProducts = function () {
+
+                    const searchText = $("#searchInput").val().toLowerCase();
 
 
-                $("#searchInput").on("input", filterProducts);
-
-            });
-            $('.deleteProduct').click(function () {
-                deleteProduct(this);
-            });
-            $('.editProduct').click(function () {
-                editProduct(this);
-            });
+                    const productContainer = $("#productTable");
 
 
+                    const productCards = productContainer.find(".cardBox");
 
 
-            const filterProducts = function () {
+                    productCards.each(function () {
+                        const cardContent = $(this).text().toLowerCase();
 
-                const searchText = $("#searchInput").val().toLowerCase();
+                        if (cardContent.includes(searchText)) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                };
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-
-                const productContainer = $("#productTable");
-
-
-                const productCards = productContainer.find(".cardBox");
-
-
-                productCards.each(function () {
-                    const cardContent = $(this).text().toLowerCase();
-
-                    if (cardContent.includes(searchText)) {
-                        $(this).show();
-                        $(this).hide();
-                    }
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.addEventListener('change', updateFilters);
                 });
-            };
+
+                const searchInput = document.getElementById('searchInput');
+                searchInput.addEventListener('input', updateFilters);
+
+                function updateFilters() {
+                    const selectedColors = getSelectedValues('color_filter[]', 'data-color-id');
+                    const selectedStores = getSelectedValues('store_filter[]', 'data-store-id');
+                    const selectedProducts = getSelectedValues('product_filter[]', 'data-product-id');
+                    const searchTerm = searchInput.value.toLowerCase();
+
+                    const allProducts = document.querySelectorAll('.cardBox');
+
+                    allProducts.forEach(function (product) {
+                        const storeId = product.getAttribute('data-store-id');
+                        const productId = product.getAttribute('data-product-id');
+                        const productName = product.querySelector('.product-name').innerText.toLowerCase();
+                        const allCircles = product.querySelectorAll('.color-circle');
+                        const isVisible = (
+                            (selectedColors.length === 0 || Array.from(allCircles).some(circle => selectedColors.includes(circle.dataset.color.toLowerCase()))) &&
+                            (selectedStores.length === 0 || selectedStores.includes(storeId)) &&
+                            (selectedProducts.length === 0 || selectedProducts.includes(productId)) &&
+                            (searchTerm === '' || productName.includes(searchTerm))
+                        );
+
+                        product.style.display = isVisible ? 'block' : 'none';
 
 
-            // let itemsPerPage = parseInt($('#datatable_length').val()); 
-            // let totalItems = 100; 
-            // let totalPages = Math.ceil(totalItems / itemsPerPage); 
-
-
-            // renderPagination(1, totalPages); 
-
-
-            // $('#datatable_length').on('change', function () {
-            //     itemsPerPage = parseInt($(this).val()); 
-            //     totalPages = Math.ceil(totalItems / itemsPerPage); 
-            //     renderPagination(1, totalPages); 
-            // });
-
-
-            // function renderPagination(currentPage, totalPages) {
-
-            //     $('.pagination').empty();
-
-
-            //     totalItems = 100; 
-            //     totalPages = Math.ceil(totalItems / itemsPerPage);
-
-
-            //     for (let i = currentPage - 5; i <= currentPage + 5; i++) {
-            //         if (i >= 1 && i <= totalPages) {
-
-            //         }
-            //     }
-
-
-            // }
-
-            function deleteProduct(element) {
-
-                const cardBox = $(element).closest('.cardBox');
-
-                const store = cardBox.find('.font-weight-bold').text().trim();
-                const flower = cardBox.find('.product-name').text().trim();
-                const activeColor = cardBox.find('.color-circles .color-circle.active');
-                const colorId = activeColor.data('color');
-                const colorMap = <?= $colorJson ?>;
-                const colorName = colorMap[colorId - 1].color_name;
-                const sid = activeColor.data('sid');
-                const confirmationMessage = `是否要刪除 ${store}:${colorName}${flower}`;
-                if (confirm(`你確定要刪除該店家的這朵花的資料嗎?\n${confirmationMessage}`)) {
-                    console.log('confirmmmm')
-                    location.href = `productdelete.php?sid=${sid}`;
+                    });
                 }
 
-            }
 
-            function editProduct(element) {
-                const cardBox = $(element).closest('.cardBox');
-                const store_id = cardBox.data('store-id');
-                const product_id = cardBox.data('product-id');
-                console.log(store_id, product_id)
-                location.href = `product_list_edit.php?store_id=${store_id}&product_id=${product_id}`;
-            }
+                // 點擊篩選按鈕，顯示篩選區塊
+                const openFilterBtn = document.getElementById('openFilterBtn');
+                const filterSection = document.getElementById('filterSection');
 
-        </script>
 
-        <?php include '../parts/html-foot.php' ?>
+
+
+                openFilterBtn.addEventListener('click', () => {
+                    filterSection.style.display = 'block';
+                });
+
+
+                const completeFilterBtn = document.getElementById('completeFilterBtn');
+                completeFilterBtn.addEventListener('click', () => {
+                    filterSection.style.display = 'none';
+                });
+
+                // 點擊取消按鈕，取消所有:checked
+                const cancelFilterBtn = document.getElementById('cancelFilterBtn');
+                cancelFilterBtn.addEventListener('click', () => {
+                    const checkboxes = document.querySelectorAll('#filterSection input[type="checkbox"]');
+                    checkboxes.forEach(checkbox => {
+                        checkbox.checked = false;
+                    });
+                    updateFilters();
+                });
+
+                function getSelectedValues(checkboxName, dataAttributeName) {
+                    const selectedCheckboxes = document.querySelectorAll(`input[name="${checkboxName}"]:checked`);
+                    return Array.from(selectedCheckboxes).map(checkbox => checkbox.getAttribute(dataAttributeName));
+                }
+
+                // let itemsPerPage = parseInt($('#datatable_length').val()); 
+                // let totalItems = 100; 
+                // let totalPages = Math.ceil(totalItems / itemsPerPage); 
+
+
+                // renderPagination(1, totalPages); 
+
+
+                // $('#datatable_length').on('change', function () {
+                //     itemsPerPage = parseInt($(this).val()); 
+                //     totalPages = Math.ceil(totalItems / itemsPerPage); 
+                //     renderPagination(1, totalPages); 
+                // });
+
+
+                // function renderPagination(currentPage, totalPages) {
+
+                //     $('.pagination').empty();
+
+
+                //     totalItems = 100; 
+                //     totalPages = Math.ceil(totalItems / itemsPerPage);
+
+
+                //     for (let i = currentPage - 5; i <= currentPage + 5; i++) {
+                //         if (i >= 1 && i <= totalPages) {
+
+                //         }
+                //     }
+
+
+                // }
+
+                function deleteProduct(element) {
+
+                    const cardBox = $(element).closest('.cardBox');
+
+                    const store = cardBox.find('.font-weight-bold').text().trim();
+                    const flower = cardBox.find('.product-name').text().trim();
+                    const activeColor = cardBox.find('.color-circles .color-circle.active');
+                    const colorId = activeColor.data('color');
+                    const colorMap = <?= $colorJson ?>;
+                    const colorName = colorMap[colorId - 1].color_name;
+                    const sid = activeColor.data('sid');
+                    const confirmationMessage = `是否要刪除 ${store}:${colorName}${flower}`;
+                    if (confirm(`你確定要刪除該店家的這朵花的資料嗎?\n${confirmationMessage}`)) {
+                        console.log('confirmmmm')
+                        location.href = `productdelete.php?sid=${sid}`;
+                    }
+
+                }
+
+                function editProduct(element) {
+                    const cardBox = $(element).closest('.cardBox');
+                    const store_id = cardBox.data('store-id');
+                    const product_id = cardBox.data('product-id');
+                    console.log(store_id, product_id)
+                    location.href = `product_list_edit.php?store_id=${store_id}&product_id=${product_id}`;
+                }
+                $("#searchIcon").click(function () {
+                    $("#searchContainer").toggleClass("active");
+                    if ($("#searchContainer").hasClass("active")) {
+                        $("#searchInput").focus();
+                    }
+                });
+            </script>
+
+            <?php include '../parts/html-foot.php' ?>
