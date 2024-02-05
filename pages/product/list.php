@@ -41,11 +41,6 @@ if ($totalRows > 0) {
     exit;
   }
 
-  // 排序
-  $orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'product_id'; //product_id排序
-  $order = isset($_GET['order']) && ($_GET['order'] === 'asc' || $_GET['order'] === 'desc') ? strtoupper($_GET['order']) : 'DESC'; //price排序
-
-
   // 透過inner join將product表格和categories表格連接起來
   $sql = sprintf(
     "SELECT p.*, c.name AS category_name FROM product p
@@ -54,19 +49,13 @@ if ($totalRows > 0) {
     %s
     %s
     %s
-    ORDER BY 
-      CASE 
-      WHEN p.updated_at IS NULL OR p.updated_at = '0000-00-00 00:00:00' THEN 1
-      ELSE 0
-    END,
-    %s %s
+    ORDER BY p.product_id %s
     LIMIT %s, %s",
     $isSearch ? "WHERE p.name LIKE :searchKeyword" : "", //搜尋-商品關鍵字
     $isSearchCategory ? "AND p.categories_id = :searchCategory" : "", // 搜尋-類別
     ($isSearchPrice && $searchPriceFirst !== '' && $searchPriceSecond !== '') ? "AND p.price BETWEEN :searchPriceFirst AND :searchPriceSecond" : "", // 搜尋-價格
     $isSearchDescription ? "AND p.description LIKE :searchDescription" : "", //搜尋-描述關鍵字
-    $orderBy,
-    $order, //排序
+    (isset($_GET['order']) && ($_GET['order'] === 'asc' || $_GET['order'] === 'desc')) ? strtoupper($_GET['order']) : 'DESC', // Sorting order (asc or desc)
     ($page - 1) * $perPage,
     $perPage
   );
@@ -150,9 +139,7 @@ if ($totalRows > 0) {
                     <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
                       if ($i >= 1 and $i <= $totalPages) : ?>
                         <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                          <a class="page-link" href="?page=<?= $i ?>&orderBy=<?= $orderBy ?>&order=<?= $order ?>">
-                            <?= $i ?>
-                          </a>
+                          <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
                         </li>
                     <?php endif;
                     endfor; ?>
@@ -328,41 +315,13 @@ if ($totalRows > 0) {
                         <a href="?orderBy=product_id&order=<?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'product_id' && $_GET['order'] === 'asc') ? 'desc' : 'asc' ?>">
                           <i class="fas <?= (isset($_GET['orderBy']) && $_GET['orderBy'] === 'product_id' && $_GET['order'] === 'asc') ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up' ?>"></i>
                         </a>
-                        #
                       </th>
                       <th style="width: 100px;">商品名稱</th>
                       <th style="width: 100px;">種類列表</th>
-                      <th style="width: 60px;">
-                        <a class="text-decoration-none" href="?orderBy=price&order=desc">
-                          <i class="fa-solid fa-circle-arrow-up"></i>
-                        </a>
-                        <a class="text-decoration-none" href="?orderBy=price&order=asc">
-                          <i class="fa-solid fa-circle-arrow-down"></i>
-                        </a>
-                        價格
-                      </th>
+                      <th style="width: 60px;">價格</th>
                       <th style="width: 120px;">尺寸</th>
-                      <th style="width: 120px;">
-
-                        <a class="text-decoration-none" href="?orderBy=created_at&order=desc">
-                          <i class="fa-solid fa-circle-arrow-up"></i>
-                        </a>
-                        <a class="text-decoration-none" href="?orderBy=created_at&order=asc">
-                          <i class="fa-solid fa-circle-arrow-down"></i>
-                        </a>
-                        <br>
-                        創建時間
-                      </th>
-                      <th style="width: 120px;">
-
-                        <a class="text-decoration-none" href="?orderBy=updated_at&order=desc">
-                          <i class="fa-solid fa-circle-arrow-up"></i>
-                        </a>
-                        <a class="text-decoration-none" href="?orderBy=updated_at&order=asc">
-                          <i class="fa-solid fa-circle-arrow-down"></i>
-                        </a>
-                        <br>更新時間
-                      </th>
+                      <th style="width: 120px;">創建時間</th>
+                      <th style="width: 120px;">更新時間</th>
                       <th style="width: 200px;">描述</th>
                       <th style="width: 20px;"><i class="fa-solid fa-file-pen"></i></th>
                     </tr>
