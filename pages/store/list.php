@@ -4,6 +4,15 @@ $pageName = 'store_list';
 $title = '店家列表';
 // 你該頁面前面的那些東東
 
+
+// 刪除
+$deleteSuccess = isset($_SESSION['deleteSuccess']) && $_SESSION['deleteSuccess'] === true;
+unset($_SESSION['deleteSuccess']);
+
+
+
+
+
 // 每一頁20筆資料
 $perPage = 10;
 
@@ -227,55 +236,64 @@ if ($totalRows > 0) {
                     <p class="mb-4">
                         "謹記：管理店家列表，如舵手操控著整艘船。確保每次操作都是謹慎的，以維護平台的和諧與穩定。"
                     </p>
+
                     <!-- 頁面整塊貼上!!!!!! -->
                     <div class="row">
+
                         <!-- 分頁切換功能 -->
                         <div class="row my-2">
-                            <!-- bootstrap => navigation -->
-                            <nav class="mx-2" aria-label="Page navigation example">
-                                <?php if ($totalPages > 1) : ?>
-                                    <ul class="pagination">
-                                        <?php if ($page > 1) : ?>
-                                            <!-- 回到最前頁 -->
-                                            <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
-                                                <a class=" page-link" href="?page=1&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
-                                                    <i class="fa-solid fa-angles-left"></i>
-                                                </a>
-                                            </li>
-                                            <!-- 上一頁 -->
-                                            <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
-                                                <a class=" page-link" href="?page=<?= $page - 1 ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
-                                                    <i class="fa-solid fa-angle-left"></i>
-                                                </a>
-                                            </li>
-                                        <?php endif; ?>
-                                        <?php for ($i = $page - 2; $i <= $page + 2; $i++) :
-                                            if ($i >= 1 and $i <= $totalPages) : 0
-                                        ?>
-                                                <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                                                    <a class="page-link" href="?page=<?= $i ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
-                                                        <?= $i ?>
+                            <div class="d-flex"> 
+                                <!-- bootstrap => navigation -->
+                                <nav class="mx-2 " aria-label="Page navigation example">
+                                    <?php if ($totalPages > 1) : ?>
+                                        <ul class="pagination">
+                                            <?php if ($page > 1) : ?>
+                                                <!-- 回到最前頁 -->
+                                                <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+                                                    <a class=" page-link" href="?page=1&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
+                                                        <i class="fa-solid fa-angles-left"></i>
                                                     </a>
                                                 </li>
-                                        <?php endif;
-                                        endfor; ?>
-                                        <?php if ($page < $totalPages) : ?>
-                                            <!-- 下一頁 -->
-                                            <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
-                                                <a class="page-link" href="?page=<?= $page + 1 ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
-                                                    <i class="fa-solid fa-angle-right"></i>
-                                                </a>
-                                            </li>
-                                            <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
-                                                <a class="page-link" href="?page=<?= $totalPages ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
-                                                    <i class="fa-solid fa-angles-right"></i>
-                                                </a>
-                                            </li>
-                                        <?php endif; ?>
-                                    </ul>
-                                <?php endif; ?>
-                            </nav>
+                                                <!-- 上一頁 -->
+                                                <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+                                                    <a class=" page-link" href="?page=<?= $page - 1 ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
+                                                        <i class="fa-solid fa-angle-left"></i>
+                                                    </a>
+                                                </li>
+                                            <?php endif; ?>
+                                            <?php for ($i = $page - 2; $i <= $page + 2; $i++) :
+                                                if ($i >= 1 and $i <= $totalPages) : 0
+                                            ?>
+                                                    <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                                                        <a class="page-link" href="?page=<?= $i ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
+                                                            <?= $i ?>
+                                                        </a>
+                                                    </li>
+                                            <?php endif;
+                                            endfor; ?>
+                                            <?php if ($page < $totalPages) : ?>
+                                                <!-- 下一頁 -->
+                                                <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
+                                                    <a class="page-link" href="?page=<?= $page + 1 ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
+                                                        <i class="fa-solid fa-angle-right"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item <?= $page >= $totalPages ? 'disabled' : '' ?>">
+                                                    <a class="page-link" href="?page=<?= $totalPages ?>&orderBy=<?= $_GET['orderBy'] ?? 'store_id' ?>&order=<?= $_GET['order'] ?? 'desc' ?>&filterName=<?= $_GET['filterName'] ?? '' ?>&filterEmail=<?= $_GET['filterEmail'] ?? '' ?>&filterPhone=<?= $_GET['filterPhone'] ?? '' ?>&filterAddress=<?= $_GET['filterAddress'] ?? '' ?>&filterSubscription=<?= $_GET['filterSubscription'] ?? '' ?>">
+                                                        <i class="fa-solid fa-angles-right"></i>
+                                                    </a>
+                                                </li>
+                                            <?php endif; ?>
+                                        </ul>
+                                    <?php endif; ?>
+                                </nav>
+                                <p class="mb-4 ms-auto ">
+                                    目前搜尋結果：共 <?= $totalRows ?> 筆資料
+                                </p>
+                            </div>
+
                         </div>
+
                         <!-- 篩選功能 -->
                         <form class="d-flex align-items-center" method="get" action="">
                             <div class="form-group mx-1">
@@ -303,7 +321,7 @@ if ($totalRows > 0) {
                                     <option value="12個月" <?= isset($_GET['filterSubscription']) && $_GET['filterSubscription'] === '12個月' ? 'selected' : '' ?>>12個月</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary mx-1  ">篩選</button>
+                            <button type="submit" class="btn btn-primary mx-3">篩選</button>
                             <input type="hidden" name="orderBy" value="<?= $_GET['orderBy'] ?? 'store_id' ?>">
                             <input type="hidden" name="order" value="<?= $_GET['order'] ?? 'desc' ?>">
                         </form>
@@ -366,6 +384,25 @@ if ($totalRows > 0) {
                                     <?php endforeach ?>
                                 </tbody>
                             </table>
+
+                            <!-- Modal -->
+                            <div class="modal fade <?= $deleteSuccess ? 'show' : '' ?>" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">刪除結果</h1>
+                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-success" role="alert">
+                                                商品已成功刪除</div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">繼續瀏覽</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -398,6 +435,14 @@ if ($totalRows > 0) {
                 location.href = `delete.php?store_id=${store_id}`;
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var deleteSuccess = <?= $deleteSuccess ? 'true' : 'false' ?>;
+            if (deleteSuccess) {
+                var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                modal.show();
+            }
+        });
     </script>
 
 
