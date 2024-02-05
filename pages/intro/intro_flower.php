@@ -1,6 +1,8 @@
-<?php require '../parts/db_connect.php';
+<?php
+require '../parts/db_connect.php';
 $pageName = 'list';
 $title = '花圖鑑';
+
 // 你該頁面前面的那些東東
 
 // 取得當前頁面的資料，並加入隨機排序（好手氣-1/3）
@@ -10,8 +12,6 @@ $randomStmt = $pdo->query($randomSql);
 $randomData = $randomStmt->fetch();
 
 // 取得當前頁面的資料，並加入隨機排序（好手氣-1/3） end
-
-
 // 每頁顯示的筆數
 $perPage = 20;
 
@@ -41,41 +41,54 @@ if ($totalRows > 0) {
     exit;
   }
 
-  // 取得當前頁面的資料
-  $sql = sprintf("SELECT * FROM intro_flower ORDER BY flower_id DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+  // 獲取排序的方式（升序或降序）
+  $order = isset($_GET['order']) ? strtolower($_GET['order']) : 'desc';
+
+  // 搜尋條件
+  $searchCondition = '';
+  if (isset($_GET['search']) && !empty($_GET['search'])) {
+    $search = htmlspecialchars($_GET['search']);
+    $searchCondition = sprintf(
+      " WHERE 
+      flower_name LIKE '%%%s%%' OR 
+      flower_engname LIKE '%%%s%%' OR 
+      flower_lang LIKE '%%%s%%' OR 
+      flower_intro LIKE '%%%s%%'",
+      $search,
+      $search,
+      $search,
+      $search
+    );
+  }
+
+  // 修改原有的SQL查詢
+  $sql = sprintf("SELECT * FROM intro_flower %s ORDER BY flower_id %s LIMIT %s, %s", $searchCondition, $order, ($page - 1) * $perPage, $perPage);
   $stmt = $pdo->query($sql);
   $rows = $stmt->fetchAll();
 }
 
-// 搜尋條件
-if (isset($_GET['search']) && !empty($_GET['search'])) {
-  $search = htmlspecialchars($_GET['search']);
-  $sql = sprintf(
-    "SELECT * FROM intro_flower WHERE 
-                  flower_name LIKE '%%%s%%' OR 
-                  flower_engname LIKE '%%%s%%' OR 
-                  flower_lang LIKE '%%%s%%' OR 
-                  flower_intro LIKE '%%%s%%' 
-                  ORDER BY flower_id DESC LIMIT %s, %s",
-    $search,
-    $search,
-    $search,
-    $search,
-    ($page - 1) * $perPage,
-    $perPage
-  );
-}
-
-$stmt = $pdo->query($sql);
-$rows = $stmt->fetchAll();
 // 刪除
 $deleteSuccess = isset($_SESSION['deleteSuccess']) && $_SESSION['deleteSuccess'] === true;
 unset($_SESSION['deleteSuccess']);
-
 ?>
 
 <?php include '../parts/html-head.php' ?>
+<style>
+  /* 在你的CSS樣式表中添加下面的代碼 */
+  th a {
+    text-decoration: none;
+    /* 避免超連結下劃線 */
+    color: #000;
+    /* 設置箭頭顏色 */
+    margin-left: 5px;
+    /* 調整箭頭和文字之間的間距 */
+  }
 
+  th a:hover {
+    color: #007bff;
+    /* 鼠標懸停時的顏色 */
+  }
+</style>
 
 
 <body id="page-top">
@@ -99,7 +112,7 @@ unset($_SESSION['deleteSuccess']);
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-        
+
           <!-- Page Heading -->
           <div class="row">
             <div class="col-9">
@@ -125,12 +138,12 @@ unset($_SESSION['deleteSuccess']);
                       <nav aria-label="Page navigation example">
                         <ul class="pagination">
                           <li class="page-item">
-                            <a class="page-link" href="?page=<?= 1 ?>">
+                            <a class="page-link" href="?page=<?= 1 ?>&order=<?= $order ?>">
                               <i class="fa-solid fa-angles-left"></i>
                             </a>
                           </li>
                           <li class="page-item">
-                            <a class="page-link" href="?page=<?= $page - 1 ?>">
+                            <a class="page-link" href="?page=<?= $page - 1 ?>&order=<?= $order ?>">
                               <i class="fa-solid fa-angle-left"></i>
                             </a>
                           </li>
@@ -138,18 +151,18 @@ unset($_SESSION['deleteSuccess']);
                           <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
                             if ($i >= 1 and $i <= $totalPages) : ?>
                               <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                                <a class="page-link" href="?page=<?= $i ?>&order=<?= $order ?>"><?= $i ?></a>
                               </li>
                           <?php endif;
                           endfor; ?>
 
                           <li class="page-item">
-                            <a class="page-link" href="?page=<?= $page + 1 ?>">
+                            <a class="page-link" href="?page=<?= $page + 1 ?>&order=<?= $order ?>">
                               <i class="fa-solid fa-angle-right"></i>
                             </a>
                           </li>
                           <li class="page-item">
-                            <a class="page-link" href="?page=<?= $totalPages ?>">
+                            <a class="page-link" href="?page=<?= $totalPages ?>&order=<?= $order ?>">
                               <i class="fa-solid fa-angles-right"></i>
                             </a>
                           </li>
@@ -178,7 +191,16 @@ unset($_SESSION['deleteSuccess']);
                         <thead>
                           <tr>
                             <th><i class="fa-solid fa-trash"></i></th>
-                            <th>#</th>
+                            <th>
+                              <!-- 降升序箭頭 start -->
+                              <a href="?page=<?= $page ?>&order=asc">
+                                <i class="fa-solid fa-arrow-up"></i>
+                              </a>
+                              <a href="?page=<?= $page ?>&order=desc">
+                                <i class="fa-solid fa-arrow-down"></i>
+                              </a>
+                              <!-- 降升序箭頭 end -->
+                            </th>
                             <th>中文花名</th>
                             <th>英文花名</th>
                             <th>花語</th>
@@ -297,7 +319,8 @@ unset($_SESSION['deleteSuccess']);
         <img src="https://media2.giphy.com/media/iehQ1h40viFAumBqD2/giphy.gif" class="img-fluid w-75 mx-auto" alt="...">
         <div class="modal-footer">
           <!-- 關閉 Modal 並繼續瀏覽的按鈕 -->
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">回頁面</button>
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">回頁面</button> -->
+          <a type="button" class="btn btn-secondary" href="/floral_shop/pages/intro/intro_flower.php">回頁面</a>
         </div>
       </div>
     </div>
