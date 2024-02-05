@@ -6,37 +6,35 @@ $perPage = 10;
 
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 if ($page < 1) {
-  // redirect
-  header('Location: ?page=1');
-  exit;
+    // redirect
+    header('Location: ?page=1');
+    exit;
 }
 
 $order = isset($_GET['order']) ? $_GET['order'] : 'desc';
 
 $t_sql = "SELECT COUNT(1) FROM course";
-// $t_stmt = $pdo->query($t_sql);
-// $row = $t_stmt->fetch(PDO::FETCH_NUM);
 
 $row = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM);
 
-// print_r($row); exit;  # 直接離開程式
+// print_r($row);
 $totalRows = $row[0]; # 取得總筆數
 $totalPages = 0; # 預設值
 $rows = []; # 預設值
 if ($totalRows > 0) {
-  $totalPages = ceil($totalRows / $perPage); # 計算總頁數
+    $totalPages = ceil($totalRows / $perPage); # 計算總頁數
 
-  if ($page > $totalPages) {
-    // redirect
-    header('Location: ?page=' . $totalPages);
-    exit;
-  }
+    if ($page > $totalPages) {
+        // redirect
+        header('Location: ?page=' . $totalPages);
+        exit;
+    }
 
-  $sql = sprintf("
-  SELECT course.*, store.store_name, store.store_address, course_category.category_name
-  FROM course
-  INNER JOIN store ON course.store_id = store.store_id
-  INNER JOIN course_category ON course.category_id = course_category.category_id");
+    $sql = sprintf("
+    SELECT course.*, store.store_name, store.store_address, course_category.category_name
+    FROM course
+    INNER JOIN store ON course.store_id = store.store_id
+    INNER JOIN course_category ON course.category_id = course_category.category_id");
 
     // 加入排序邏輯
     if (isset($_GET['orderBy'])) {
@@ -174,7 +172,6 @@ if ($totalRows > 0) {
                                             <th><i class="fa-solid fa-file-pen"></i></th>
                                         </tr>
                                     </thead>
-                                    <!-- TODO:搜尋結果? -->
                                     <tbody>
                                     <?php foreach ($rows as $r) : ?>
                                         <tr>
@@ -200,7 +197,7 @@ if ($totalRows > 0) {
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- TODO:結果先獨立出來試試看 -->
+                            <!-- 結果 -->
                             <div id="searchResult"></div>
                         </div>
                     </div>
