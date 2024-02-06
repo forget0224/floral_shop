@@ -72,6 +72,7 @@ if(isset($_POST['request'])){
                         <?php } ?>
                     </tbody>
                 </table>
+                <div class="h6 text-center">目前資料筆數:<?= $count ?></div>
             </div>
         </div>
     <?php } else {

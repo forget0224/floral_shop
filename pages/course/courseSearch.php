@@ -25,6 +25,7 @@ if(isset($_POST['input'])){
     $stmt->execute();
     
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $count = $stmt->rowCount();
     
     if(count($result) > 0){ ?>
         <div class="courseTable">
@@ -80,6 +81,7 @@ if(isset($_POST['input'])){
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div class="h6 text-center">目前資料筆數:<?= $count ?></div>
             </div>
         </div>
         <?php
