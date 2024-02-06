@@ -160,7 +160,7 @@ $stock_status_options = $stmt_stock_status->fetchAll(PDO::FETCH_ASSOC);
                                             <span class="">
                                                 <i class="fa-solid fa-circle-plus"></i>
                                             </span>
-                                            <span class="text">修改顏色</span>
+                                            <span class="text">新增顏色</span>
                                         </a>
                                     </div>
                                 </div>
@@ -224,15 +224,15 @@ $stock_status_options = $stmt_stock_status->fetchAll(PDO::FETCH_ASSOC);
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">修改結果</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-success" role="alert">
-                        修改成功
+                    <div class="alert alert-success logMessage" role="alert">
+
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-secondary" href="product_list_add.php">繼續修改</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">繼續修改</button>
                     <a type="button" class="btn btn-primary" href="product_list.php">到列表頁</a>
                 </div>
             </div>
@@ -487,6 +487,8 @@ $stock_status_options = $stmt_stock_status->fetchAll(PDO::FETCH_ASSOC);
                     .then(result => {
                         console.log({ result });
                         if (result.success) {
+                            populateModalBody(result.logMessages);
+
                             myModal.show();
                         }
                     })
@@ -498,7 +500,32 @@ $stock_status_options = $stmt_stock_status->fetchAll(PDO::FETCH_ASSOC);
 
 
 
+        function populateModalBody(logMessages) {
 
+            const modalBody = document.querySelector('.logMessage');
+
+
+            modalBody.innerHTML = '';
+
+
+            const ul = document.createElement('ul');
+
+
+            if (logMessages && logMessages.length > 0) {
+                logMessages.forEach(message => {
+                    const li = document.createElement('li');
+                    li.textContent = message;
+                    ul.appendChild(li);
+                });
+            } else {
+
+                const li = document.createElement('li');
+                li.textContent = '沒有任何變更。';
+                ul.appendChild(li);
+            }
+
+            modalBody.appendChild(ul);
+        }
 
 
 

@@ -135,9 +135,10 @@ function fetchProductsOptions()
         height: 20px;
         border-radius: 50%;
         margin-right: 5px;
+        border: 1px solid black;
     }
 
-    .product_img {
+    .product_img_box {
 
         width: 250px;
         height: 165px;
@@ -227,6 +228,7 @@ function fetchProductsOptions()
         border-bottom: 0.1rem solid #858796 !important
     }
 </style>
+
 
 <body id="page-top">
 
@@ -338,7 +340,7 @@ function fetchProductsOptions()
                                                 data-dismiss="modal">完成</button>
 
                                             <button type="button" class="btn btn-secondary"
-                                                id="cancelFilterBtn">取消</button>
+                                                id="cancelFilterBtn">全部取消</button>
                                         </div>
                                     </div>
                                 </div>
@@ -381,12 +383,13 @@ function fetchProductsOptions()
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
-                                                    <div class="product_img overflow-hidden">
+                                                    <div class="product_img_box overflow-hidden">
                                                         <!-- <img src="/floral_shop/img/slide2.jpg" alt="" class="w-100"> -->
                                                         <img src="<?= !empty($r['products_url']) ? htmlspecialchars($r['products_url']) : 'img/placehold.png' ?>"
-                                                            alt="" class="img-fluid object-fit-cover    ">
+                                                            alt="" class="img-fluid object-fit-cover product_img">
 
                                                     </div>
+
                                                     <div class="my-2">
                                                         <h7 class="product-name">
                                                             <?= $r['product_name'] ?>
@@ -498,6 +501,7 @@ function fetchProductsOptions()
             <?php include '../parts/scripts.php' ?>
 
             <script>
+
                 $(document).ready(function () {
 
                     $('th[data-column="delete"]').removeClass().addClass("sorting_disabled");
@@ -536,16 +540,34 @@ function fetchProductsOptions()
                     editProduct(this);
                 });
 
+                let searchResults = []; // 保存搜索結果的變數
+                const updateFilters = function () {
+                    const selectedColors = getSelectedValues('color_filter[]', 'data-color-id');
+                    const selectedStores = getSelectedValues('store_filter[]', 'data-store-id');
+                    const selectedProducts = getSelectedValues('product_filter[]', 'data-product-id');
+
+                    // 使用保存的搜索結果進行篩選，如果搜索結果為空，則使用所有的產品卡片
+                    const productsToFilter = searchResults.length > 0 ? searchResults : $("#productTable .cardBox");
+
+                    productsToFilter.each(function () {
+                        const product = $(this);
+                        const storeId = product.attr('data-store-id');
+                        const productId = product.attr('data-product-id');
+                        const productName = product.find('.product-name').text().toLowerCase();
+                        const allCircles = product.find('.color-circle');
+                        const isVisible = (
+                            (selectedColors.length === 0 || Array.from(allCircles).some(circle => selectedColors.includes(circle.dataset.color.toLowerCase()))) &&
+                            (selectedStores.length === 0 || selectedStores.includes(storeId)) &&
+                            (selectedProducts.length === 0 || selectedProducts.includes(productId))
+                        );
+
+                        product.css('display', isVisible ? 'block' : 'none');
+                    });
+                };
                 const filterProducts = function () {
-
                     const searchText = $("#searchInput").val().toLowerCase();
-
-
                     const productContainer = $("#productTable");
-
-
                     const productCards = productContainer.find(".cardBox");
-
 
                     productCards.each(function () {
                         const cardContent = $(this).text().toLowerCase();
@@ -556,6 +578,10 @@ function fetchProductsOptions()
                             $(this).hide();
                         }
                     });
+
+                    // 更新搜索結果
+                    searchResults = productCards.filter(':visible');
+                    updateFilters();
                 };
                 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
@@ -566,31 +592,7 @@ function fetchProductsOptions()
                 const searchInput = document.getElementById('searchInput');
                 searchInput.addEventListener('input', updateFilters);
 
-                function updateFilters() {
-                    const selectedColors = getSelectedValues('color_filter[]', 'data-color-id');
-                    const selectedStores = getSelectedValues('store_filter[]', 'data-store-id');
-                    const selectedProducts = getSelectedValues('product_filter[]', 'data-product-id');
-                    const searchTerm = searchInput.value.toLowerCase();
 
-                    const allProducts = document.querySelectorAll('.cardBox');
-
-                    allProducts.forEach(function (product) {
-                        const storeId = product.getAttribute('data-store-id');
-                        const productId = product.getAttribute('data-product-id');
-                        const productName = product.querySelector('.product-name').innerText.toLowerCase();
-                        const allCircles = product.querySelectorAll('.color-circle');
-                        const isVisible = (
-                            (selectedColors.length === 0 || Array.from(allCircles).some(circle => selectedColors.includes(circle.dataset.color.toLowerCase()))) &&
-                            (selectedStores.length === 0 || selectedStores.includes(storeId)) &&
-                            (selectedProducts.length === 0 || selectedProducts.includes(productId)) &&
-                            (searchTerm === '' || productName.includes(searchTerm))
-                        );
-
-                        product.style.display = isVisible ? 'block' : 'none';
-
-
-                    });
-                }
 
 
                 // 點擊篩選按鈕，顯示篩選區塊
@@ -657,6 +659,14 @@ function fetchProductsOptions()
 
 
                 // }
+                const handleImageError = (element) => {
+                    element.src = 'img/placehold.png';
+                };
+
+
+                $('.product_img').on('error', function () {
+                    handleImageError(this);
+                });
 
                 function deleteProduct(element) {
 
