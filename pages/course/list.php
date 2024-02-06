@@ -196,6 +196,7 @@ if ($totalRows > 0) {
                                     <?php endforeach ?>
                                     </tbody>
                                 </table>
+                                <div class="h6 text-center">目前資料筆數:<?= $totalRows ?></div>
                             </div>
                             <!-- 結果 -->
                             <div id="searchResult"></div>
@@ -368,52 +369,6 @@ if ($totalRows > 0) {
                 const priceB = parseFloat(b.getElementsByTagName('td')[7].textContent);
 
                 return ascending ? priceA - priceB : priceB - priceA;
-            });
-
-            // 清空表格
-            tableBody.innerHTML = '';
-
-            // 重新插入排序後的行
-            rows.forEach(row => {
-                tableBody.appendChild(row);
-            });
-        }
-    });
-    </script> -->
-    
-    <!-- <script>
-        // 序號排序
-        document.addEventListener('DOMContentLoaded', function(){
-           const numberFilterIcon = document.getElementById('numberFilter');
-           
-        // 初始排序狀態
-        let ascending = true;
-        
-        numberFilterIcon.addEventListener('click', function(event){
-            event.preventDefault();
-            
-            // 切換箭頭方向
-            ascending = !ascending;
-            
-            if (ascending){
-                numberFilterIcon.innerHTML = '<i class="fa-solid fa-arrow-down-wide-short"></i>'
-            }else{
-                numberFilterIcon.innerHTML = '<i class="fa-solid fa-arrow-up-wide-short"></i>'
-            }
-            sortTableByNumber(ascending);
-            
-        });
-        // id排序
-        function sortTableByNumber(ascending){
-            // 在這裡實現根據價格排序的邏輯，可以使用JavaScript的Array.sort()
-            const tableBody = document.querySelector('tbody');
-            const rows = Array.from(tableBody.getElementsByTagName('tr'));
-
-            rows.sort((a, b) => {
-                const numberA = parseFloat(a.getElementsByTagName('td')[1].textContent);
-                const numberB = parseFloat(b.getElementsByTagName('td')[1].textContent);
-
-                return ascending ? numberA - numberB : numberB - numberA;
             });
 
             // 清空表格
