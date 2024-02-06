@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2024-02-01 03:03:19
+-- 產生時間： 2024-02-06 04:47:54
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -426,12 +426,7 @@ CREATE TABLE `custom_orders` (
 --
 
 INSERT INTO `custom_orders` (`sid`, `order_id`, `order_date`, `delivery_date`, `member_id`, `store_id`, `shipping_id`, `sender_name`, `sender_tel`, `recipient_name`, `recipient_tel`, `recipient_address`, `payment_method`, `shipping_method`, `shipping_status`, `order_status`) VALUES
-(35, 'F2024012679001456', '2024-01-26 18:24:00', '2024-01-20', 5, 1, 2, '', '', '', '', 'je8 je8 ', 1, 1, 0, 1),
-(37, 'F2024012656254968', '2024-01-26 18:24:00', '2024-01-20', 2, 2, 1, '', '', '', '', '西西', 1, 2, 0, 2),
-(40, 'F2024012659309172', '2024-01-26 06:39:00', '2024-01-31', 4, 3, 1, '', '', '', '', '', 2, 2, 0, 3),
-(42, 'F2024012689775776', '2024-01-26 06:39:00', '2024-01-31', 4, 3, 2, '', '', '', '', 'grrg', 2, 1, 0, 4),
-(47, 'F2024012868889191', '2024-01-28 18:19:00', '2024-01-20', 1, 4, 1, '', '', '', '', '哈哈', 3, 1, 0, 5),
-(48, 'F2024013187029306', '2024-01-31 10:52:00', '2024-02-01', 2, 3, NULL, NULL, NULL, NULL, NULL, '大安區', 1, NULL, NULL, NULL),
+(48, 'F2024013187029306', '2024-01-31 00:00:00', '2024-02-01', 2, 3, NULL, NULL, NULL, NULL, NULL, '大地', 1, NULL, NULL, NULL),
 (49, 'F2024013122505516', '2024-01-02 08:15:45', '2024-01-05', 5, 1, 2, '李小美', '0921123456', '張大雄', '0922333444', '台北市中正區xx路1號', 1, 1, 0, 1),
 (50, 'F2024013152108261', '2024-01-08 14:30:22', '2024-01-12', 12, 3, 1, '王大力', '0939876543', '陳小花', '0987654321', '新北市板橋區yy街2號', 2, 1, 0, 2),
 (51, 'F2024013193024763', '2024-01-14 09:45:17', '2024-01-20', 8, 5, 2, '林阿杰', '0912345678', '鄭小娟', '0957123456', '高雄市三民區zz路3號', 3, 2, 1, 1),
@@ -446,7 +441,9 @@ INSERT INTO `custom_orders` (`sid`, `order_id`, `order_date`, `delivery_date`, `
 (60, 'F2024013131733957', '2024-03-08 12:30:45', '2024-03-12', 17, 4, 1, '張大發', '0987654321', '黃小玲', '0945678901', '彰化市北區zz街18號', 3, 2, 1, 2),
 (61, 'F2024013197817127', '2024-03-14 09:45:22', '2024-03-19', 9, 21, 2, '許小青', '0912345678', '林大明', '0976123456', '新竹市東區xx街20號', 1, 1, 0, 1),
 (62, 'F2024013123883765', '2024-03-20 18:22:30', '2024-03-25', 21, 9, 1, '黃小美', '0923456123', '吳大勇', '0909786543', '嘉義市西區yy路22號', 2, 1, 0, 1),
-(63, 'F2024013185967449', '2024-03-26 12:48:17', '2024-03-30', 11, 16, 2, '林小華', '0954321890', '陳大春', '0923123456', '台中市西屯區yy路24號', 3, 2, 1, 2);
+(63, 'F2024013185967449', '2024-03-26 12:48:17', '2024-03-30', 11, 16, 2, '林小華', '0954321890', '陳大春', '0923123456', '台中市西屯區yy路24號', 3, 2, 1, 2),
+(64, 'F2024020174342103', '2024-02-01 00:00:00', '2024-02-12', 33, 2, NULL, NULL, NULL, NULL, NULL, 'dddddjjkjkk', 2, NULL, NULL, NULL),
+(65, 'F2024020172162614', '2024-02-01 14:29:00', '2024-02-23', 1, 2, NULL, NULL, NULL, NULL, NULL, 'wwww', 1, NULL, NULL, NULL);
 
 --
 -- 觸發器 `custom_orders`
@@ -491,7 +488,7 @@ INSERT INTO `custom_products` (`product_id`, `product_name`, `product_stock`) VA
 CREATE TABLE `custom_product_list` (
   `sid` int(11) NOT NULL,
   `product_id` varchar(255) NOT NULL,
-  `products_url` int(11) NOT NULL,
+  `products_url` varchar(255) NOT NULL,
   `product_color` int(11) NOT NULL,
   `product_stock` int(1) NOT NULL,
   `product_price` int(11) NOT NULL,
@@ -503,16 +500,21 @@ CREATE TABLE `custom_product_list` (
 --
 
 INSERT INTO `custom_product_list` (`sid`, `product_id`, `products_url`, `product_color`, `product_stock`, `product_price`, `store_id`) VALUES
-(1, '1', 0, 2, 1, 50, 2),
-(2, '2', 0, 5, 1, 70, 4),
-(3, '3', 0, 1, 2, 80, 1),
-(4, '4', 0, 2, 1, 60, 5),
-(5, '5', 0, 4, 1, 90, 4),
-(6, '1', 0, 3, 1, 85, 2),
-(7, '2', 0, 7, 1, 75, 4),
-(8, '3', 0, 2, 2, 90, 1),
-(9, '4', 0, 6, 1, 65, 5),
-(10, '5', 0, 12, 1, 100, 4);
+(35, '1', 'img/pinkrose.png', 7, 1, 8888, 1),
+(55, '2', 'img/sunflower.jpg', 6, 1, 2, 5),
+(56, '2', 'img/sunflower.jpg', 5, 2, 1, 5),
+(57, '1', 'img/carnation.jpg', 5, 1, 111, 39),
+(58, '1', 'img/carnation.jpg', 4, 2, 33, 39),
+(64, '1', 'https://images.unsplash.com/photo-1503135935062-b7d1f5a0690f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 8, 1, 2, 10),
+(65, '1', 'https://images.unsplash.com/photo-1503135935062-b7d1f5a0690f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 3, 2, 3, 10),
+(73, '4', 'img/tulip.jpg', 6, 2, 111, 51),
+(74, '4', 'img/tulip.jpg', 2, 1, 343, 51),
+(75, '4', 'img/tulip.jpg', 7, 2, 4544, 51),
+(76, '4', 'img/tulip.jpg', 11, 1, 222, 51),
+(77, '4', 'img/tulip.jpg', 6, 1, 222, 51),
+(78, '4', 'img/tulip.jpg', 2, 2, 88, 6),
+(79, '4', 'img/carnation.jpg', 3, 2, 1, 4),
+(80, '4', 'img/tulip.jpg', 4, 1, 22, 6);
 
 -- --------------------------------------------------------
 
@@ -2700,7 +2702,10 @@ INSERT INTO `product` (`product_id`, `name`, `categories_id`, `price`, `size`, `
 (76, '花卉網袋', 12, 60, '18cm x 18cm', '2018-06-14 14:05:00', '2018-06-23 07:35:00', '簡約實用，保護花卉不受損。'),
 (77, '花貼紙', 12, 50, '10cm x 10cm', '2017-02-01 14:05:00', '2017-02-08 12:48:00', '多款造型，可隨心黏貼在花束上。'),
 (78, '花卉襯墊', 12, 150, '40cm x 40cm', '2015-07-03 14:05:00', '2015-07-10 14:33:00', '柔軟質感，保護花束不變形。'),
-(79, '花束袋', 12, 70, '15cm x 15cm', '2020-08-27 14:05:00', '2020-09-03 08:10:00', '簡易包裝，方便攜帶。');
+(79, '花束袋', 12, 70, '15cm x 15cm', '2020-08-27 14:05:00', '2020-09-03 08:10:00', '簡易包裝，方便攜帶。'),
+(81, '23', 4, 345, '345', '2024-02-01 14:30:55', '0000-00-00 00:00:00', '34'),
+(82, '345', 12, 345, '345', '2024-02-01 14:31:04', '2024-02-01 14:31:45', '35'),
+(83, 'dfgdfg', 3, 34, '444cv', '2024-02-01 14:34:41', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -3296,7 +3301,7 @@ CREATE TABLE `store` (
   `store_tel` varchar(255) DEFAULT NULL,
   `sub_date` date DEFAULT NULL,
   `sub_id` int(11) DEFAULT NULL,
-  `permission_id` int(11) NOT NULL DEFAULT 2
+  `permission_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -3575,8 +3580,8 @@ ALTER TABLE `custom_templates`
 ALTER TABLE `custom_template_detail`
   ADD PRIMARY KEY (`sid`),
   ADD KEY `fk_td_template_id` (`template_id`),
-  ADD KEY `fk_td_product_id` (`product_id`),
-  ADD KEY `fk_td_color_id` (`color_id`);
+  ADD KEY `fk_td_color_id` (`color_id`),
+  ADD KEY `fk_td_product_id` (`product_id`);
 
 --
 -- 資料表索引 `intro_flower`
@@ -3848,7 +3853,7 @@ ALTER TABLE `course_rating`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `custom_orders`
 --
 ALTER TABLE `custom_orders`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `custom_products`
@@ -3860,7 +3865,7 @@ ALTER TABLE `custom_products`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `custom_product_list`
 --
 ALTER TABLE `custom_product_list`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `custom_templates`
@@ -3968,7 +3973,7 @@ ALTER TABLE `payment`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `product_cart`
@@ -4134,7 +4139,7 @@ ALTER TABLE `custom_templates`
 --
 ALTER TABLE `custom_template_detail`
   ADD CONSTRAINT `fk_td_color_id` FOREIGN KEY (`color_id`) REFERENCES `color_list` (`color_list_id`),
-  ADD CONSTRAINT `fk_td_product_id` FOREIGN KEY (`product_id`) REFERENCES `custom_product_list` (`sid`),
+  ADD CONSTRAINT `fk_td_product_id` FOREIGN KEY (`product_id`) REFERENCES `custom_products` (`product_id`),
   ADD CONSTRAINT `fk_td_template_id` FOREIGN KEY (`template_id`) REFERENCES `custom_templates` (`template_id`);
 COMMIT;
 
